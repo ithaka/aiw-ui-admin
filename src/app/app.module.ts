@@ -20,6 +20,8 @@ import {
  */
 import { ENV_PROVIDERS } from './environment'
 import { ROUTES } from './app.routes'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+
 // App is our top level component
 import { AppComponent } from './app.component'
 import { APP_RESOLVER_PROVIDERS } from './app.resolver'
@@ -63,6 +65,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],
   /**
