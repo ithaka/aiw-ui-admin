@@ -31,8 +31,8 @@ import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
 import { NavComponent } from './shared'
 
-import '../styles/styles.scss'
-import '../styles/headings.css'
+import '../sass/app.scss'
+// import '../styles/headings.css'
 
 // Application wide providers
 const APP_PROVIDERS = [

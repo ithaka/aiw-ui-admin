@@ -1,0 +1,367 @@
+{
+  "LOGIN": {
+    "REG_LOGIN": {
+      "HEADING": "Log in with your Artstor account",
+      "EMAIL_LABEL": "Email Address",
+      "PASSWORD_LABEL": "Password",
+      "FORCE_PW_RESET_MSG": "Please <a id=\"forcePwdResetModal\" (click)=\"showPwdModal = true\" class=\"link\">reset your password</a> in order to log in.",
+      "FORGOT_PW_PROMPT": "Forgot password?",
+      "LOGIN_HELP_LINK": "http://support.artstor.org/?article-category=03-accessing-the-artstor-digital-library",
+      "LOGIN_HELP_PROMPT": "Login Help"
+    },
+    "INSTITUTION_LOGIN": {
+      "HEADING": "Log in through your Institution",
+      "LIST_INFO": "This is not a complete list of subscribing institutions. Institutions listed have provided single sign-on or proxy access. If your school is listed, select it from the dropdown and you will be redirected to your institutional login page to gain access to Artstor.",
+      "SELECT_LABEL": "Select your institution's name",
+      "ERRORS": {
+        "SELECT_INSTITUTION": "Please select an institution",
+        "SERVICE_ERROR": "We've experience an error and are unable to retrieve the insitutions"
+      }
+    },
+    "LOGIN_BTN": "Log in",
+    "SERVER_ERROR": "Server is not responding. Please try again later.",
+    "TERMS": "By using Artstor Digital Library, I agree to the <a id=\"linkTermsAndConditions\" href=\"http://www.artstor.org/terms\" class=\"link\" target=\"_blank\">Terms</a>",
+    "WRONG_PASSWORD" : "Invalid email address or password. Try again.",
+    "INVALID_EMAIL" : "Please enter a valid email address",
+    "PASSWORD_REQUIRED": "Password must be 7-20 characters",
+    "EXPIRED" : "That login is expired. Please login from campus to renew your account.",
+    "REGISTER_PROMPT": "Not Registered?",
+    "ACCESS_PROMPT": "How do I get access?"
+  },
+  "REGISTER": {
+    "REGISTER_HEADING": "Register for a new Artstor account",
+    "REGISTER_DESCRIPTION": "Registering for an account lets you download images, save them to groups, create presentations, and share them with other Artstor users.",
+    "ERRORS": {
+      "EMAIL_REQUIRED": "Please enter your email address",
+      "EMAIL_INVALID": "Invalid email format",
+      "EMAIL_MISMATCH": "Email confirmation does not match",
+      "EMAIL_DUPLICATE": "Email address is already registered",
+      "PASSWORD_REQUIRED": "Password must be 7-20 characters",
+      "PASSWORD_MINLENGTH": "Password must be 7-20 characters",
+      "PASSWORD_MISMATCH": "Password confirmation does not match",
+      "AGE_REQUIRED": "Please confirm you are 13 or older",
+      "INSTITUTION_ROLE_REQUIRED": "Please select a role",
+      "ACADEMIC_DEPT_REQUIRED": "Please select a department",
+      "LOGIN_SERVER": "Server is not responding. Please try again later."
+    },
+    "AGE_PROMPT": "I confirm that I am 13 or older",
+    "AGE_PROMPT_HOVER": "If you are under 13, please provide your legal guardian's email address to register",
+    "INFO_PROMPT": "Yes, send me information about new Artstor content and tools",
+    "SURVEY_PROMPT": "Yes, send me surveys",
+    "PRIVACY_DISCLAIMER": "Artstor will not share your personal information except in limited instances as set forth in its <a class=\"link\" href=\"http://www.artstor.org/privacy-policy\">privacy policy</a>.",
+    "FIELDS_REQUIRED": "Please note that all form fields are required."
+  },
+  "ACCOUNT": {
+    "CHANGE_PASS": {
+      "LABELS": {
+        "OLD_PASS": "Current Password",
+        "NEW_PASS": "New Password",
+        "NEW_PASS_CONFIRM": "Confirm New Password"
+      },
+      "OLD_PASS_REQUIRED": "Current password is required",
+      "NEW_PASS_REQUIRED": "New password is required",
+      "PASS_CONFIRM_ERROR": "Password confirmation does not match",
+      "MIN_LENGTH_PROMPT": "Passwords must be 7 characters minimum",
+      "CHANGE_SUCCESS": "Password successfully changed",
+      "GENERAL_ERROR": "There was a network error. Please try again some other time.",
+      "WRONG_PASS_ERROR": "The password is not correct for this account"
+    }
+  },
+  "ASSET_PAGE": {
+    "HEADER_LABELS": {
+      "OBJ_DETAILS": "Item Details",
+      "FILE_PROPS" : "File Properties",
+      "SHR_LNK": "Share Link"
+    },
+    "BUTTONS": {
+      "DOWNLOAD": "Download",
+      "PRINT": "Print",
+      "LINK": "Link",
+      "EXT": "Exit",
+      "COMPARE": "Compare",
+      "GET_IAP": "Request IAP",
+      "REPORT_ERROR": "Report Error"
+    },
+    "LINKS":{
+      "BACK": "Back to Results"
+    },
+    "MESSAGES": {
+      "NEEDASSETS": "To compare assets, you will need to access an asset through a set of results first. Then those results will show here."
+    }
+  },
+  "IMAGE_GROUP_PAGE": {
+    "DOWNLOAD_LIMIT_MODAL": {
+      "TITLE": "Download Limit Reached",
+      "CLOSE_BUTTON": "Ok",
+      "MAIN_BODY": "You have met your download limit."
+    },
+    "DELETE_IG": {
+      "TITLE": "Delete Image Group",
+      "DELETE_BUTTON": "Delete",
+      "CANCEL_BUTTON": "Cancel",
+      "MAIN_BODY1": "Are you sure you want to delete",
+      "MAIN_BODY2":  "This cannot be undone.",
+      "TITLE_DELETED": "Group was Deleted"
+    }
+  },
+  "UPLOAD_IMAGES_MODAL": {
+    "TITLE": "Upload Images",
+    "FORMAT_LBL": "JPEG File Format Required",
+    "DROP_TXT": "Drop Files Here",
+    "UPLOAD_LBL": "Upload new media",
+    "SELECT_BUTTON_TXT": "SELECT FILES",
+    "HELP": "Help"
+  },
+  "EDIT_PC_MODAL": {
+    "TITLE": "Personal Collection",
+    "EDIT_COL": "Edit Collection",
+    "META_ADD_INFO": "Metadata can be added by clicking on the thumbnail image, or from the Personal Collection Administration dialog and image page.",
+    "HELP": "Help",
+    "CLOSE": "Close",
+    "SAVE": "Save",
+    "FORM": {
+      "TITLE": "Title",
+      "CREATOR": "Creator",
+      "WRK_TYP": "Work Type",
+      "DATE": "Date",
+      "LOCATION": "Location",
+      "MATERIAL": "Material",
+      "DESCRIPTION": "Description",
+      "SUBJECT": "Subject"
+    }
+  },
+  "ADD_TO_GROUP_MODAL": {
+    "FROM_SELECTED": {
+      "TITLE": "Add Images to Group",
+      "SELECT_PROMPT": "Select an image group",
+      "ADD_SUCCESS": "Images successfully added to group",
+      "ADD_FAILURE": "Unable to add images to group. Sorry about that.",
+      "TOO_MANY_ASSETS": "This image group has exceeded the 1000 image limit.",
+      "OPEN_CREATE_GROUP_MODAL": "Create a new group with images"
+    },
+    "FROM_ASSET": {
+      "TITLE": "Add Image to Group",
+      "SELECT_PROMPT": "Select an image group",
+      "ADD_SUCCESS": "Image successfully added to group",
+      "ADD_FAILURE": "Unable to add image to group. Sorry about that.",
+      "TOO_MANY_ASSETS": "This image group has exceeded the 1000 image limit.",
+      "OPEN_CREATE_GROUP_MODAL": "Create a new group with image"
+    },
+    "CONTROLS": {
+      "SAVE": "Save Changes",
+      "NAV_TO_GROUP": "Go to group",
+      "CLOSE": "Close",
+      "RETURN_TO_RESULTS": "Return",
+      "HELP": "Help"
+    },
+    "NO_GROUP" : "Please select a group."
+  },
+  "NEW_GROUP_MODAL": {
+    "CREATE_TITLE": "Create New Image Group",
+    "EDIT_TITLE": "Edit Image Group",
+    "COPY_TITLE": "Copy Image Group",
+    "TITLE_FIELD_LABEL": "Title",
+    "TITLE_REQUIRED_MSG": "A title is required",
+    "DESCRIPTION_FIELD_LABEL": "Description",
+    "PERMISSION_FIELD_LABEL": "Who should see this image group?",
+    "PERMISSIONS": {
+      "GLOBAL": "Everyone",
+      "INSTITUTIONAL": "This Institution",
+      "PRIVATE": "Only Me"
+    },
+    "TAGS_FIELD_LABEL": "Tags",
+    "SHOW_ADD_TO_IMAGE_GROUP": "Add item to existing image group",
+    "CREATE_SUCCESS": "You've successfully created an image group",
+    "CREATE_FAILURE": "Oops, something went wrong and your group was not created. Please try again.",
+    "EDIT_SUCCESS" : "You've successfully edited the image group",
+    "CONTROLS": {
+      "RETURN_TO_RESULTS": "Return",
+      "NAV_TO_GROUP": "Go to group",
+      "CLOSE": "Close",
+      "SAVE_EDIT": "Save changes"
+    }
+  },
+  "ADVANCED_SEARCH_MODAL": {
+    "TITLE": "Advanced Search",
+    "SEARCH_HEADING": "Search for words or phrases",
+    "SEARCH_DESCRIPTION": "Enter single or multiple words. Use quotes to indicate exact search terms (e.g., fresco, \"costume design\")",
+    "DATE_HEADING": "Date",
+    "DATE_DESCRIPTION": "Enter a year or range (numbers only) to limit your search. Select BCE or CE.",
+    "FILTER_HEADING": "Search by geography, classification, and/or collections",
+    "FILTER_DESCRIPTION": "Narrow your search results by filtering on Geography, Classification, and Collection",
+    "GEO_HEADING": "Geography",
+    "CLASS_HEADING": "Classification",
+    "COLLECTION_HEADING": "Collection",
+    "ERRORS": {
+      "EMPTY_SEARCH": "<b>Search is Empty</b> Please add a search term or select a filter",
+      "DUMB_DATE": "<b>End Date is less than Start Date</b> End date must be greater than or equal to Start date."
+    },
+    "BUTTONS":{
+      "HELP": "Help",
+      "SEARCH": "Search",
+      "CLEAR": "Clear"
+    },
+    "BOOLEAN_OPTIONS": {
+      "AND": "AND",
+      "OR": "OR",
+      "NOT": "NOT"
+    }
+  },
+  "RETURN_HOME" : "Return Home",
+  "BROWSE_GROUPS" : "Browse Groups",
+  "LOGIN_REQUIRED_MODAL": {
+    "HEADING": "User account required",
+    "PROMPT": "Please log in or <a href=\"/#/register\" class=\"link\">Register</a> to save images."
+  },
+  "BROWSE": {
+    "ERRORS": {
+      "NO_INSTITUTIONAL_COLLECTIONS_HEADING": "No Institutional Collections found",
+      "NO_INSTITUTIONAL_COLLECTIONS_PROMPT": "<p>There are no institutional collections available for your institution. You can add institutional collections using Shared Shelf.</p><p>Learn more about <a href=\"http://artstor.org/sharedshelf\" class=\"link\">Shared Shelf</a>.</p>",
+      "NO_GROUPS_COLLECTIONS_HEADING": "No Groups Found",
+      "NO_PRIVATE_GROUPS_COLLECTIONS_PROMPT": "<p>You haven't made any private groups yet. Learn more about <a href='http://support.artstor.org/?article=create-and-manage-image-groups' class='link'>groups</a>.</p>",
+      "NO_INSTITUTIONAL_GROUPS_COLLECTIONS_PROMPT": "<p>You haven't made any institutional groups yet. Learn more about <a href='http://support.artstor.org/?article=create-and-manage-image-groups' class='link'>groups</a>.</p>",
+      "SEARCH_PROMPT": "Enter a keyword or select a filter to begin a search"
+    }
+  },
+  "FOOTER": {
+    "LINKS": {
+      "ABOUT": "<a href=\"http://www.artstor.org/content/artstor-digital-library-features-benefits\" class=\"link\" target=\"_blank\">About</a>",
+      "GETTING_STARTED": "<a href=\"http://support.artstor.org/?page_id=52\" class=\"link\" target=\"_blank\">Getting Started</a>",
+      "TEACHING_IDEAS": "<a href=\"http://www.artstor.org/content/teaching-resources-overview\" class=\"link\" target=\"_blank\">Teaching and Study Ideas</a>",
+      "STAY_INFORMED": "<a href=\"http://www.artstor.org/content/join-our-mailing-list\" class=\"link\" target=\"_blank\">Stay Informed</a>",
+      "TERMS": "<a href=\"http://www.artstor.org/terms\" class=\"link\" target=\"_blank\">Terms</a>",
+      "PRIVACY": "<a href=\"http://www.artstor.org/privacy-policy\" class=\"link\" target=\"_blank\">Privacy</a>",
+      "COPYRIGHT": "<a href=\"http://www.artstor.org/copyright\" class=\"link\" target=\"_blank\">Copyright Concerns</a>",
+      "SUPPORT": "<a href=\"http://support.artstor.org\" class=\"link\" target=\"_blank\">Support</a>"
+    }
+  },
+  "ACCESS_HELP_MODAL": {
+    "HEADING": "How do I get access?",
+    "PROMPT": "<p>Access is provided to <a href=\"http://www.artstor.org/content/subscribers\" class=\"link\">subscribing institutions</a></p><p>If you belong to a subscribing institution, find out how to <a href=\"http://support.artstor.org/?article=remote-and-proxy-access\" class=\"link\">use remote access methods</a></p><p>If your institution is not a subscriber, find out <a href=\"http://www.artstor.org/trial\" class=\"link\">how they can be</a></p>",
+    "DISMISS": "Ok"
+  },
+  "ACCESS_DENIED_MODAL": {
+    "HEADING": "Content Unavailable",
+    "PROMPT": "If you are already <a href=\"/#/login\" class=\"link\">logged in</a>, this may be due to content limitations or your institutional access."
+  },
+  "SHARE_IG_LINK_MODAL": {
+    "MAIN_HEADING": "Share link to image group",
+    "URL_LABEL": "Copy URL",
+    "COPY_SUCCESS": "Link copied to clipboard",
+    "SERVICE_ERROR": "We've encountered an error in getting a share token. Please refresh or try again later."
+  },
+  "HOME": {
+    "HEADINGS": {
+      "SSC": "Shared Shelf Commons",
+      "BRWSE": "Browse",
+      "FRM_BLOG": "From Our Blog",
+      "INSTITUTION_COLLECTIONS": "{{institutionName}} Collections"
+    },
+    "BROWSE": {
+      "TITLE": "Browse",
+      "GEO_HEADING": "Geography",
+      "GEO_LIST": "(Afghanistan, Albania, Algeria...)",
+      "CLASS_HEADING": "Classification",
+      "CLASS_LIST": "(paintings, performing arts, photographs)",
+      "COLL_HEADING": "Collection",
+      "COLL_LIST": "(Artstor, Shared Shelf, Shared Shelf Commons, My Collections...)",
+      "TEACHING_HEADING": "Teaching Resources",
+      "TEACHING_LIST": "(Curriculum Guides, AP® Resources, Surveys and Case Studies: Art History, Humanities and Social Sciences)",
+      "GROUPS_HEADING": "Image Groups",
+      "GROUPS_LIST": "(My groups and groups shared by others at my institution)"
+    },
+    "FEATURED": {
+      "HEADING": "Featured Collection",
+      "SUBHEADING": "The Andy Warhol Foundation for the Visual Arts: Oeuvre",
+      "DESCRIPTION": "Andy Warhol; Brooklyn Bridge; 1983. Images © The Andy Warhol Foundation for the Visual Arts, Inc. and Andy Warhol artwork © The Andy Warhol Foundation for the Visual Arts, Inc.",
+      "LINK": "/#/category/10374058919;name=The%20Andy%20Warhol%20Foundation%20for%20the%20Visual%20Arts%3A%20Oeuvre%20458",
+      "IMG_SOURCE": "/assets/img/featured-collection.jpg",
+      "LINK_TITLE": "The Andy Warhol Foundation for the Visual Arts: Oeuvre",
+      "ALT_TEXT": "The Andy Warhol Foundation for the Visual Arts: Oeuvre"
+    },
+    "AD": {
+      "LINK": "http://support.artstor.org/?page_id=37",
+      "IMG_SOURCE": "/assets/img/promo-webinar.jpg",
+      "ALT_TEXT": "Welcome to the new Artstor Digital Library! Check out what's new."
+    },
+    "QUESTIONS": {
+      "HEADING": "Questions",
+      "EMAIL_INSTITUTION": "Email your institutional contact",
+      "EMAIL_ARTSTOR": "Email Artstor",
+      "WEBINAR": "Sign up for an Artstor webinar",
+      "SURVEY": "Take a survey: Tell us what you think!"
+    },
+    "LINKS":{
+      "ADVNC_SRCH": "Advanced Search",
+      "SKIP_COLLECTIONS": "Skip collections list"
+    },
+    "ACCESS_PROVIDED_BY": "Your access to Artstor is provided by:"
+  },
+  "NAV_MENU": {
+    "HOME": "Home",
+    "COLLECTIONS": {
+      "TITLE": "Browse",
+      "ARTSTOR": "Artstor Collections",
+      "INSTITUTION": "Institutional Collections",
+      "OPEN": "Open Collections",
+      "OWNED": "My Collections",
+      "GROUPS": "Image Groups"
+    },
+    "ORGANIZE": {
+      "TITLE": "Organize",
+      "SELECT_ALL": "Select All on Page",
+      "NEW_GROUP": "Save Selections to New Image Group",
+      "EXISTING_GROUP": "Save Selections to Existing Image Group",
+      "DELETE_SELECTIONS": "Delete Selections from Image Group",
+      "DESELECT": "Deselect All",
+      "EDIT": "Edit Image Group Info",
+      "SAVE": "Save Image Group as...",
+      "DELETE_GROUP": "Delete Image Group"
+    },
+    "SHARE": {
+      "TITLE": "Share",
+      "GENERATE_IMAGE_LINK": "Generate Image Link",
+      "GENERATE_GROUP_LINK": "Generate Image Group Link",
+      "PRINT_GROUP": "Print Image Group",
+      "DOWNLOAD_GROUP": "Download Image Group"
+    }
+  },
+  "BETA_SKY_BANNER": {
+    "MESSAGE": "Welcome to the new Artstor Digital Library platform. Learn about <a href=\"http://support.artstor.org/?page_id=37\" target=\"_blank\" class=\"link\">what's new</a>."
+  },
+  "SEARCH_SKY_BANNER": {
+    "MESSAGE": "⚠️ This is a testing instance for the new Search index. Please excuse the broken bits."
+  },
+  "FILTERS" : {
+    "artcollectiontitle_str" : "Collection",
+    "artclassification_str" : "Classification",
+    "classification" : "Classification",
+    "geography" : "Geography",
+    "collTypes" : "Collection Type",
+    "collectiontypes" : "Collection Type",
+    "data" : "Date"
+  },
+  "FIELD" : {
+    "artclassification" : "Classification", 
+    "artcollectiontitle" : "Collection", 
+    "Creator" : "Creator",
+    "artcreator" : "Creator", 
+    "artculture" : "Culture", 
+    "artcurrentrepository" : "Repository", 
+    "artcurrentrepositoryidnumber" : "Repository Number", 
+    "artdate" : "Date", 
+    "artidnumber" : "ID Number", 
+    "artlocation" : "Location", 
+    "artmaterial" : "Material", 
+    "artmeasurements" : "Measurements", 
+    "artrelation" : "Relation", 
+    "artrepository" : "Repository", 
+    "artsource" : "Source", 
+    "artstyleperiod" : "Style Period", 
+    "artsubject" : "Subject", 
+    "arttechnique" : "Technique", 
+    "arttitle" : "Title",
+    "title" : "Title",
+    "artworktype" : "Work Type"
+  }
+}
