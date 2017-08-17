@@ -27,6 +27,7 @@ import { AppState, InternalStateType } from './app.service'
 import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
+import { NavComponent } from './shared'
 
 import '../styles/styles.scss'
 import '../styles/headings.css'
@@ -51,6 +52,7 @@ type StoreType = {
   declarations: [
     AppComponent,
     HomeComponent,
+    NavComponent,
     NoContentComponent,
     XLargeDirective
   ],
