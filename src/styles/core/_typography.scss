@@ -1,0 +1,291 @@
+/**
+ * # Typography
+ * All type styles 
+ */
+
+// Sizes
+$baseFontSize: 14px;
+$baseLineHeight: 18px;
+
+// Colors
+$typeAccent: $red;
+
+
+// Font Imports
+// ----------------------------------------------------
+
+// @font-face {
+//   font-family: 'Graphik Web';
+//   src: url('/assets/fonts/Graphik-Regular-Web.eot');
+//   src: url('/assets/fonts/Graphik-Regular-Web.eot?#iefix') format('embedded-opentype'),
+//      url('/assets/fonts/Graphik-Regular-Web.woff') format('woff'),
+//      url('/assets/fonts/Graphik-Regular-Web.ttf') format('truetype'),
+//      url('/assets/fonts/Graphik-Regular-Web.svg#Graphik-Regular') format('svg');
+//   font-weight:  400;
+//   font-style:   normal;
+//   font-stretch: normal;
+// }
+
+%Graphik-Regular-Web, %SansRegular {
+  font-family: Verdana, Arial, sans-serif;
+  font-weight:  400;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+// @font-face {
+//   font-family: 'Graphik Web';
+//   src: url('/assets/fonts/Graphik-RegularItalic-Web.eot');
+//   src: url('/assets/fonts/Graphik-RegularItalic-Web.eot?#iefix') format('embedded-opentype'),
+//      url('/assets/fonts/Graphik-RegularItalic-Web.woff') format('woff'),
+//      url('/assets/fonts/Graphik-RegularItalic-Web.ttf') format('truetype'),
+//      url('/assets/fonts/Graphik-RegularItalic-Web.svg#Graphik-RegularItalic') format('svg');
+//   font-weight:  400;
+//   font-style:   italic;
+//   font-stretch: normal;
+// }
+
+%Graphik-RegularItalic-Web, %SansItalic {
+  font-family: Verdana, Arial, sans-serif;
+  font-weight:  400;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+
+// @font-face {
+//   font-family: 'Graphik Web';
+//   src: url('/assets/fonts/Graphik-Bold-Web.eot');
+//   src: url('/assets/fonts/Graphik-Bold-Web.eot?#iefix') format('embedded-opentype'),
+//      url('/assets/fonts/Graphik-Bold-Web.woff') format('woff'),
+//      url('/assets/fonts/Graphik-Bold-Web.ttf') format('truetype'),
+//      url('/assets/fonts/Graphik-Bold-Web.svg#Graphik-Bold') format('svg');
+//   font-weight:  700;
+//   font-style:   normal;
+//   font-stretch: normal;
+// }
+
+%Graphik-Bold-Web {
+  font-family: Verdana, Arial, sans-serif;
+  font-weight:  700;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
+// @font-face {
+//   font-family: 'Lyon Display Web';
+//   src: url('/assets/fonts/LyonDisplay-Regular-Web.eot');
+//   src: url('/assets/fonts/LyonDisplay-Regular-Web.eot?#iefix') format('embedded-opentype'),
+//      url('/assets/fonts/LyonDisplay-Regular-Web.woff') format('woff'),
+//      url('/assets/fonts/LyonDisplay-Regular-Web.ttf') format('truetype'),
+//      url('/assets/fonts/LyonDisplay-Regular-Web.svg#Lyon Display Web') format('svg');
+//   font-weight:  400;
+//   font-style:   normal;
+//   font-stretch: normal;
+// }
+
+// %LyonDisplay-Regular-Web {
+//   font-family: 'Lyon Display Web', serif;
+//   font-weight:  400;
+//   font-style:   normal;
+//   font-stretch: normal;
+// }
+
+
+// @font-face {
+//   font-family: 'Lyon Display Web', serif;
+//   src: url('/assets/fonts/LyonDisplay-RegularItalic-Web.eot');
+//   src: url('/assets/fonts/LyonDisplay-RegularItalic-Web.eot?#iefix') format('embedded-opentype'),
+//      url('/assets/fonts/LyonDisplay-RegularItalic-Web.woff') format('woff'),
+//      url('/assets/fonts/LyonDisplay-RegularItalic-Web.ttf') format('truetype'),
+//      url('/assets/fonts/LyonDisplay-RegularItalic-Web.svg#Lyon Display Web') format('svg');
+//   font-weight:  400;
+//   font-style:   italic;
+//   font-stretch: normal;
+// }
+
+// %LyonDisplay-RegularItalic-Web {
+//   font-family: 'Lyon Display Web', serif;
+//   font-weight:  400;
+//   font-style:   italic;
+//   font-stretch: normal;
+// } 
+
+// Core Type Styles
+// ----------------------------------------------------
+
+/**
+ * The relative path to the image assets folder.
+ *
+ * @nuclide Base-Font
+ * @section Typography > Core Styles
+ */
+ %baseFontStyle {
+     @extend %SansRegular;
+     font-size: $baseFontSize;
+ }
+
+ html {
+   @extend %SansRegular;
+   font-size: $baseFontSize;
+ }
+
+
+// Base Type Elements
+a, button {
+  @extend %Graphik-Regular-Web;
+}
+
+$linkColor : #444;
+
+a, a[href] {
+  cursor: pointer;
+  color: $linkColor;
+  text-decoration: none;
+}
+
+a.link, .link {
+  cursor: pointer;
+  color: $linkColor;
+  text-decoration: underline;
+  text-decoration-color: $linkColor;
+
+  &:visited {
+    color: $linkColor;
+  }
+  &:hover, &:focus {
+    color: $blue;
+    text-decoration: underline;
+    text-decoration-color: $blue;
+    // border-bottom: 1px solid #8300e0;
+  }
+
+  
+}
+
+a.list-group-item, a.list-group-item-action, a.btn  {
+  text-decoration: none;
+  &:hover, &:focus {
+    color: $blue;
+    text-decoration: none;
+    background: #fafafa;
+  }
+}
+
+.link--accent {
+  @extend .link;
+  cursor: pointer;
+  font-weight: normal;
+  color: $typeAccent;
+  text-decoration-color: $typeAccent;
+  // border-bottom: 1px solid rgba($typeAccent, 0.4);
+
+  &:hover, &:focus, &:active {
+    color: #000;
+    text-decoration-color: #000;
+    // border-color: $brightOrange; 
+    // text-decoration: none;
+  }
+}
+
+.link--action {
+  @extend .link;
+  color: $blue;
+  text-decoration: none !important;
+
+  &:hover, &:focus, &:active {
+    color: lighten($blue, 10%);
+    text-decoration: underline;
+    -moz-text-decoration-color:  lighten($blue, 10%);
+    -webkit-text-decoration-color:  lighten($blue, 10%);
+  }
+}
+
+.form-text {
+  font-size: 12px;
+  
+  & .link {
+    text-decoration: underline !important;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// sorry about this one! It wouldn't work in component styles because of [innerHtml]
+.page__description a {
+  text-decoration: underline;
+}
+
+p {
+    @extend %baseFontStyle;
+    width: 100%;
+}
+
+label {
+  @extend %Graphik-Bold-Web;
+  letter-spacing: 0.5px;
+  color: #444;
+  font-size: 12px;
+}
+
+h1, h2, h3, h4, h5,
+.h1, .h2, .h3, .h4, .h5 {
+  @extend %SansRegular;
+  // Do not use type styles to handle layout spacing (other than line-height)
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+h1, .h1 {
+  @extend %Graphik-Regular-Web;
+  color: $typeAccent;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.h1--title-block {
+  line-height: 26px;
+  margin: 6px 0px 12px;
+}
+
+h2, .h2 {
+  @extend %Graphik-Regular-Web;
+  color: $typeAccent;
+  font-size: 15px;
+  line-height: 22px;
+
+  &.header-button {
+    &:hover, &:focus {
+      color: $brightOrange;
+    }
+  }
+}
+
+h3, .h3 {
+  @extend %Graphik-Regular-Web;
+  font-size: 13px;
+  font-weight: bold;
+  color: #444;
+  line-height: 18px;
+  margin: 2px 0;
+}
+
+.header-button {
+  cursor: pointer;
+}
+
+.small {
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.row-hdr{
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+    @extend %Graphik-Regular-Web;
+}

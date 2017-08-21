@@ -1,0 +1,55 @@
+// Breakpoints
+$xsmall-screen: 320px;
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+
+// Nice References
+$xsphone: $xsmall-screen;
+$phone: $small-screen;
+$tablet: $medium-screen;
+$desktop: $large-screen;
+
+// Bootstrap variable ovverides
+$btn-border-radius: 0px;
+
+
+// List-Group
+$list-group-item-padding-x:      1.25rem;
+$list-group-item-padding-y:      .75rem;
+
+$list-group-border-radius: 3px;
+/**
+ * Base value for vertical/horizontal padding
+ *
+ * @nuclide Image-Folder
+ * @section Config > Spacing
+ */
+$basePadding: 24px;
+
+/** @color Gray */
+$gray: #cdcdcd;
+/** @color Teal */
+$teal: rgb(225,232,225);
+$brightTeal: #45bfab;
+
+/** @color Burnt Orange */
+$burntOrange: #ca4f10;// #b64403;
+/** @color Beige */
+$beige: #d4cd98;
+
+$brightOrange: #fd7740;
+
+$bgLightAccent: #f8faf8;
+$bgDefault: #fff;
+
+/**
+ Brand Colors from Public Site
+ */
+ $blue: #0039c6;
+ $green: #afc128;
+ $red: #e21c28;
+ $orange: #ef6e1e;
+ $purple: #8300e0;
+ $darkGreen: #008d58;
+ $yellow: #f2be19;
