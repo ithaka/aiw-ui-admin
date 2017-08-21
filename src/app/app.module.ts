@@ -31,6 +31,7 @@ import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
 import { NavComponent } from './shared'
 import { SettingsPage } from './settings-page/settings-page.component'
+import { RegisterPage } from './register-page/register-page.component'
 
 import '../styles/styles.scss'
 // import '../styles/headings.css'
@@ -53,10 +54,12 @@ type StoreType = {
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
+    // i've been alphabetizing these from the start to make it easier to find components
     AppComponent,
     HomeComponent,
     NavComponent,
     NoContentComponent,
+    RegisterPage,
     SettingsPage,
     XLargeDirective
   ],
