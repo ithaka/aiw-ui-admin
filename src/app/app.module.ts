@@ -30,8 +30,11 @@ import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
 import { NavComponent } from './shared'
-import { SettingsPage } from './settings-page/settings-page.component'
+
 import { RegisterPage } from './register-page/register-page.component'
+import { SettingsPage } from './settings-page/settings-page.component'
+import { UsersPage } from './users-page/users-page.component'
+
 
 import '../styles/styles.scss'
 // import '../styles/headings.css'
@@ -61,6 +64,7 @@ type StoreType = {
     NoContentComponent,
     RegisterPage,
     SettingsPage,
+    UsersPage,
     XLargeDirective
   ],
   /**
