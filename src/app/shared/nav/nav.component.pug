@@ -7,11 +7,16 @@
         img#logoMobile.hidden-xs-up(src="/assets/img/logo-square.png" alt="Artstor logo")
   .col-2
     .login-panel
-      div hello
-//- .row
-//-   .col-3
-//-     div(style="height: 300px;width: 300px;background-color: red;")
-//-   .col-3
-//-     div(style="height: 300px;width: 300px;background-color: black;")
-//-   .col-3
-//-     div(style="height: 300px;width: 300px;background-color: aquamarine;")
+      div login info to go here
+.row.nav-row
+  .col-2
+  .col-8
+    nav.navbar
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link([routerLink]="['/home']") Home
+        li.nav-item
+          a.nav-link([routerLink]="['/home']") Global Settings
+        li.nav-item
+          a.nav-link([routerLink]="['/home']") User Accounts
+

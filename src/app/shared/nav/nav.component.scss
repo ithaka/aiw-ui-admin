@@ -1,15 +1,22 @@
 @import './../../../styles/core/variables';
 
-$nav-height: 80px;
-$mobileNavHeight: 60px;
+$headerHeight: 80px;
+$mobileHeaderHeight: 60px;
+
+$navHeight: 50px;
 
 //--layout--//
 .header-row {
-  max-height: $nav-height;
+  max-height: $headerHeight;
+}
+
+.nav-row {
+  // height: $navHeight;
+  background: $medGray;
 }
 
 .login-panel {
-  background: $light-grey;
+  background: $lightGray;
   height: 100%;
 }
 
@@ -19,12 +26,12 @@ $mobileNavHeight: 60px;
   $logoHeight: 24px;
   height: $logoHeight;
   width: auto;
-  margin: ($mobileNavHeight - $logoHeight)/2 0;
+  margin: ($mobileHeaderHeight - $logoHeight)/2 0;
   margin-right: 20px;
   padding: 0px;
 
   @media (min-width: 768px) {
-      margin: ($nav-height - $logoHeight)/2 0;
+      margin: ($headerHeight - $logoHeight)/2 0;
   }
 }
 
