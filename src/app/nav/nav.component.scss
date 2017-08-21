@@ -47,3 +47,31 @@ $navHeight: 50px;
   border: none !important;
   padding: 0px;
 }
+
+//--nav--//
+.navbar-nav {
+  flex-direction: row;
+}
+
+.nav-link {
+  text-transform: none;
+  color: #000;
+  font-weight: bold;
+
+  &:active {
+      text-decoration: none;
+      outline: none;
+      color: #0039c6;
+  }
+
+  &:hover, &:focus  {
+    text-decoration: none;
+    color: #0039c6;
+    outline: none;
+    background: none;
+
+    & .value {
+        text-decoration: underline;
+    }
+  }
+}
