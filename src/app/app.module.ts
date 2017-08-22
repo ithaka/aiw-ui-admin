@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
-import { HttpModule } from '@angular/http'
+import { Http, HttpModule } from '@angular/http'
 import {
   NgModule,
   ApplicationRef
@@ -21,6 +21,7 @@ import {
 import { ENV_PROVIDERS } from './environment'
 import { ROUTES } from './app.routes'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate'
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -76,6 +77,11 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    TranslateModule.forRoot({
+        provide: TranslateLoader,
+        useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+        deps: [Http]
+    }),
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
   ],

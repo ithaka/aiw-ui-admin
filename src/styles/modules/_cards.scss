@@ -1,0 +1,197 @@
+/**
+ * # Cards
+ * Modifications to the Bootstrap element:
+ * https://v4-alpha.getbootstrap.com/components/card/
+ */
+
+$cardPadding: 24px;
+$cardBorderStyle: 1px solid rgba(0, 0, 0, 0.15);
+$assetCardBorderSize: 1px;
+
+.card{
+    border-radius: 0px;
+    border: 0px solid transparent;
+}
+
+.card--light {
+    padding: $cardPadding;
+    background: $bgLightAccent;
+
+    & hr {
+        border-color: #fff;
+        margin: $cardPadding/2 -1*$cardPadding;
+    }
+}
+
+
+
+.card--v-pad {
+    padding: 24px 0px;
+    @media (max-width: $phone) {
+        padding: $cardPadding;
+    }
+}
+
+ .card-header {
+    padding: $cardPadding 0px $cardPadding/2;
+    background: transparent;
+    border: 0px solid transparent;
+ } 
+
+.form-card {
+    border: $cardBorderStyle; 
+    & .list-group {
+        max-height: 100px;
+        overflow-y: scroll;
+    }
+}
+
+.list-group.compact {
+    padding: 0.5rem 0;
+
+    & .list-group-item {
+        border: none;
+        padding-top: 0.1rem;
+        padding-bottom: 0.1rem;
+    }
+}
+
+.card--link {
+    cursor: pointer;
+    opacity: 0.95;
+}
+
+img.no-stretch {
+    width: 100%;
+    height: auto;
+}
+
+
+.card.card--asset, .card--asset {
+    margin-bottom: 0px;
+    height: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 0px;
+    margin: 0px auto;
+    cursor: pointer;
+
+    max-width: 300px;
+
+    &.lrgThmb{
+        height: 280px;
+
+        .card-img-top {
+            height: 190px;
+
+            img{
+                max-height: 185px;
+            }
+        }
+    }
+
+    &.disabled {
+        opacity: 0.8;
+        pointer-events: none;
+        cursor: default;
+
+        & .card-block {
+            background: #eee;
+        }
+    }
+
+    & .card-block {
+        margin: 3px;
+        padding: 5px;
+        // prevents odd spacing change in edit mode
+        border: $assetCardBorderSize solid transparent;
+        border-radius: 3px;
+        min-height: 100%;
+    }
+
+    & .card-img-top {
+        text-align: center;
+        height: 120px;
+        position: relative;
+        margin-bottom: 6px;
+
+        & img {
+            /*@extend %vertical-center;*/
+            position: absolute;
+            max-width: 100%;
+            max-height: 115px;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+        }
+    }
+
+    & .card-block {
+        text-align: left;
+    }
+
+    &:hover, &:active, &:focus {
+        & .card-block {
+            background: #fdfdfd;
+            border: $assetCardBorderSize solid #eaeaea;
+        }
+    }
+}
+
+.card-text {
+    font-size:11px;
+    line-height: 14px;
+    margin-top: 12px;
+    margin-bottom: 0px;
+    padding: 0px;
+    position: relative;
+
+    & i {
+        font-size: 16px;
+    }
+    & span {
+        /*max-height: 2em;*/
+        max-height: 14px;
+        white-space: nowrap;
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.card-text li{
+    cursor: pointer;
+} 
+
+.edit .card--asset{
+    opacity: 0.6;
+}
+
+.draggable .card--asset {
+    cursor: move;
+}
+
+.dnd-sortable-drag .card--asset {
+    cursor: move;
+    & .card-block {
+        background: #fafafa;
+        border-color: #ababab;
+        transform: translateY(-1px);
+        box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+    }
+}
+
+.card--asset.selected{
+    opacity: 1 !important;
+    & .card-block {
+        border-color: #ababab;
+        transform: translateY(-1px);
+        box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+    }
+}
+
+
+.list-group-clean .list-group-item {   
+        padding-top: $basePadding/4;
+}
