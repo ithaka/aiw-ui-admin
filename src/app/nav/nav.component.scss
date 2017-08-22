@@ -13,6 +13,25 @@ $navHeight: 50px;
 .nav-row {
   // height: $navHeight;
   background: $medGray;
+  position: relative;
+
+  &:before, &:after {
+    background: $medGray;
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    min-width: 500px;
+    height: 100%;
+  }
+
+  &:before {
+      right: 100%;
+  }
+
+  &:after {
+      left: 100%;
+  }
 }
 
 .login-panel {
@@ -45,7 +64,7 @@ $navHeight: 50px;
 
 .logo {
   border: none !important;
-  padding: 0px;
+  padding: 0 29px;
 }
 
 //--nav--//
@@ -75,3 +94,9 @@ $navHeight: 50px;
     }
   }
 }
+
+// .navbar-light {
+//   background: $navBarLightBg;
+
+
+// }
