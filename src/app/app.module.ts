@@ -30,6 +30,7 @@ import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
 
+import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
@@ -60,6 +61,7 @@ type StoreType = {
     // i've been alphabetizing these from the start to make it easier to find components
     AppComponent,
     HomeComponent,
+    LoginPage,
     NavComponent,
     NoContentComponent,
     RegisterPage,

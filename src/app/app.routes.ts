@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router'
+
 import { HomeComponent } from './home'
-import { AboutComponent } from './about'
+import { LoginPage } from './login-page/login-page.component'
 import { NoContentComponent } from './no-content'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
@@ -11,6 +12,7 @@ import { DataResolver } from './app.resolver'
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginPage },
   { path: 'register', component: RegisterPage },
   { path: 'settings', component: SettingsPage },
   { path: 'users', component: UsersPage },
