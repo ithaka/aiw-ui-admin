@@ -22,6 +22,7 @@ import { ENV_PROVIDERS } from './environment'
 import { ROUTES } from './app.routes'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate'
+import { Ng2CompleterModule } from 'ng2-completer'
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -77,6 +78,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpModule,
+    Ng2CompleterModule,
     TranslateModule.forRoot({
         provide: TranslateLoader,
         useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
