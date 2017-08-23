@@ -28,6 +28,7 @@ import { Ng2CompleterModule } from 'ng2-completer'
 import { AppComponent } from './app.component'
 import { APP_RESOLVER_PROVIDERS } from './app.resolver'
 import { AppState, InternalStateType } from './app.service'
+import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 import { XLargeDirective } from './home/x-large'
@@ -62,6 +63,7 @@ type StoreType = {
   declarations: [
     // i've been alphabetizing these from the start to make it easier to find components
     AppComponent,
+    HeaderComponent,
     HomeComponent,
     LoginPage,
     NavComponent,

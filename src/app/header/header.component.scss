@@ -1,0 +1,43 @@
+@import './../../styles/core/variables';
+
+$headerHeight: 80px;
+$mobileHeaderHeight: 60px;
+
+//--layout--//
+.header-row {
+  max-height: $headerHeight;
+}
+
+.login-panel {
+  background: $lightGray;
+  height: 100%;
+  min-width: 150px;
+}
+
+//--logos--//
+#logo {
+  // Make sure height is a factor of the real image height for scaling
+  $logoHeight: 24px;
+  height: $logoHeight;
+  width: auto;
+  margin: ($mobileHeaderHeight - $logoHeight)/2 0;
+  margin-right: 20px;
+  padding: 0px;
+
+  @media (min-width: 768px) {
+      margin: ($headerHeight - $logoHeight)/2 0;
+  }
+}
+
+#logoMobile {
+  position: fixed;
+  top: 8px;
+  left: 14px;
+  z-index: 9000;
+  height: 32px;
+}
+
+.logo {
+  border: none !important;
+  padding: 0 29px;
+}
