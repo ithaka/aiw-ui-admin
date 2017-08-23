@@ -7,7 +7,7 @@ ang-main-header([showUserPanel]="false")
         .card-header
           h1#loginHeading {{ 'LOGIN.HEADING' | translate }}
         .card-body
-          form(
+          form#formLogin(
             (ngSubmit)="submitLogin(loginForm)"
             )
             .form-group
@@ -20,7 +20,7 @@ ang-main-header([showUserPanel]="false")
               //- p.form-text.text-danger(*ngIf="forcePwdRst", [innerHtml]="'LOGIN.FORCE_PW_RESET_MSG' | translate")
             p.notranslate([innerHtml]="'LOGIN.TERMS' | translate")
             .form-group
-              button#btnLoginRemote.btn.btn-primary([class.loading]="loginLoading" type="submit" name="action" data-sc="account: remote user log in") 
+              button#btnLogin.btn.btn-primary([class.loading]="loginLoading" type="submit" name="action" data-sc="account: remote user log in") 
                 | {{ 'LOGIN.LOGIN_BTN' | translate }}
       br
-      p([innerHtml]="'LOGIN.LOGIN_HELP' | translate")
+      p#linkLoginHelp([innerHtml]="'LOGIN.LOGIN_HELP' | translate")

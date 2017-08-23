@@ -1,0 +1,205 @@
+/**
+ * # Buttons
+ * Variations for buttons, links, and clickable icons
+ */
+
+$primaryBtnBg: $orange;
+$primaryBtnColor: #fff;
+$secondaryBtnBg: rgb(200,200,200);
+$secondaryBtnColor: #fff;
+$btnLinkHoverBg: rgb(230,230,230);
+$btnShadow: none;
+
+$btnHeight: 30px;
+$iconBtnSize: $btnHeight;
+
+.btn, a.btn {
+     @extend %Graphik-Bold-Web;
+     color: #fff;
+     font-size: 12px;
+     padding: 0px 24px;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+     border-bottom: none;
+     cursor: pointer;
+     height: $btnHeight;
+     line-height: $btnHeight;
+
+     &:hover, &:focus, &:active {
+         color: #fff;
+        border-bottom: none;
+     }
+
+     &.disabled, &:disabled {
+         pointer-events: none;
+         opacity: 0.25;
+     }
+}
+
+/**
+ * @atom Button 
+ * @section Navigation > Buttons
+ * @markup
+ *  <button type="button" class="btn btn-primary">Primary</button>
+ *  <button type="button" class="btn btn-secondary">Secondary</button>
+ *  <button type="button" class="btn btn-success">Success</button>
+ *  <button type="button" class="btn btn-info">Info</button>
+ *  <button type="button" class="btn btn-warning">Warning</button>
+ *  <button type="button" class="btn btn-danger">Danger</button>
+ *  <button type="button" class="btn btn-link">Link</button>
+ */
+ .btn-primary, a.btn-primary {
+     background: $primaryBtnBg;
+     border-color: $primaryBtnBg;
+
+     &:hover, &:focus, &:active {
+        background: darken($primaryBtnBg, 10%);
+        border-color: darken($primaryBtnBg, 10%);
+     }
+ }
+ 
+ .btn-secondary, a.btn-secondary {
+    background: $secondaryBtnBg;
+    //  border-color: $secondaryBtnBg;
+    border: none;
+    color: $secondaryBtnColor; 
+
+     &:hover, &:focus, &:active, &.active {
+        background: darken($secondaryBtnBg, 10%);
+        // border-color: darken($secondaryBtnBg, 10%);
+        background-color: #000000;
+        color: $secondaryBtnColor;
+     }
+
+     &.disabled, &:disabled {
+         background: lighten($secondaryBtnBg, 12%);
+     }
+ }
+
+ .btn-dark {
+     background: #2d2d2d;
+     color: #fff;
+ }
+
+ .btn.btn-link, a.btn.btn-link { 
+     text-transform: none !important;
+     padding: 0px 6px 0px 0px;
+     color: #000;
+     background: none;
+     
+     &.with-pad {
+        margin: 0px 24px;
+     }
+
+     &:active {
+         text-decoration: none;
+         outline: none;
+     }
+
+     &.active{
+        color: #0039c6;
+     }
+
+     &:hover, &:focus  {
+         text-decoration: none;
+         color: #0039c6;
+         outline: none;
+         background: none;
+
+         & .value {
+             text-decoration: underline;
+         }
+     }
+
+     & .value {
+         color: #000;
+         letter-spacing: 0px;
+         font-weight: normal;
+     }
+ }
+
+ .btn.dropdown-toggle {
+     padding-right: 10px;
+ }
+
+ .btn.loading {
+    @extend .progress-bar-striped;
+    @extend .progress-bar-animated;
+    color: rgba(255,255,255,0.5);
+    pointer-events: none;
+
+    // Hide other class
+    &:after {
+        display: none !important;
+    }
+ }
+
+ $btnBorderRadius: 0px;
+
+.btn.btn--square {
+    height: $iconBtnSize;
+    width: $iconBtnSize;
+    padding: 0px;
+}
+
+ .btn.btn--icon {
+    position: relative;
+    cursor: pointer;
+    border-radius: $btnBorderRadius;
+    height: $iconBtnSize;
+    width: $iconBtnSize;
+    margin: 0;
+    background: rgba(255,255,255,0.98);
+    color: #333;
+    box-shadow: $btnShadow;
+    padding: 0px;
+    text-align: center;
+    border-bottom: none;
+
+    & .icon {
+        opacity: 0.8;
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+    }
+
+    &:hover, &:active {
+        background: rgba(240,240,240,1);
+
+        & .icon {
+            opacity: 1;
+        }
+    }
+
+    &.active {
+        background: rgb(200,200,200);
+    }
+ }
+
+ .button-group {
+     & .btn {
+         border-radius: 0px;
+         margin: 0px;
+         border-right: 1px solid rgba(0,0,0,0.05);
+
+         &:first-of-type {
+             border-top-left-radius: $btnBorderRadius;
+             border-bottom-left-radius: $btnBorderRadius;
+         }
+
+         &:last-of-type {
+             border-top-right-radius: $btnBorderRadius;
+             border-bottom-right-radius: $btnBorderRadius;
+             border-right: 0px solid transparent;
+         }
+     }
+ }
+
+ .btn-row {
+     & .btn {
+         margin: 1px;
+     }
+ }
