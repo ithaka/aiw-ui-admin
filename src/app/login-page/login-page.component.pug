@@ -8,11 +8,15 @@ ang-main-header([showUserPanel]="false")
           h1#loginHeading {{ 'LOGIN.HEADING' | translate }}
         .card-body
           form#formLogin(
+            [formGroup]="loginForm",
             (ngSubmit)="submitLogin(loginForm)"
             )
             .form-group
               label(for="loginEmail") {{ 'LOGIN.EMAIL_LABEL' | translate }}
-              input#inputLoginEmail.form-control(name="username" type="text" placeholder="Username")
+              input#inputLoginEmail.form-control(
+                [formControl]="loginForm.controls['email']",
+                name="username" type="text" placeholder="Username"
+              )
             .form-group
               label(for="loginPassword") {{ 'LOGIN.PASSWORD_LABEL' | translate }}
               input#inputLoginPassword.form-control(name="password" type="password" placeholder="Password")
