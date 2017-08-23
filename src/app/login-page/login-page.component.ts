@@ -4,7 +4,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
   selector: 'ang-login-page',
-  templateUrl: 'login-page.component.pug'
+  templateUrl: 'login-page.component.pug',
+  styleUrls: ['./login-page.component.scss']
 })
 
 export class LoginPage implements OnInit {
@@ -13,6 +14,6 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
   submitLogin(loginForm: FormGroup) {
-    
+
   }
 }
