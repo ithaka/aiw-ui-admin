@@ -22,6 +22,5 @@ ang-main-header([showUserPanel]="false")
             .form-group
               button#btnLoginRemote.btn.btn-primary([class.loading]="loginLoading" type="submit" name="action" data-sc="account: remote user log in") 
                 | {{ 'LOGIN.LOGIN_BTN' | translate }}
-          a#linkLoginResetModal((click)="showPwdModal = true" tabindex="0" class="link") {{ 'LOGIN.FORGOT_PW_PROMPT' | translate }}
-          br
-          a.link([attr.href]="'LOGIN.LOGIN_HELP_LINK' | translate" target="_blank") {{ 'LOGIN.LOGIN_HELP_PROMPT' | translate }}
+      br
+      p([innerHtml]="'LOGIN.LOGIN_HELP' | translate")
