@@ -7,6 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core'
 import { AppState } from './app.service'
+import { TranslateService } from 'ng2-translate'
 
 /**
  * App Component
@@ -26,8 +27,16 @@ export class AppComponent implements OnInit {
   public url = 'https://twitter.com/AngularClass'
 
   constructor(
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    translate: TranslateService
+  ) {
+
+    // see https://www.npmjs.com/package/ng2-translate
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang('en');
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('en');
+  }
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state)
