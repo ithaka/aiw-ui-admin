@@ -44,9 +44,11 @@ import '../styles/styles.scss'
 // import '../styles/headings.css'
 
 // Application wide providers
+import { AuthService } from './shared'
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  AuthService
 ]
 
 type StoreType = {

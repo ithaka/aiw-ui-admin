@@ -14,12 +14,15 @@ ang-main-header([showUserPanel]="false")
             .form-group
               label(for="loginEmail") {{ 'LOGIN.EMAIL_LABEL' | translate }}
               input#inputLoginEmail.form-control(
-                [formControl]="loginForm.controls['email']",
+                [formControl]="loginForm.controls['username']",
                 name="username" type="text" placeholder="Username"
               )
             .form-group
               label(for="loginPassword") {{ 'LOGIN.PASSWORD_LABEL' | translate }}
-              input#inputLoginPassword.form-control(name="password" type="password" placeholder="Password")
+              input#inputLoginPassword.form-control(
+                [formControl]="loginForm.controls['password']"
+                name="password" type="password" placeholder="Password"
+              )
               //- #errorMsg.form-text.text-danger(*ngIf="errorMsg") {{ errorMsg | translate }}
               //- p.form-text.text-danger(*ngIf="forcePwdRst", [innerHtml]="'LOGIN.FORCE_PW_RESET_MSG' | translate")
             p.notranslate([innerHtml]="'LOGIN.TERMS' | translate")
