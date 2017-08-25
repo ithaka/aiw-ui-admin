@@ -7,6 +7,7 @@ export class AuthService {
   private requestOptions: RequestOptions
 
   private hostname = "//admin.stage.artstor.org"
+  private ENV = 'dev'
 
   constructor(
     private http: Http
@@ -14,8 +15,13 @@ export class AuthService {
     this.requestOptions = new RequestOptions({ withCredentials: true })
   }
 
-  public getUrl(): string {
-    return this.hostname + "/admin"
+  public getServiceUrl(legacy?: boolean): string {
+    let serviceUrl = '//art-aa-service.apps.'
+    this.ENV === 'dev' ? serviceUrl += 'test' : serviceUrl += 'prod' // switch between dev and prod urls
+    serviceUrl += '.cirrostratus.org'
+    legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
+
+    return serviceUrl
   }
 
   /**
@@ -36,9 +42,13 @@ export class AuthService {
       password: password
     })
 
+    let options = this.getDefaultOptions()
+    options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
+
     return this.http.post(
-      [this.getUrl(), "users", "login"].join("/"),
-      data
+      [this.getServiceUrl(), "users", "login"].join("/"),
+      data,
+      options
     )
   }
 
