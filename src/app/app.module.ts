@@ -32,7 +32,6 @@ import { AppState, InternalStateType } from './app.service'
 import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
-import { XLargeDirective } from './home/x-large'
 
 import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
@@ -73,8 +72,7 @@ type StoreType = {
     NoContentComponent,
     RegisterPage,
     SettingsPage,
-    UsersPage,
-    XLargeDirective
+    UsersPage
   ],
   /**
    * Import Angular's modules.
