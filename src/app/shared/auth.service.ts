@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core'
-import { Http, Response, Headers, RequestOptions } from '@angular/http'
+// import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+// import { URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class AuthService {
-  private requestOptions: RequestOptions
+  // private requestOptions: RequestOptions
 
   private hostname = "//admin.stage.artstor.org"
   private ENV = 'dev'
 
   constructor(
-    private http: Http
+    private http: HttpClient
   ) {
-    this.requestOptions = new RequestOptions({ withCredentials: true })
+    // this.requestOptions = new RequestOptions({ withCredentials: true })
   }
 
   public getServiceUrl(legacy?: boolean): string {
@@ -24,12 +26,12 @@ export class AuthService {
     return serviceUrl
   }
 
-  /**
-   * 
-   */
-  public getDefaultOptions(): RequestOptions {
-    return this.requestOptions
-  }
+  // /**
+  //  * Need to update this to work with the HttpClientModule architecture
+  //  */
+  // public getDefaultOptions(): RequestOptions {
+  //   return this.requestOptions
+  // }
 
   /**
    * Makes http call to log user into admin tools, which returns sessionid cookie
@@ -37,18 +39,24 @@ export class AuthService {
    * @param password user's password
    */
   public login(username: string, password: string): Observable<any> {
+    // let data = new URLSearchParams()
+    // data.append('username', username)
+    // data.append('password', password)
+
     let data = this.formEncode({
       username: username,
       password: password
     })
 
-    let options = this.getDefaultOptions()
-    options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    // let options = this.getDefaultOptions()
+    // options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
 
     return this.http.post(
       [this.getServiceUrl(), "users", "login"].join("/"),
       data,
-      options
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      }
     )
   }
 
@@ -65,5 +73,5 @@ export class AuthService {
         encodedString += key + '=' + encodeURIComponent(obj[key]);
     }
     return encodedString.replace(/%20/g, '+');
-}
+  }
 }

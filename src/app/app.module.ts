@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { Http, HttpModule } from '@angular/http'
+import { Http } from '@angular/http'
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
 import {
   NgModule,
   ApplicationRef
@@ -82,7 +83,10 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'sessionid'
+    }),
     Ng2CompleterModule,
     TranslateModule.forRoot({
         provide: TranslateLoader,
