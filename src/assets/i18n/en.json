@@ -8,7 +8,9 @@
     "LOGIN_HELP": "Having trouble logging in? Contact <a href=\"mailto:userservices@artstor.org\" class=\"link\" target=\"_blank\">userservices@artstor.org</a>",
     "MESSAGES": {
       "UNAUTHORIZED": "Invalid email address or password. Try again.",
-      "SERVICE_ERROR": "Server is not responding. Please try again later."
+      "SERVICE_ERROR": "Server is not responding. Please try again later.",
+      "USERNAME_REQUIRED": "Please enter the email associated with your Admin account.",
+      "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account"
     }
   }
 }

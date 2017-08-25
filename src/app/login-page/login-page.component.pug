@@ -11,26 +11,32 @@ ang-main-header([showUserPanel]="false")
             [formGroup]="loginForm",
             (ngSubmit)="submitLogin(loginForm)"
             )
-            .form-group
+            .form-group([ngClass]="{ 'has-danger': formSubmitted && loginForm.controls['username'].hasError('required') }")
               label(for="loginEmail") {{ 'LOGIN.EMAIL_LABEL' | translate }}
               input#inputLoginEmail.form-control(
                 [formControl]="loginForm.controls['username']",
                 name="username" type="text" placeholder="Username"
               )
-            .form-group
+              .form-control-feedback(*ngIf="formSubmitted && loginForm.controls['username'].hasError('required')")
+                | {{ 'LOGIN.MESSAGES.USERNAME_REQUIRED' | translate }}
+            .form-group([ngClass]="{ 'has-danger': formSubmitted && loginForm.controls['password'].hasError('required') }")
               label(for="loginPassword") {{ 'LOGIN.PASSWORD_LABEL' | translate }}
               input#inputLoginPassword.form-control(
                 [formControl]="loginForm.controls['password']"
                 name="password" type="password" placeholder="Password"
               )
+              .form-control-feedback(*ngIf="formSubmitted && loginForm.controls['password'].hasError('required')")
+                | {{ 'LOGIN.MESSAGES.PASSWORD_REQUIRED' | translate }}
             
               //- #errorMsg.form-text.text-danger(*ngIf="errorMsg") {{ errorMsg | translate }}
               //- p.form-text.text-danger(*ngIf="forcePwdRst", [innerHtml]="'LOGIN.FORCE_PW_RESET_MSG' | translate")
             p.notranslate([innerHtml]="'LOGIN.TERMS' | translate")
-            .form-group(
-              [ngClass]="{ 'has-danger': messages.serviceError, 'has-danger': messages.unauthorized }"
-            )
-              button#btnLogin.btn.btn-primary([class.loading]="loginLoading" type="submit" name="action" data-sc="account: remote user log in") 
+            .form-group([ngClass]="{ 'has-danger': messages.serviceError, 'has-danger': messages.unauthorized }")
+              button#btnLogin.btn.btn-primary(
+                (click)="formSubmitted = true",
+                [class.loading]="loginLoading",
+                type="submit" name="action" data-sc="account: remote user log in"
+              ) 
                 | {{ 'LOGIN.LOGIN_BTN' | translate }}
               .form-control-feedback(*ngIf="messages.serviceError") {{ 'LOGIN.MESSAGES.SERVICE_ERROR' | translate }}
               .form-control-feedback(*ngIf="messages.unauthorized") {{ 'LOGIN.MESSAGES.UNAUTHORIZED' | translate }}

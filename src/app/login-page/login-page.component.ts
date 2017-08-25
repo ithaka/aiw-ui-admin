@@ -13,7 +13,7 @@ import { AuthService } from './../shared'
 
 export class LoginPage implements OnInit {
   private loginForm: FormGroup
-
+  private formSubmitted: boolean = false
   private messages: {
     unauthorized?: boolean,
     serviceError?: boolean
@@ -34,6 +34,7 @@ export class LoginPage implements OnInit {
 
   submitLogin(loginForm: FormGroup) {
     this.messages = {} // reset object that displays messages
+    if (loginForm.invalid) { return }
 
     this._auth.login(loginForm.value.username, loginForm.value.password)
       .take(1)
