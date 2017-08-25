@@ -23,11 +23,17 @@ ang-main-header([showUserPanel]="false")
                 [formControl]="loginForm.controls['password']"
                 name="password" type="password" placeholder="Password"
               )
+            
               //- #errorMsg.form-text.text-danger(*ngIf="errorMsg") {{ errorMsg | translate }}
               //- p.form-text.text-danger(*ngIf="forcePwdRst", [innerHtml]="'LOGIN.FORCE_PW_RESET_MSG' | translate")
             p.notranslate([innerHtml]="'LOGIN.TERMS' | translate")
-            .form-group
+            .form-group(
+              [ngClass]="{ 'has-danger': messages.serviceError, 'has-danger': messages.unauthorized }"
+            )
               button#btnLogin.btn.btn-primary([class.loading]="loginLoading" type="submit" name="action" data-sc="account: remote user log in") 
                 | {{ 'LOGIN.LOGIN_BTN' | translate }}
+              .form-control-feedback(*ngIf="messages.serviceError") {{ 'LOGIN.MESSAGES.SERVICE_ERROR' | translate }}
+              .form-control-feedback(*ngIf="messages.unauthorized") {{ 'LOGIN.MESSAGES.UNAUTHORIZED' | translate }}
+              
       br
       p#linkLoginHelp([innerHtml]="'LOGIN.LOGIN_HELP' | translate")

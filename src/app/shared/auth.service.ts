@@ -38,7 +38,7 @@ export class AuthService {
    * @param username user's email
    * @param password user's password
    */
-  public login(username: string, password: string): Observable<any> {
+  public login(username: string, password: string): Observable<LoginResponse> {
     // let data = new URLSearchParams()
     // data.append('username', username)
     // data.append('password', password)
@@ -51,7 +51,7 @@ export class AuthService {
     // let options = this.getDefaultOptions()
     // options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
 
-    return this.http.post(
+    return this.http.post<LoginResponse>(
       [this.getServiceUrl(), "users", "login"].join("/"),
       data,
       {
@@ -74,4 +74,12 @@ export class AuthService {
     }
     return encodedString.replace(/%20/g, '+');
   }
+}
+
+interface LoginResponse {
+  email: string
+  firstname: string
+  lastname: string
+  message: string
+  status: number
 }

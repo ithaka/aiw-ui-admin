@@ -5,6 +5,10 @@
     "PASSWORD_LABEL": "Password",
     "LOGIN_BTN": "Log in",
     "TERMS": "By using Artstor Digital Library, I agree to the <a id=\"linkTermsAndConditions\" href=\"http://www.artstor.org/terms\" class=\"link\" target=\"_blank\">Terms</a>",
-    "LOGIN_HELP": "Having trouble logging in? Contact <a href=\"mailto:userservices@artstor.org\" class=\"link\" target=\"_blank\">userservices@artstor.org</a>"
+    "LOGIN_HELP": "Having trouble logging in? Contact <a href=\"mailto:userservices@artstor.org\" class=\"link\" target=\"_blank\">userservices@artstor.org</a>",
+    "MESSAGES": {
+      "UNAUTHORIZED": "Invalid email address or password. Try again.",
+      "SERVICE_ERROR": "Server is not responding. Please try again later."
+    }
   }
 }
