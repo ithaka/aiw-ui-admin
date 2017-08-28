@@ -60,6 +60,29 @@ export class AuthService {
     )
   }
 
+  public getInstitution(): Observable <InstitutionInfoResponse> {
+    return Observable.of({
+      "institution": {
+        "country": "United States",
+        "id": "1000",
+        "name": "ARTstor",
+        "access_code": "awmfmellon",
+        "access_password": "artstor",
+        "default_user_id": "110",
+        "default_user_pwd": "artstor1",
+        "display_name": "ARTstor",
+        "region_id": "1",
+        "ss_enabled": "1"
+      },
+      "instsupport": {
+        "contact_email": "rhefee.estrella@artstor.org",
+        "contact_name": "Rhefee Estrella",
+        "institution_id": 1000,
+        "show_option": "1"
+      }
+    })
+  }
+
   /**
    * Encodes javascript object into a URI component
    * @param obj The object to be encoded
@@ -82,4 +105,27 @@ interface LoginResponse {
   lastname: string
   message: string
   status: number
+}
+
+interface InstitutionInfoResponse {
+  
+  institution: {
+    country: string,
+    id: string,
+    name: string,
+    access_code: string,
+    access_password: string,
+    default_user_id: string,
+    default_user_pwd: string,
+    display_name: string,
+    region_id: string,
+    ss_enabled: string
+  },
+  instsupport: {
+    contact_email: string,
+    contact_name: string,
+    institution_id: number,
+    show_option: string
+  }
+  
 }
