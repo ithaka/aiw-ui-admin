@@ -60,6 +60,9 @@ export class AuthService {
     )
   }
 
+  /**
+   * Gets the logged in user's institution's info
+   */
   public getInstitution(): Observable <InstitutionInfoResponse> {
     return Observable.of({
       "institution": {
