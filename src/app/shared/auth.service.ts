@@ -64,6 +64,7 @@ export class AuthService {
    * Gets the logged in user's institution's info
    */
   public getInstitution(): Observable <InstitutionInfoResponse> {
+    // MOCK DATA B/C RIGHT NOW THE SERVICE REQUIRES A URL PARAMETER WE CANNOT PROVIDE
     return Observable.of({
       "institution": {
         "country": "United States",
@@ -84,6 +85,11 @@ export class AuthService {
         "show_option": "1"
       }
     })
+
+    // FOR AFTER THE URL IS CHANGED TO RETURN USER'S INSTITUTION AUTOMATICALLY
+    // return this.http.get<InstitutionInfoResponse>(
+    //   [this.getServiceUrl(), "institution"].join("/")
+    // )
   }
 
   /**
