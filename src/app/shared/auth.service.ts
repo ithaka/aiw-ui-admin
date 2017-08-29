@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { CanActivate } from '@angular/router'
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 import { PrimaryUser } from './datatypes'
@@ -17,6 +17,7 @@ export class AuthService implements CanActivate {
   private _user: PrimaryUser = <PrimaryUser>{}
 
   constructor(
+    private _router: Router,
     private http: HttpClient
   ) {
   }
@@ -112,20 +113,26 @@ export class AuthService implements CanActivate {
    * @param obj The object to be encoded
    */
   public formEncode(obj: Object): string {
-    var encodedString = '';
+    var encodedString = ''
     for (var key in obj) {
         if (encodedString.length !== 0) {
-            encodedString += '&';
+            encodedString += '&'
         }
-        encodedString += key + '=' + encodeURIComponent(obj[key]);
+        encodedString += key + '=' + encodeURIComponent(obj[key])
     }
-    return encodedString.replace(/%20/g, '+');
+    return encodedString.replace(/%20/g, '+')
   }
 
-  canActivate(): Observable<boolean> {
+  /**
+   * Called to verify whether or not user is logged in
+   *  went ahead and did the async format so that we can eventually return an http call here
+   * @returns boolean indicating whether or not to pass on to the next route guard
+   */
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     if (this._user.isLoggedIn) {
       return Observable.of(true)
     } else {
+      this._router.navigate(['/login'])
       return Observable.of(false)
     }
   }

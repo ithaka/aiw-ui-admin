@@ -49,6 +49,7 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   AuthService
+  // { provide: "AuthService" }
 ]
 
 type StoreType = {

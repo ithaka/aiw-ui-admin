@@ -8,13 +8,14 @@ import { SettingsPage } from './settings-page/settings-page.component'
 import { UsersPage } from './users-page/users-page.component'
 
 import { DataResolver } from './app.resolver'
+import { AuthService } from './shared'
 
 export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthService] },
   { path: 'login', component: LoginPage },
   { path: 'register', component: RegisterPage },
   { path: 'settings', component: SettingsPage },
   { path: 'users', component: UsersPage },
-  { path: '**', component: NoContentComponent },
+  { path: '**', component: NoContentComponent }
 ]
