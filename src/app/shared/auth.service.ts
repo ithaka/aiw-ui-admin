@@ -109,7 +109,7 @@ export class AuthService {
   }
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   email: string
   firstname: string
   lastname: string
