@@ -36,6 +36,7 @@ import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 
 import { LoginPage } from './login-page/login-page.component'
+import { InstitutionPage } from './institution-page/institution-page.component'
 import { NavComponent } from './nav/nav.component'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
@@ -70,6 +71,7 @@ type StoreType = {
     HeaderComponent,
     HomeComponent,
     LoginPage,
+    InstitutionPage,
     NavComponent,
     NoContentComponent,
     RegisterPage,

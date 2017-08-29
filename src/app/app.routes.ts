@@ -2,6 +2,7 @@ import { Routes } from '@angular/router'
 
 import { HomeComponent } from './home'
 import { LoginPage } from './login-page/login-page.component'
+import { InstitutionPage } from './institution-page/institution-page.component'
 import { NoContentComponent } from './no-content'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
@@ -16,5 +17,6 @@ export const ROUTES: Routes = [
   { path: 'register', component: RegisterPage },
   { path: 'settings', component: SettingsPage },
   { path: 'users', component: UsersPage },
+  { path: 'institution', component: InstitutionPage },
   { path: '**', component: NoContentComponent },
 ]
