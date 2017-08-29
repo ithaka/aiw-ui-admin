@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core'
-// import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-// import { URLSearchParams } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
+
+import { PrimaryUser } from './datatypes'
 
 @Injectable()
 export class AuthService {
-  // private requestOptions: RequestOptions
 
   private hostname = "//admin.stage.artstor.org"
   private ENV = 'dev'
+  /**
+   * This is typcast to create an initial object reference
+   *  because we pass the same reference around the entire site
+   */
+  private _user: PrimaryUser = <PrimaryUser>{}
 
   constructor(
     private http: HttpClient
   ) {
-    // this.requestOptions = new RequestOptions({ withCredentials: true })
   }
 
   public getServiceUrl(legacy?: boolean): string {
@@ -26,12 +29,22 @@ export class AuthService {
     return serviceUrl
   }
 
-  // /**
-  //  * Need to update this to work with the HttpClientModule architecture
-  //  */
-  // public getDefaultOptions(): RequestOptions {
-  //   return this.requestOptions
-  // }
+  get user(): PrimaryUser {
+    return this._user
+  }
+
+  set user(user: PrimaryUser) {
+    // because we want to keep the same object referenced, instead of setting the object to a new user,
+    //  we will clear out and use the same object
+    Object.keys(this._user).forEach((key) => {
+      delete this._user[key]
+    })
+
+    // take all of the properties from the new object and assign them
+    Object.keys(user).forEach((key) => {
+      this._user[key] = user[key]
+    })
+  }
 
   /**
    * Makes http call to log user into admin tools, which returns sessionid cookie
