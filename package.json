@@ -90,6 +90,7 @@
     "ie-shim": "^0.1.0",
     "ng2-completer": "^1.6.1",
     "ng2-translate": "^5.0.0",
+    "ngx-dropdown": "0.0.22",
     "pug": "^2.0.0-rc.3",
     "pug-html-loader": "^1.1.5",
     "reflect-metadata": "^0.1.10",

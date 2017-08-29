@@ -16,6 +16,8 @@ import {
   PreloadAllModules
 } from '@angular/router'
 
+import {DropdownModule} from "ngx-dropdown";
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -82,6 +84,7 @@ type StoreType = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    DropdownModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),

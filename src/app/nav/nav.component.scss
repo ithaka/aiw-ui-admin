@@ -24,6 +24,79 @@ $navHeight: 50px;
   &:after {
       left: 100%;
   }
+
+  // Nav Menu Dropdown
+  .dropdown{
+
+    .nav-link{
+      color: #000;
+      
+      &:active, &:hover, &:focus {
+          color: #0039c6;
+      }
+
+      &::after{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 0.5em;
+        vertical-align: middle;
+        content: "";
+        border-top: 0.4em solid;
+        border-right: 0.4em solid transparent;
+        border-left: 0.4em solid transparent;
+      }
+    }
+
+    .dropdown-menu{
+      font-size: 1rem;
+      margin-top: 0.125rem;
+      background-color: #fff;
+      color: #292b2c;
+      text-align: left;
+      z-index: 2000;
+      border-radius: 0px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+
+      li{
+        display: block;
+        width: 100%;
+        padding: 0.3rem 0.5rem;
+        font-weight: normal;
+        color: #292b2c;
+        text-align: inherit;
+        white-space: nowrap;
+        background: none;
+        text-transform: initial;
+        cursor: pointer;
+
+        &:hover, &:focus{
+          background-color: #f7f7f9;
+        }
+      }
+    }
+
+    &:hover{
+      .dropdown-menu{
+        display: block;
+      }
+      .nav-link{
+        color: #0039c6;
+      }
+    }
+    
+    &.open {
+      .dropdown-menu{
+        display: block;
+      }
+
+      .nav-link{
+        color: #0039c6;
+      }
+    }
+    
+  }
 }
 
 //--nav--//
@@ -35,6 +108,7 @@ $navHeight: 50px;
   text-transform: none;
   color: #000;
   font-weight: bold;
+  padding: 0px;
 
   &:active {
       text-decoration: none;
