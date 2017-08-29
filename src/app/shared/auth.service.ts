@@ -120,7 +120,6 @@ export class AuthService implements CanActivate {
    * @returns boolean indicating whether or not to pass on to the next route guard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    console.log(this.user)
     if (this.user && this.user.isLoggedIn) {
       return Observable.of(true)
     } else {
