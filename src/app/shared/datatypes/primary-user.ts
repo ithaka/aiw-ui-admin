@@ -21,9 +21,11 @@ export class PrimaryUser {
    * @param res the data returned by the api's login endpoint
    */
   constructor(res: LoginResponse) {
+    console.log("constructing new user")
     this.email = res.email
     this.firstname = res.firstname
     this.lastname = res.lastname
+    this.isLoggedIn = true
   }
 
   // GETTERS AND SETTERS //

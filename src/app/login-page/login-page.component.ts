@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
       .take(1)
       .subscribe((res) => {
         this._auth.user = new PrimaryUser(res)
+        console.log(this._auth.user)
         this._router.navigate(['/home'])
       }, (err) => {
         switch (err.status) {

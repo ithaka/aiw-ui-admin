@@ -36,16 +36,7 @@ export class AuthService implements CanActivate {
   }
 
   set user(user: PrimaryUser) {
-    // because we want to keep the same object referenced, instead of setting the object to a new user,
-    //  we will clear out and use the same object
-    Object.keys(this._user).forEach((key) => {
-      delete this._user[key]
-    })
-
-    // take all of the properties from the new object and assign them
-    Object.keys(user).forEach((key) => {
-      this._user[key] = user[key]
-    })
+    this._user = user
   }
 
   /**
@@ -129,7 +120,8 @@ export class AuthService implements CanActivate {
    * @returns boolean indicating whether or not to pass on to the next route guard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    if (this._user.isLoggedIn) {
+    console.log(this.user)
+    if (this.user && this.user.isLoggedIn) {
       return Observable.of(true)
     } else {
       this._router.navigate(['/login'])
