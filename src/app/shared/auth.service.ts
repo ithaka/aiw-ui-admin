@@ -81,6 +81,7 @@ export class AuthService {
       "instsupport": {
         "contact_email": "rhefee.estrella@artstor.org",
         "contact_name": "Rhefee Estrella",
+        "contact_tel": "631-687-2639",
         "institution_id": 1000,
         "show_option": "1"
       }
