@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { CanActivate } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 import { PrimaryUser } from './datatypes'
 
 @Injectable()
-export class AuthService {
+export class AuthService implements CanActivate {
 
   private hostname = "//admin.stage.artstor.org"
   private ENV = 'dev'
@@ -119,6 +120,14 @@ export class AuthService {
         encodedString += key + '=' + encodeURIComponent(obj[key]);
     }
     return encodedString.replace(/%20/g, '+');
+  }
+
+  canActivate(): Observable<boolean> {
+    if (this._user.isLoggedIn) {
+      return Observable.of(true)
+    } else {
+      return Observable.of(false)
+    }
   }
 }
 
