@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
-import { PrimaryUser } from './datatypes'
+import { Locker } from 'angular2-locker'
+
+import { iPrimaryUser, PrimaryUser } from './datatypes';
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -15,11 +17,20 @@ export class AuthService implements CanActivate {
    *  because we pass the same reference around the entire site
    */
   private _user: PrimaryUser = <PrimaryUser>{}
+  private _storage: Locker
 
   constructor(
     private _router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    locker: Locker
   ) {
+    this._storage = locker.useDriver(Locker.DRIVERS.LOCAL)
+
+    // if the user is already logged in, we can check for their object
+    let savedUser: iPrimaryUser = this._storage.get('user')
+    if (savedUser) {
+      this.user = new PrimaryUser(savedUser)
+    }
   }
 
   public getServiceUrl(legacy?: boolean): string {
@@ -37,6 +48,7 @@ export class AuthService implements CanActivate {
 
   set user(user: PrimaryUser) {
     this._user = user
+    this._storage.set('user', this._user) // serialize it to local storage
   }
 
   /**
@@ -120,6 +132,7 @@ export class AuthService implements CanActivate {
    * @returns boolean indicating whether or not to pass on to the next route guard
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    console.log('canactivate running', this.user, this.user.isLoggedIn)
     if (this.user && this.user.isLoggedIn) {
       return Observable.of(true)
     } else {

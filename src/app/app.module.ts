@@ -24,6 +24,8 @@ import { ROUTES } from './app.routes'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate'
 import { Ng2CompleterModule } from 'ng2-completer'
+import { LockerModule } from 'angular2-locker'
+
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -49,7 +51,6 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   AuthService
-  // { provide: "AuthService" }
 ]
 
 type StoreType = {
@@ -81,12 +82,13 @@ type StoreType = {
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),
+    LockerModule,
     Ng2CompleterModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
         provide: TranslateLoader,
         useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),

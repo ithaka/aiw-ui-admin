@@ -3,7 +3,7 @@ import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_di
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 
-import { AuthService, PrimaryUser } from './../shared'
+import { AuthService, PrimaryUser, iPrimaryUser } from './../shared'
 
 @Component({
   selector: 'ang-login-page',
@@ -39,8 +39,11 @@ export class LoginPage implements OnInit {
     this._auth.login(loginForm.value.username, loginForm.value.password)
       .take(1)
       .subscribe((res) => {
-        this._auth.user = new PrimaryUser(res)
-        console.log(this._auth.user)
+        this._auth.user = new PrimaryUser({
+          email: res.email,
+          firstname: res.firstname,
+          lastname: res.lastname
+        })
         this._router.navigate(['/home'])
       }, (err) => {
         switch (err.status) {

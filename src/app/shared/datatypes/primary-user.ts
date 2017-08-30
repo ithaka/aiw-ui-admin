@@ -1,7 +1,7 @@
 import { LoginResponse } from './../auth.service' // the login response is the root of the user object
 
 // our way of 'dressing up' the login response into a useful object
-export class PrimaryUser {
+export class PrimaryUser implements iPrimaryUser {
   // PROPERTIES //
   /**
    * All of the private properties should be modified only via methods attached to the PrimaryUser object,
@@ -18,12 +18,12 @@ export class PrimaryUser {
   /**
    * The PrimaryUser should be constructable using only the response from login
    *  any other data/modifications should be handled through methods!
-   * @param res the data returned by the api's login endpoint
+   * @param user the interface for a user
    */
-  constructor(res: LoginResponse) {
-    this.email = res.email
-    this.firstname = res.firstname
-    this.lastname = res.lastname
+  constructor(user: iPrimaryUser) {
+    this.email = user.email
+    this.firstname = user.firstname
+    this.lastname = user.lastname
     this.isLoggedIn = true
   }
 
@@ -40,4 +40,10 @@ export class PrimaryUser {
   set isLoggedIn(state: boolean) {
     this._isLoggedIn = state
   }
+}
+
+export interface iPrimaryUser {
+  email: string
+  firstname: string
+  lastname: string
 }
