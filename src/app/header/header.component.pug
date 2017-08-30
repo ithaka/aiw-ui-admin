@@ -5,5 +5,5 @@
         img#logo.hidden-xs-down(src="/assets/img/logo-v1-1.png" alt="Artstor logo")
         img#logoMobile.hidden-xs-up(src="/assets/img/logo-square.png" alt="Artstor logo")
   .col-4
-    .login-panel(*ngIf="showUserPanel")
-      div login info to go here
+    .login-panel.d-flex.align-items-center.justify-content-center(*ngIf="showUserPanel")
+      div {{ 'HEADER.GREETING' | translate:translateParams }}

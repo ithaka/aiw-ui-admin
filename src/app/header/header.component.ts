@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
+
+import { AuthService } from './../shared'
 
 @Component({
   selector: 'ang-main-header',
@@ -9,7 +11,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() showUserPanel = true
 
-  constructor() { }
+  // holds variables used for translate
+  private translateParams: {
+    email?: string
+  } = {}
 
-  ngOnInit() { }
+  constructor(
+    private _auth: AuthService
+  ) {
+  }
+
+  ngOnInit() {
+    this.translateParams.email = this._auth.user.email
+  }
 }
