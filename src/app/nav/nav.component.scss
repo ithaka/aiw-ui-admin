@@ -26,9 +26,12 @@ $navHeight: 50px;
   }
 }
 
-//--nav--//
-.navbar-nav {
-  flex-direction: row;
+.nav-item {
+  padding: 0;
+}
+
+.flex-row {
+  padding: 0;
 }
 
 .nav-link {
@@ -53,9 +56,3 @@ $navHeight: 50px;
     }
   }
 }
-
-// .navbar-light {
-//   background: $navBarLightBg;
-
-
-// }
