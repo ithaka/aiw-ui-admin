@@ -52,6 +52,16 @@ export class AuthService implements CanActivate {
   }
 
   /**
+   * Deletes clears storage, deletes user object, triggers the logout call and navigates to /login
+   */
+  public logoutUser(): void {
+    // TODO: actually trigger the logout call
+    this._router.navigate(['/login'])
+    this._storage.clear()
+    this._user = <PrimaryUser>{}
+  }
+
+  /**
    * Makes http call to log user into admin tools, which returns sessionid cookie
    * @param username user's email
    * @param password user's password

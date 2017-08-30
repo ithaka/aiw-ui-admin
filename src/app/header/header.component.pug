@@ -6,4 +6,6 @@
         img#logoMobile.hidden-xs-up(src="/assets/img/logo-square.png" alt="Artstor logo")
   .col-4
     .login-panel.d-flex.align-items-center.justify-content-center(*ngIf="showUserPanel")
-      div {{ 'HEADER.GREETING' | translate:translateParams }}
+      div
+        div {{ 'HEADER.GREETING' | translate:translateParams }}
+        .link.text-center((click)="_auth.logoutUser()") Log Out
