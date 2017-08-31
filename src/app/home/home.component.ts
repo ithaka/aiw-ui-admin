@@ -2,8 +2,10 @@ import {
   Component,
   OnInit
 } from '@angular/core'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 import { AppState } from '../app.service'
+import { UserDetailsModal } from './../modals'
 
 @Component({
   /**
@@ -30,18 +32,14 @@ export class HomeComponent implements OnInit {
    * TypeScript public modifiers
    */
   constructor(
+    private _modal: NgbModal,
     public appState: AppState
   ) {}
 
-  public ngOnInit() {
-    console.log('hello `Home` component')
-    /**
-     * this.title.getData().subscribe(data => this.data = data)
-     */
+  ngOnInit() {
   }
 
-  public submitState(value: string) {
-    this.appState.set('value', value)
-    this.localState.value = ''
+  testModal(): void {
+    let userModal = this._modal.open(UserDetailsModal)
   }
 }

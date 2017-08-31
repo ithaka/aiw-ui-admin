@@ -1,0 +1,15 @@
+.modal-header
+  h4.modal-title Hi there!
+  button.close(
+    type="button",
+    aria-label="Close",
+    (click)="activeModal.dismiss('Cross click')"
+  )
+    span(aria-hidden="true") &times;
+.modal-body
+  p Hello, {{name}}!
+.modal-footer
+  button.btn(
+    (click)="activeModal.close('Close click')",
+    type="button"
+  ) Close

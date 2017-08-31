@@ -73,9 +73,15 @@ type StoreType = {
     NavComponent,
     NoContentComponent,
     RegisterPage,
-    SettingsPage,
     UserDetailsModal,
+    SettingsPage,
     UsersPage
+  ],
+  /**
+   * Components which can be dynamically created
+   */
+  entryComponents: [
+    UserDetailsModal
   ],
   /**
    * Import Angular's modules.

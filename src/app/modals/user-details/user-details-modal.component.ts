@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'ang-user-details-modal',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core'
 })
 
 export class UserDetailsModal implements OnInit {
-  constructor() { }
+  constructor(private activeModal: NgbActiveModal) { }
 
   ngOnInit() { }
 }
