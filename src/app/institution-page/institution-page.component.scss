@@ -24,7 +24,7 @@
         background: #f8faf8;
         padding: 20px;
 
-        input[type="password"]{
+        input{
             width: 250px;
             padding: 5px;
             letter-spacing: 0.3px;
@@ -47,6 +47,13 @@
                 letter-spacing: 0.3px;
                 margin-left: 10px;
             }
+        }
+    }
+
+    .btn-grp{
+        margin-top: 20px;
+        button{
+            margin-right: 10px;
         }
     }
 }

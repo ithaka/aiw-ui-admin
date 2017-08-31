@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
-import { Locker } from 'angular2-locker'
+import { LockerModule, Locker, LockerConfig } from 'angular2-locker'
 
 import { iPrimaryUser, PrimaryUser } from './datatypes';
 
@@ -89,6 +89,31 @@ export class AuthService implements CanActivate {
   }
 
   /**
+   * Makes http call to update institutional details
+   * @param instForm institutional form data
+   */
+  public updateInst(instForm: any): Observable<any> {
+
+    let data = this.formEncode({
+      instPrivContactEmail: instForm.value.admin_email,
+      instPrivContactName: instForm.value.admin_name,
+      instPrivContactPhone: instForm.value.admin_phone,
+      localSupportAdminName: instForm.value.admin_name,
+      localSupportEmail: instForm.value.admin_email,
+      localSupportPhone: instForm.value.admin_phone,
+      pcEnable: '1',
+    })
+
+    return this.http.post<any>(
+      [this.getServiceUrl(), "api/insitution"].join("/"),
+      data,
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    )
+  }
+
+  /**
    * Gets the logged in user's institution's info
    */
   public getInstitution(): Observable <InstitutionInfoResponse> {
@@ -117,7 +142,7 @@ export class AuthService implements CanActivate {
 
     // FOR AFTER THE URL IS CHANGED TO RETURN USER'S INSTITUTION AUTOMATICALLY
     // return this.http.get<InstitutionInfoResponse>(
-    //   [this.getServiceUrl(), "institution"].join("/")
+    //   [this.getServiceUrl(), "api/secure/institution"].join("/")
     // )
   }
 
