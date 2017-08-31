@@ -1,20 +1,36 @@
 import { Injectable } from '@angular/core'
-// import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-// import { URLSearchParams } from '@angular/http'
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
+import { Locker } from 'angular2-locker'
+
+import { iPrimaryUser, PrimaryUser } from './datatypes';
+
 @Injectable()
-export class AuthService {
-  // private requestOptions: RequestOptions
+export class AuthService implements CanActivate {
 
   private hostname = "//admin.stage.artstor.org"
   private ENV = 'dev'
+  /**
+   * This is typcast to create an initial object reference
+   *  because we pass the same reference around the entire site
+   */
+  private _user: PrimaryUser = <PrimaryUser>{}
+  private _storage: Locker
 
   constructor(
-    private http: HttpClient
+    private _router: Router,
+    private http: HttpClient,
+    locker: Locker
   ) {
-    // this.requestOptions = new RequestOptions({ withCredentials: true })
+    this._storage = locker.useDriver(Locker.DRIVERS.LOCAL)
+
+    // if the user is already logged in, we can check for their object
+    let savedUser: iPrimaryUser = this._storage.get('user')
+    if (savedUser) {
+      this.user = new PrimaryUser(savedUser)
+    }
   }
 
   public getServiceUrl(legacy?: boolean): string {
@@ -26,12 +42,24 @@ export class AuthService {
     return serviceUrl
   }
 
-  // /**
-  //  * Need to update this to work with the HttpClientModule architecture
-  //  */
-  // public getDefaultOptions(): RequestOptions {
-  //   return this.requestOptions
-  // }
+  get user(): PrimaryUser {
+    return this._user
+  }
+
+  set user(user: PrimaryUser) {
+    this._user = user
+    this._storage.set('user', this._user) // serialize it to local storage
+  }
+
+  /**
+   * Deletes clears storage, deletes user object, triggers the logout call and navigates to /login
+   */
+  public logoutUser(): void {
+    // TODO: actually trigger the logout call
+    this._router.navigate(['/login'])
+    this._storage.clear()
+    this._user = <PrimaryUser>{}
+  }
 
   /**
    * Makes http call to log user into admin tools, which returns sessionid cookie
@@ -98,18 +126,33 @@ export class AuthService {
    * @param obj The object to be encoded
    */
   public formEncode(obj: Object): string {
-    var encodedString = '';
+    var encodedString = ''
     for (var key in obj) {
         if (encodedString.length !== 0) {
-            encodedString += '&';
+            encodedString += '&'
         }
-        encodedString += key + '=' + encodeURIComponent(obj[key]);
+        encodedString += key + '=' + encodeURIComponent(obj[key])
     }
-    return encodedString.replace(/%20/g, '+');
+    return encodedString.replace(/%20/g, '+')
+  }
+
+  /**
+   * Called to verify whether or not user is logged in
+   *  went ahead and did the async format so that we can eventually return an http call here
+   * @returns boolean indicating whether or not to pass on to the next route guard
+   */
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    console.log('canactivate running', this.user, this.user.isLoggedIn)
+    if (this.user && this.user.isLoggedIn) {
+      return Observable.of(true)
+    } else {
+      this._router.navigate(['/login'])
+      return Observable.of(false)
+    }
   }
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   email: string
   firstname: string
   lastname: string

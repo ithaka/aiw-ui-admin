@@ -12,5 +12,8 @@
       "USERNAME_REQUIRED": "Please enter the email associated with your Admin account.",
       "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account"
     }
+  },
+  "HEADER": {
+    "GREETING": "Welcome, {{email}}"
   }
 }

@@ -26,6 +26,8 @@ import { ROUTES } from './app.routes'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-translate'
 import { Ng2CompleterModule } from 'ng2-completer'
+import { LockerModule } from 'angular2-locker'
+
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -34,12 +36,12 @@ import { AppState, InternalStateType } from './app.service'
 import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
-
 import { LoginPage } from './login-page/login-page.component'
 import { InstitutionPage } from './institution-page/institution-page.component'
 import { NavComponent } from './nav/nav.component'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
+import { UserDetailsModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
 
 
@@ -76,6 +78,7 @@ type StoreType = {
     NoContentComponent,
     RegisterPage,
     SettingsPage,
+    UserDetailsModal,
     UsersPage
   ],
   /**
@@ -84,13 +87,14 @@ type StoreType = {
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     DropdownModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),
+    LockerModule,
     Ng2CompleterModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
         provide: TranslateLoader,
         useFactory: (http: Http) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),

@@ -4,6 +4,8 @@
       a.logo([routerLink]="['/home']")
         img#logo.hidden-xs-down(src="/assets/img/logo-v1-1.png" alt="Artstor logo")
         img#logoMobile.hidden-xs-up(src="/assets/img/logo-square.png" alt="Artstor logo")
-  .col-2
-    .login-panel(*ngIf="showUserPanel")
-      div login info to go here
+  .col-4
+    .login-panel.d-flex.align-items-center.justify-content-center(*ngIf="showUserPanel")
+      div
+        div {{ 'HEADER.GREETING' | translate:translateParams }}
+        .link.text-center((click)="_auth.logoutUser()") Log Out

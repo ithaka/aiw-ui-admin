@@ -6,6 +6,8 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core'
+import { Title } from '@angular/platform-browser'
+
 import { AppState } from './app.service'
 import { TranslateService } from 'ng2-translate'
 
@@ -28,9 +30,11 @@ export class AppComponent implements OnInit {
 
   constructor(
     public appState: AppState,
+    private _title: Title,
     translate: TranslateService
   ) {
-
+    
+    this._title.setTitle('Artstor Admin')
     // see https://www.npmjs.com/package/ng2-translate
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
