@@ -35,11 +35,15 @@ export class AuthService implements CanActivate {
 
   public getServiceUrl(legacy?: boolean): string {
     let serviceUrl = '//art-aa-service.apps.'
-    this.ENV === 'dev' ? serviceUrl += 'test' : serviceUrl += 'prod' // switch between dev and prod urls
+    serviceUrl += this.ENV === 'dev' ? 'test' : 'prod' // switch between dev and prod urls
     serviceUrl += '.cirrostratus.org'
     legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
 
     return serviceUrl
+  }
+
+  public getLibraryUrl(): string {
+    return this.ENV === 'dev' ? '//stage.artstor.org' : '//library.artstor.org'
   }
 
   get user(): PrimaryUser {
@@ -59,6 +63,9 @@ export class AuthService implements CanActivate {
     this._router.navigate(['/login'])
     this._storage.clear()
     this._user = <PrimaryUser>{}
+    this.logoutRequest()
+      .take(1)
+      .subscribe((res) => { console.log(res) }, (err) => { console.error(err) })
   }
 
   /**
@@ -85,6 +92,13 @@ export class AuthService implements CanActivate {
       {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       }
+    )
+  }
+
+  private logoutRequest(): Observable<any> {
+    return this.http.get(
+      [this.getLibraryUrl(), "api", "secure", "logout"].join("/"),
+      { withCredentials: true }
     )
   }
 
@@ -118,32 +132,33 @@ export class AuthService implements CanActivate {
    */
   public getInstitution(): Observable <InstitutionInfoResponse> {
     // MOCK DATA B/C RIGHT NOW THE SERVICE REQUIRES A URL PARAMETER WE CANNOT PROVIDE
-    return Observable.of({
-      "institution": {
-        "country": "United States",
-        "id": "1000",
-        "name": "ARTstor",
-        "access_code": "awmfmellon",
-        "access_password": "artstor",
-        "default_user_id": "110",
-        "default_user_pwd": "artstor1",
-        "display_name": "ARTstor",
-        "region_id": "1",
-        "ss_enabled": "1"
-      },
-      "instsupport": {
-        "contact_email": "rhefee.estrella@artstor.org",
-        "contact_name": "Rhefee Estrella",
-        "contact_tel": "631-687-2639",
-        "institution_id": 1000,
-        "show_option": "1"
-      }
-    })
+    // return Observable.of({
+    //   "institution": {
+    //     "country": "United States",
+    //     "id": "1000",
+    //     "name": "ARTstor",
+    //     "access_code": "awmfmellon",
+    //     "access_password": "artstor",
+    //     "default_user_id": "110",
+    //     "default_user_pwd": "artstor1",
+    //     "display_name": "ARTstor",
+    //     "region_id": "1",
+    //     "ss_enabled": "1"
+    //   },
+    //   "instsupport": {
+    //     "contact_email": "rhefee.estrella@artstor.org",
+    //     "contact_name": "Rhefee Estrella",
+    //     "contact_tel": "631-687-2639",
+    //     "institution_id": 1000,
+    //     "show_option": "1"
+    //   }
+    // })
 
     // FOR AFTER THE URL IS CHANGED TO RETURN USER'S INSTITUTION AUTOMATICALLY
-    // return this.http.get<InstitutionInfoResponse>(
-    //   [this.getServiceUrl(), "api/secure/institution"].join("/")
-    // )
+    return this.http.get<InstitutionInfoResponse>(
+      [this.getServiceUrl(true), "secure", "institution"].join("/"),
+      { withCredentials: true }
+    )
   }
 
   /**

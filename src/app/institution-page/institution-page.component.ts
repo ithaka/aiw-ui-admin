@@ -43,24 +43,21 @@ export class InstitutionPage implements OnInit {
   
   private loadInstitutionDetails(): void{
     this._auth.getInstitution().subscribe( (res) => {
-      if(res.institution){
-        this.instituion = res;
-        console.log(this.instituion);
+      this.instituion = res
 
-        // Setting form values
-        this.manageInstForm.controls['pwd'].setValue(this.instituion.institution.access_password);
-        this.manageInstForm.controls['admin_name'].setValue(this.instituion.instsupport.contact_name);
-        this.manageInstForm.controls['admin_email'].setValue(this.instituion.instsupport.contact_email);
-        this.manageInstForm.controls['admin_phone'].setValue(this.instituion.instsupport.contact_tel);
-      }
-    });
+      // Setting form values
+      this.manageInstForm.controls['pwd'].setValue(this.instituion.institution.access_password)
+      this.manageInstForm.controls['admin_name'].setValue(this.instituion.instsupport.contact_name)
+      this.manageInstForm.controls['admin_email'].setValue(this.instituion.instsupport.contact_email)
+      this.manageInstForm.controls['admin_phone'].setValue(this.instituion.instsupport.contact_tel)
+    })
   }
 
   private updateInstitutionalDetails(): void{
     this.messages = {} // reset object that displays messages
     if (this.manageInstForm.invalid) { return }
     this._auth.updateInst(this.manageInstForm).subscribe( (res) => {
-      console.log(res);
+      console.log(res)
     });
       // .take(1)
       // .subscribe((res) => {
