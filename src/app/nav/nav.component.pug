@@ -4,14 +4,9 @@
       ul.flex-row
         li.nav-item.btn
           a.nav-link([routerLink]="['/home']") Home
-        
-        li.nav-item.btn.dropdown(dropdown)
-          a.nav-link(dropdown-open) Global Settings
-          ul.dropdown-menu
-            li
-              a( [routerLink]="['/institution']" ) Manage Institution
-            li
-              a Send an Email
+
+        li.nav-item.btn
+          a.nav-link([routerLink]="['/institution']") Manage Institution
 
         li.nav-item.btn
           a.nav-link([routerLink]="['/users']") User Accounts
