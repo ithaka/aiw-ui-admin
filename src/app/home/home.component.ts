@@ -6,6 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 import { AppState } from '../app.service'
 import { UserDetailsModal } from './../modals'
+import { UserDetails } from './../shared'
+import { UsersService } from '../shared/users.service'
 
 @Component({
   /**
@@ -24,19 +26,25 @@ import { UserDetailsModal } from './../modals'
   templateUrl: './home.component.pug'
 })
 export class HomeComponent implements OnInit {
-  /**
-   * Set our default values
-   */
-  public localState = { value: '' }
+  private userDetails: UserDetails
+
   /**
    * TypeScript public modifiers
    */
   constructor(
+    private _users: UsersService,
     private _modal: NgbModal,
     public appState: AppState
   ) {}
 
   ngOnInit() {
+    this._users.getUserDetails("nothing")
+      .take(1)
+      .subscribe((res) => {
+        this.userDetails = res
+      }, (err) => {
+        console.error(err)
+      })
   }
 
   testModal(): void {

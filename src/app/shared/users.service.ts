@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 
 import { AuthService } from './'
+import { UserDetails } from './'
 
 @Injectable()
 export class UsersService {
@@ -12,24 +13,24 @@ export class UsersService {
     private _auth: AuthService
   ) { }
 
-  private getUserDetails(userId: string): Observable<UserDetailsResponse> {
-    return this.http.get<UserDetailsResponse>(
-      [this._auth.getServiceUrl(), "users", "userDetails", userId].join("/")
-    )
-  }
-}
+  public getUserDetails(userId: string): Observable<UserDetails> {
+    // return this.http.get<UserDetails>(
+    //   [this._auth.getServiceUrl(), "users", "userDetails", userId].join("/")
+    // )
 
-interface UserDetailsResponse {
-  createdDate: string
-  totalAccessDays: number
-  hasAdminPriv: boolean
-  ssEnabled: boolean
-  archivedUser: boolean
-  optInEmail: boolean
-  user: string,
-  daysAccessRemaining: number
-  profileId: number
-  optInSurvey: boolean
-  timeLastAccessed: string
-  ssAdmin: boolean
+    return Observable.of({
+      "createdDate": "2016-01-13 00:00:00",
+      "totalAccessDays": 120,
+      "hasAdminPriv": true,
+      "ssEnabled": true,
+      "archivedUser": false,
+      "optInEmail": true,
+      "user": "qabackdoor001@artstor.org",
+      "daysAccessRemaining": 110,
+      "profileId": 648548,
+      "optInSurvey": true,
+      "timeLastAccessed": "2017-08-22T15:04:05.000+0000",
+      "ssAdmin": true
+    })
+  }
 }
