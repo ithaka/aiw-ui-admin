@@ -49,5 +49,14 @@ export class HomeComponent implements OnInit {
 
   testModal(): void {
     let userModal = this._modal.open(UserDetailsModal)
+    this._users.getUserDetails("648548")
+      .take(1)
+      .subscribe(
+        (res) => {
+          console.log(res)
+          userModal.componentInstance.user = res
+        },
+        (err) => { console.error(err) }
+      )
   }
 }
