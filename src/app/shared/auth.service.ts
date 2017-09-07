@@ -63,7 +63,7 @@ export class AuthService implements CanActivate {
     this._user = <PrimaryUser>{}
     // make the logout request
     this.http.post<any>(
-      [this.getServiceUrl(true), "secure", "logout"].join("/"),
+      [this.getServiceUrl(true), "secure", "logout"].join("/") + "?target=" + encodeURIComponent('/api/secure/userinfo'),
       {},
       { withCredentials: true }
     )
