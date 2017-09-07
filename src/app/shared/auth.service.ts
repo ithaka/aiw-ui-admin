@@ -74,23 +74,17 @@ export class AuthService implements CanActivate {
    * @param password user's password
    */
   public login(username: string, password: string): Observable<LoginResponse> {
-    // let data = new URLSearchParams()
-    // data.append('username', username)
-    // data.append('password', password)
-
     let data = this.formEncode({
       username: username,
       password: password
     })
 
-    // let options = this.getDefaultOptions()
-    // options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
-
     return this.http.post<LoginResponse>(
       [this.getServiceUrl(), "users", "login"].join("/"),
       data,
       {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        withCredentials: true
       }
     )
   }
