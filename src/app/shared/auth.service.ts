@@ -125,30 +125,6 @@ export class AuthService implements CanActivate {
    * Gets the logged in user's institution's info
    */
   public getInstitution(): Observable <InstitutionInfoResponse> {
-    // MOCK DATA B/C RIGHT NOW THE SERVICE REQUIRES A URL PARAMETER WE CANNOT PROVIDE
-    // return Observable.of({
-    //   "institution": {
-    //     "country": "United States",
-    //     "id": "1000",
-    //     "name": "ARTstor",
-    //     "access_code": "awmfmellon",
-    //     "access_password": "artstor",
-    //     "default_user_id": "110",
-    //     "default_user_pwd": "artstor1",
-    //     "display_name": "ARTstor",
-    //     "region_id": "1",
-    //     "ss_enabled": "1"
-    //   },
-    //   "instsupport": {
-    //     "contact_email": "rhefee.estrella@artstor.org",
-    //     "contact_name": "Rhefee Estrella",
-    //     "contact_tel": "631-687-2639",
-    //     "institution_id": 1000,
-    //     "show_option": "1"
-    //   }
-    // })
-
-    // FOR AFTER THE URL IS CHANGED TO RETURN USER'S INSTITUTION AUTOMATICALLY
     return this.http.get<InstitutionInfoResponse>(
       [this.getServiceUrl(true), "secure", "institution"].join("/"),
       { withCredentials: true }
