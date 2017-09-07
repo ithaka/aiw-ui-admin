@@ -38,13 +38,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._users.getUserDetails("nothing")
-      .take(1)
-      .subscribe((res) => {
-        this.userDetails = res
-      }, (err) => {
-        console.error(err)
-      })
   }
 
   testModal(): void {
@@ -53,7 +46,6 @@ export class HomeComponent implements OnInit {
       .take(1)
       .subscribe(
         (res) => {
-          console.log(res)
           userModal.componentInstance.user = res
         },
         (err) => { console.error(err) }
