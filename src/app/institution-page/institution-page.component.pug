@@ -1,0 +1,44 @@
+ang-main-header
+ang-main-nav
+
+.container.main-content#mainContent
+    form#formInst(
+            [formGroup]="manageInstForm",
+            (ngSubmit)="updateInstitutionalDetails(manageInstForm)"
+            )    
+        .page-hdr
+            h1 Manage Institution
+        p.small.pt-2.info-txt To make the most of Artstor at your institution, go to #[a(href="http://support.artstor.org/?article=promoting-artstor-on-campus" target="_blank") Promotional materials].
+        
+        h2 User settings
+        .usr-settings-cntnr.mt-2
+            .cntnr
+                h3 Update Password
+                p.small The default password for all newly registered users is #[b artstor].
+                p.small.mb-1 (7-20 characters, no special characters)
+                div
+                    input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
+                    input#inputCPWD(type="password", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
+
+        h2.mt-3 Local support contacts for Artstor
+        p.small There are locations in Artstor where your institution can publish local support contact information.
+        .usr-contact-cntnr
+            .cntnr
+                h3 Emails
+                p.small Emails sent from the Admin site will include the following contact information:
+
+                .cntct-row
+                    .lbl Administrator:
+                    input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name")
+                .cntct-row
+                    .lbl *Email address:
+                    input#inputAdminEmail(type="text", [formControl]="manageInstForm.controls['admin_email']", name="admin_email")
+                .cntct-row
+                    .lbl Phone number:
+                    input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone")
+
+                p.small *Note: This email address will also be displayed on the Search & Browse page of the digital library.
+    
+        .btn-grp
+            button#btnCancel.btn.btn-secondary([routerLink]="['/home']") Cancel
+            button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") Update

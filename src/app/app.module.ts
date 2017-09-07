@@ -16,6 +16,8 @@ import {
   PreloadAllModules
 } from '@angular/router'
 
+import {DropdownModule} from "ngx-dropdown";
+
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -35,6 +37,7 @@ import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home'
 import { NoContentComponent } from './no-content'
 import { LoginPage } from './login-page/login-page.component'
+import { InstitutionPage } from './institution-page/institution-page.component'
 import { NavComponent } from './nav/nav.component'
 import { RegisterPage } from './register-page/register-page.component'
 import { SettingsPage } from './settings-page/settings-page.component'
@@ -70,6 +73,7 @@ type StoreType = {
     HeaderComponent,
     HomeComponent,
     LoginPage,
+    InstitutionPage,
     NavComponent,
     NoContentComponent,
     RegisterPage,
@@ -84,6 +88,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    DropdownModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),
