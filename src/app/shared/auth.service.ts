@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
-import { Locker } from 'angular2-locker'
+import { LockerModule, Locker, LockerConfig } from 'angular2-locker'
 
 import { iPrimaryUser, PrimaryUser } from './datatypes';
 
@@ -35,7 +35,7 @@ export class AuthService implements CanActivate {
 
   public getServiceUrl(legacy?: boolean): string {
     let serviceUrl = '//art-aa-service.apps.'
-    this.ENV === 'dev' ? serviceUrl += 'test' : serviceUrl += 'prod' // switch between dev and prod urls
+    serviceUrl += this.ENV === 'dev' ? 'test' : 'prod' // switch between dev and prod urls
     serviceUrl += '.cirrostratus.org'
     legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
 
@@ -55,10 +55,20 @@ export class AuthService implements CanActivate {
    * Deletes clears storage, deletes user object, triggers the logout call and navigates to /login
    */
   public logoutUser(): void {
-    // TODO: actually trigger the logout call
+    // nav the user to login page
     this._router.navigate(['/login'])
+    // clear local storage
     this._storage.clear()
+    // reset the user object
     this._user = <PrimaryUser>{}
+    // make the logout request
+    this.http.post<any>(
+      [this.getServiceUrl(true), "secure", "logout"].join("/"),
+      {},
+      { withCredentials: true }
+    )
+    .take(1)
+    .subscribe((res) => { console.log(res) }, (err) => { console.error(err) })
   }
 
   /**
@@ -67,23 +77,43 @@ export class AuthService implements CanActivate {
    * @param password user's password
    */
   public login(username: string, password: string): Observable<LoginResponse> {
-    // let data = new URLSearchParams()
-    // data.append('username', username)
-    // data.append('password', password)
-
     let data = this.formEncode({
       username: username,
       password: password
     })
 
-    // let options = this.getDefaultOptions()
-    // options.headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
-
     return this.http.post<LoginResponse>(
       [this.getServiceUrl(), "users", "login"].join("/"),
       data,
       {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        withCredentials: true
+      }
+    )
+  }
+
+  /**
+   * Makes http call to update institutional details
+   * @param instForm institutional form data
+   */
+  public updateInst(instForm: any): Observable<any> {
+
+    let data = this.formEncode({
+      instPrivContactEmail: instForm.value.admin_email,
+      instPrivContactName: instForm.value.admin_name,
+      instPrivContactPhone: instForm.value.admin_phone,
+      localSupportAdminName: instForm.value.admin_name,
+      localSupportEmail: instForm.value.admin_email,
+      localSupportPhone: instForm.value.admin_phone,
+      pcEnable: '1',
+    })
+
+    return this.http.post<any>(
+      [this.getServiceUrl(), "api/insitution"].join("/"),
+      data,
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+        withCredentials: true
       }
     )
   }
@@ -92,33 +122,10 @@ export class AuthService implements CanActivate {
    * Gets the logged in user's institution's info
    */
   public getInstitution(): Observable <InstitutionInfoResponse> {
-    // MOCK DATA B/C RIGHT NOW THE SERVICE REQUIRES A URL PARAMETER WE CANNOT PROVIDE
-    return Observable.of({
-      "institution": {
-        "country": "United States",
-        "id": "1000",
-        "name": "ARTstor",
-        "access_code": "awmfmellon",
-        "access_password": "artstor",
-        "default_user_id": "110",
-        "default_user_pwd": "artstor1",
-        "display_name": "ARTstor",
-        "region_id": "1",
-        "ss_enabled": "1"
-      },
-      "instsupport": {
-        "contact_email": "rhefee.estrella@artstor.org",
-        "contact_name": "Rhefee Estrella",
-        "contact_tel": "631-687-2639",
-        "institution_id": 1000,
-        "show_option": "1"
-      }
-    })
-
-    // FOR AFTER THE URL IS CHANGED TO RETURN USER'S INSTITUTION AUTOMATICALLY
-    // return this.http.get<InstitutionInfoResponse>(
-    //   [this.getServiceUrl(), "institution"].join("/")
-    // )
+    return this.http.get<InstitutionInfoResponse>(
+      [this.getServiceUrl(true), "secure", "institution"].join("/"),
+      { withCredentials: true }
+    )
   }
 
   /**

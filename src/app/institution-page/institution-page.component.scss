@@ -1,0 +1,60 @@
+.main-content{
+    padding: 24px;
+
+    .page-hdr{
+        color: #4F5557;
+        filter: grayscale(100%);
+        font-size: 1.3em;
+        background: url("/assets/img/institution.gif") no-repeat -7px 0px transparent;
+        height: 40px;
+        padding: 7px 0px 0px 50px;
+
+        h1{
+            color: #4F5557;
+            font-weight: 500;
+        }
+    }
+    .info-txt{
+        a{
+            color: #b64404;
+            font-weight: bold;
+        }
+    }
+
+    .usr-settings-cntnr, .usr-contact-cntnr{
+        background: #f8faf8;
+        padding: 20px;
+
+        input{
+            width: 250px;
+            padding: 5px;
+            letter-spacing: 0.3px;
+            margin-right: 10px;
+        }
+
+        .cntct-row{
+            margin-bottom: 5px;
+            
+            .lbl{
+                font-size: 14px;
+                font-weight: 600;
+                display: inline-block;
+                letter-spacing: 0.3px;
+                min-width: 130px;                
+            }
+            input[type="text"]{
+                width: 250px;
+                padding: 5px;
+                letter-spacing: 0.3px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .btn-grp{
+        margin-top: 20px;
+        button{
+            margin-right: 10px;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 {
-  "name": "angular-starter",
-  "version": "6.0.0",
-  "description": "An Angular Webpack Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "name": "ang-ui-admin",
+  "version": "0.1.0",
+  "description": "Admin tools for controlling users and access to library.artstor.org",
   "keywords": [
     "angular",
     "angular2",
@@ -9,9 +9,8 @@
     "webpack",
     "typescript"
   ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/AngularClass/angular-starter",
-  "license": "MIT",
+  "author": "Corbin Fonville & Team",
+  "homepage": "admin.artstor.org",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
     "build:aot": "npm run build:aot:prod",
@@ -91,6 +90,7 @@
     "ie-shim": "^0.1.0",
     "ng2-completer": "^1.6.1",
     "ng2-translate": "^5.0.0",
+    "ngx-dropdown": "0.0.22",
     "pug": "^2.0.0-rc.3",
     "pug-html-loader": "^1.1.5",
     "reflect-metadata": "^0.1.10",
@@ -169,7 +169,7 @@
     "url": "https://github.com/AngularClass/angular-starter/issues"
   },
   "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
+    "node": ">= 8.1.4",
+    "npm": ">= 5"
   }
 }
