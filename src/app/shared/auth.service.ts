@@ -42,10 +42,6 @@ export class AuthService implements CanActivate {
     return serviceUrl
   }
 
-  public getLibraryUrl(): string {
-    return this.ENV === 'dev' ? '//stage.artstor.org' : '//library.artstor.org'
-  }
-
   get user(): PrimaryUser {
     return this._user
   }
@@ -59,13 +55,20 @@ export class AuthService implements CanActivate {
    * Deletes clears storage, deletes user object, triggers the logout call and navigates to /login
    */
   public logoutUser(): void {
-    // TODO: actually trigger the logout call
+    // nav the user to login page
     this._router.navigate(['/login'])
+    // clear local storage
     this._storage.clear()
+    // reset the user object
     this._user = <PrimaryUser>{}
-    this.logoutRequest()
-      .take(1)
-      .subscribe((res) => { console.log(res) }, (err) => { console.error(err) })
+    // make the logout request
+    this.http.post<any>(
+      [this.getServiceUrl(true), "secure", "logout"].join("/"),
+      {},
+      { withCredentials: true }
+    )
+    .take(1)
+    .subscribe((res) => { console.log(res) }, (err) => { console.error(err) })
   }
 
   /**
@@ -86,13 +89,6 @@ export class AuthService implements CanActivate {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
         withCredentials: true
       }
-    )
-  }
-
-  private logoutRequest(): Observable<any> {
-    return this.http.get(
-      [this.getLibraryUrl(), "api", "secure", "logout"].join("/"),
-      { withCredentials: true }
     )
   }
 
