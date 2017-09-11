@@ -10,6 +10,7 @@ import { UserDetails } from '../../shared'
 
 export class UserDetailsModal implements OnInit {
   @Input() user: UserDetails
+  @Input() name: string
 
   constructor(private activeModal: NgbActiveModal) { }
 

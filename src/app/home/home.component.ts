@@ -46,7 +46,9 @@ export class HomeComponent implements OnInit {
       .take(1)
       .subscribe(
         (res) => {
+          console.log(res)
           userModal.componentInstance.user = res
+          userModal.componentInstance.name = "World"
         },
         (err) => { console.error(err) }
       )

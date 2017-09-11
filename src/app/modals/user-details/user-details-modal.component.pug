@@ -1,13 +1,16 @@
 .modal-header
-  h4.modal-title Hi there!
+  h4.modal-title User Details
   button.close(
     type="button",
     aria-label="Close",
     (click)="activeModal.dismiss('Cross click')"
   )
     span(aria-hidden="true") &times;
-.modal-body
-  p Hello, {{name}}!
+.modal-body.has-icon-overlay(*ngIf="!user")
+  i.icon-lg.icon-loading-large
+.modal-body(*ngIf="user")
+  h5 {{ user.firstname }}
+  p {{ name }}
 .modal-footer
   button.btn(
     (click)="activeModal.close('Close click')",
