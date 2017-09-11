@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
         (res) => {
           console.log(res)
           userModal.componentInstance.user = res
-          userModal.componentInstance.name = "World"
         },
         (err) => { console.error(err) }
       )

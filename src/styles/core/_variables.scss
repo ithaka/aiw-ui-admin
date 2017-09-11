@@ -27,8 +27,6 @@ $list-group-border-radius: 3px;
  */
 $basePadding: 24px;
 
-/** @color Gray */
-// $gray: #cdcdcd; // if we ever use this, we have to name it something else, it's overwriting bootstrap rn
 /** @color Teal */
 $teal: rgb(225,232,225);
 $brightTeal: #45bfab;
@@ -55,3 +53,4 @@ $bgDefault: #fff;
  $yellow: #f2be19;
  $lightGray: #f9f9f9;
  $medGray: #eee;
+ $darkGray: #cdcdcd;

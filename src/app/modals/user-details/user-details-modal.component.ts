@@ -5,7 +5,8 @@ import { UserDetails } from '../../shared'
 
 @Component({
   selector: 'ang-user-details-modal',
-  templateUrl: 'user-details-modal.component.pug'
+  templateUrl: 'user-details-modal.component.pug',
+  styleUrls: ['./user-details-modal.component.scss']
 })
 
 export class UserDetailsModal implements OnInit {
