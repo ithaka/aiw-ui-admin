@@ -19,4 +19,32 @@ export class UsersService {
       { withCredentials: true }
     )
   }
+
+  public archiveUser(userId: string): Observable<ArchiveUserResponse> {
+    return this.http.post<ArchiveUserResponse>(
+      [this._auth.getServiceUrl(), "users", "archive"].join("/") + `?profileId=${userId}`,
+      {},
+      { withCredentials: true }
+    )
+  }
+
+  public unarchiveUser(userId: string): Observable<ArchiveUserResponse> {
+    return this.http.post<ArchiveUserResponse>(
+      [this._auth.getServiceUrl(), "users", "unarchive"].join("/") + `?profileId=${userId}`,
+      {},
+      { withCredentials: true }
+    )
+  }
+}
+
+interface ArchiveUserResponse {
+  profileId: number,
+  userId: string,
+  institutionId: string,
+  portalName: string,
+  active: boolean,
+  roles: string,
+  pcAllowed: boolean,
+  ssEnabled: boolean,
+  timeLastAccessed: string
 }
