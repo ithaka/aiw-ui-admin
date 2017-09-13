@@ -20,31 +20,52 @@ export class UsersService {
     )
   }
 
-  public archiveUser(userId: string): Observable<ArchiveUserResponse> {
-    return this.http.post<ArchiveUserResponse>(
+  public archiveUser(userId: string): Observable<UpdateUserResponse> {
+    return this.http.post<UpdateUserResponse>(
       [this._auth.getServiceUrl(), "users", "archive"].join("/") + `?profileId=${userId}`,
       {},
       { withCredentials: true }
     )
   }
 
-  public unarchiveUser(userId: string): Observable<ArchiveUserResponse> {
-    return this.http.post<ArchiveUserResponse>(
+  public unarchiveUser(userId: string): Observable<UpdateUserResponse> {
+    return this.http.post<UpdateUserResponse>(
       [this._auth.getServiceUrl(), "users", "unarchive"].join("/") + `?profileId=${userId}`,
       {},
       { withCredentials: true }
     )
   }
+
+  public updateUser(userId: string, update: UserUpdate): Observable<UpdateUserResponse> {
+    return this.http.post<UpdateUserResponse>(
+      [this._auth.getServiceUrl(), "users", "updateUserDetails"].join("/") + `?profileId=${userId}`,
+      update,
+      {
+        withCredentials: true
+      }
+    )
+  }
 }
 
-interface ArchiveUserResponse {
-  profileId: number,
-  userId: string,
-  institutionId: string,
-  portalName: string,
-  active: boolean,
-  roles: string,
-  pcAllowed: boolean,
-  ssEnabled: boolean,
+interface UpdateUserResponse {
+  profileId: number
+  userId: string
+  institutionId: string
+  portalName: string
+  active: boolean
+  roles: string
+  pcAllowed: boolean
+  ssEnabled: boolean
   timeLastAccessed: string
+}
+
+interface UserUpdate {
+  profileId: string
+  ssEnabled?: boolean
+  optInEmail?: boolean
+  optInSurvey?: boolean
+  ssAdmin?: boolean
+  hasAdminPriv?: boolean
+  archivedUser?: boolean
+  daysAccessRemaining?: number
 }
