@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table';
 
-import { AuthService } from './../shared';
+import { AuthService, UsersService } from './../shared';
 
 @Component({
   selector: 'ang-users-page',
@@ -35,6 +35,7 @@ export class UsersPage implements OnInit {
 
   constructor(
     private _auth: AuthService,
+    private _users: UsersService
   ) {
     
   }
@@ -44,13 +45,11 @@ export class UsersPage implements OnInit {
   }
 
   private loadUsers(): void{
-    this._auth.getUsers().subscribe( (res) => {
+    this._users.getUsers().subscribe( (res) => {
       if(res){
         this.users = res;
         this.length = this.users.length;
         this.onChangeTable(this.config);
-
-        console.log(this.users);
       }
     })
   }
@@ -144,6 +143,15 @@ export class UsersPage implements OnInit {
   }
 
   public onCellClick(data: any): any {
-    console.log(data);
+    let userModal = this._modal.open(UserDetailsModal)
+    this._users.getUserDetails("648548")
+      .take(1)
+      .subscribe(
+        (res) => {
+          console.log(res)
+          userModal.componentInstance.user = res
+        },
+        (err) => { console.error(err) }
+      )
   }
 }

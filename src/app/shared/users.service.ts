@@ -44,6 +44,17 @@ export class UsersService {
       }
     )
   }
+
+  /**
+   * Gets institutional users
+   */
+  public getUsers(): Observable <ListUsersResponse[]> {
+    return this.http.get<ListUsersResponse[]>(
+      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers/?type=active&institutionId=1000',
+      // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
+      { withCredentials: true }
+    )
+  }
 }
 
 interface UpdateUserResponse {
@@ -56,4 +67,16 @@ interface UpdateUserResponse {
   pcAllowed: boolean
   ssEnabled: boolean
   timeLastAccessed: string
+}
+
+interface ListUsersResponse {
+  email: string,
+  active: boolean,
+  roles: string,
+  profileid: number,
+  userid: number,
+  institutionid: number,
+  ssenabled: boolean,
+  createdate: Date,
+  timelastaccessed: Date
 }
