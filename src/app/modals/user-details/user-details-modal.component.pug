@@ -1,11 +1,12 @@
 .modal-header
-  h4.modal-title User Details
+  h4.modal-title Edit User Details
   button.close(
     type="button",
     aria-label="Close",
     (click)="activeModal.dismiss('Cross click')"
   )
     span(aria-hidden="true") &times;
+//- Just a loading icon until the user object gets back
 .modal-body.has-icon-overlay.text-center(*ngIf="!user")
   i.icon-lg.icon-loading-large
 .modal-body(*ngIf="user")
@@ -24,7 +25,23 @@
       tr
         td Remote login access
         td {{ user.totalAccessDays }} of 120 days remaining
-
+  h6 Permissions
+  .form-group
+    label.form-control.form-check-label(for="checkSSEnabled") Enable Shared Shelf
+      input#checkSSEnabled.form-check-input(
+        type="checkbox",
+        [formControl]="permissionsForm.controls['ssEnabled']"
+      )
+    label.form-control.form-check-label(for="checkOptInEmail") Opt in to email
+      input#checkOptInEmail.form-check-input(
+        type="checkbox",
+        [formControl]="permissionsForm.controls['optInEmail']"
+      )
+    label.form-control.form-check-label(for="checkOptInSurvey") Opt in to survey
+      input#checkOptInSurvey.form-check-input(
+        type="checkbox",
+        [formControl]="permissionsForm.controls['optInSurvey']"
+      )
 .modal-footer
   button.btn(
     (click)="activeModal.close('Close click')",

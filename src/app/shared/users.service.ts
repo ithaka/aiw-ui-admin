@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 
-import { AuthService } from './'
-import { UserDetails } from './'
+import { AuthService, UserDetails, UserUpdate } from './'
 
 @Injectable()
 export class UsersService {
@@ -48,7 +47,7 @@ export class UsersService {
 }
 
 interface UpdateUserResponse {
-  profileId: number
+  profileId: string
   userId: string
   institutionId: string
   portalName: string
@@ -57,15 +56,4 @@ interface UpdateUserResponse {
   pcAllowed: boolean
   ssEnabled: boolean
   timeLastAccessed: string
-}
-
-interface UserUpdate {
-  profileId: string
-  ssEnabled?: boolean
-  optInEmail?: boolean
-  optInSurvey?: boolean
-  ssAdmin?: boolean
-  hasAdminPriv?: boolean
-  archivedUser?: boolean
-  daysAccessRemaining?: number
 }
