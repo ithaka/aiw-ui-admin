@@ -63,7 +63,7 @@ export class AuthService implements CanActivate {
     this._user = <PrimaryUser>{}
     // make the logout request
     this.http.post<any>(
-      [this.getServiceUrl(true), "secure", "logout"].join("/"),
+      [this.getServiceUrl(true), "secure", "logout"].join("/") + "?target=" + encodeURIComponent('/api/secure/userinfo'),
       {},
       { withCredentials: true }
     )
@@ -124,6 +124,17 @@ export class AuthService implements CanActivate {
   public getInstitution(): Observable <InstitutionInfoResponse> {
     return this.http.get<InstitutionInfoResponse>(
       [this.getServiceUrl(true), "secure", "institution"].join("/"),
+      { withCredentials: true }
+    )
+  }
+  
+  /**
+   * Gets institutional users
+   */
+  public getUsers(): Observable <UserResponse[]> {
+    return this.http.get<UserResponse[]>(
+      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers/?type=active&institutionId=1000',
+      // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
       { withCredentials: true }
     )
   }
@@ -188,4 +199,16 @@ interface InstitutionInfoResponse {
     show_option: string
   }
   
+}
+
+interface UserResponse {
+  email: string,
+  active: boolean,
+  roles: string,
+  profileid: number,
+  userid: number,
+  institutionid: number,
+  ssenabled: boolean,
+  createdate: Date,
+  timelastaccessed: Date
 }
