@@ -42,6 +42,16 @@
         type="checkbox",
         [formControl]="permissionsForm.controls['optInSurvey']"
       )
+    label.form-control.form-check-label(for="checkSSAdmin") Grant SS Admin Rights
+      input#checkSSAdmin.form-check-input(
+        type="checkbox",
+        [formControl]="permissionsForm.controls['ssAdmin']"
+      )
+    label.form-control.form-check-label(for="checkArtstorAdmin") Grant Artstor Admin Rights
+      input#checkArtstorAdmin.form-check-input(
+        type="checkbox",
+        [formControl]="permissionsForm.controls['hasAdminPriv']"
+      )
 .modal-footer
   button.btn(
     (click)="activeModal.close('Close click')",

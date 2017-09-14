@@ -26,8 +26,7 @@ export class UserDetailsModal implements OnInit {
       optInEmail: null,
       optInSurvey: null,
       ssAdmin: null,
-      hasAdminPriv: null,
-      archivedUser: null
+      hasAdminPriv: null
     })
   }
 
