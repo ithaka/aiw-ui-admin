@@ -1,0 +1,21 @@
+.main-content{
+    padding: 24px;
+
+    .page-hdr{
+        color: #4F5557;
+        filter: grayscale(100%);
+        font-size: 1.3em;
+        background: url("/assets/img/users.gif") no-repeat -7px 0px transparent;
+        height: 40px;
+        padding: 7px 0px 0px 50px;
+
+        h1{
+            color: #4F5557;
+            font-weight: 500;
+        }
+    }
+
+    .grid-cntnr{
+        margin-top: 20px;
+    }
+}

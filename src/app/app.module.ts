@@ -16,7 +16,8 @@ import {
   PreloadAllModules
 } from '@angular/router'
 
-import {DropdownModule} from "ngx-dropdown";
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -88,7 +89,7 @@ type StoreType = {
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    DropdownModule,
+    Ng2TableModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),
