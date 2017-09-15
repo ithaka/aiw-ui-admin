@@ -43,11 +43,12 @@ export class UserDetailsModal implements OnInit {
   private onSubmit(update: UserUpdate) {
     // reset all service messages
     this.messages = {}
+    // tell the form that it's submitted
+    this.submitted = true
 
     // the update object requires a user id in order to send it
     update.profileId = this.user.profileId
     if (this.permissionsForm.invalid) {
-      this.submitted = true
       return
     }
 

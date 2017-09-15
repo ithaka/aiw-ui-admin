@@ -56,12 +56,20 @@ form#formPermissions(
           type="checkbox",
           [formControl]="permissionsForm.controls['hasAdminPriv']"
         )
+    .form-group.has-danger
+      .form-control-feedback.has-danger(*ngIf="submitted && messages.permissionsError")
+        | An error occurred while processing your request. Please try again later.
     .list-group
       button.list-group-item.btn.btn-secondary(
         type="button",
         (click)="archiveUser()"
       ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
-      button.list-group-item.btn.btn-secondary Extend access 30 days
+      button.list-group-item.btn.btn-secondary(
+        type="button"
+      ) Extend access 30 days
+    .form-group.has-danger
+      .form-control-feedback.has-danger(*ngIf="submitted && messages.archiveError")
+        | An error occurred while processing your request. Please try again later.
   .modal-footer
     button.btn(
       (click)="activeModal.close('Close click')",
