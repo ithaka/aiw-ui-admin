@@ -68,7 +68,7 @@ form#formPermissions(
         type="button"
       ) Extend access 30 days
     .form-group.has-danger
-      #errorArchiveUser.form-control-feedback.has-danger(*ngIf="submitted && messages.archiveError")
+      #errorArchiveUser.form-control-feedback.has-danger(*ngIf="messages.archiveError")
         | An error occurred while processing your request. Please try again later.
   .modal-footer
     button#btnCloseModal.btn(
