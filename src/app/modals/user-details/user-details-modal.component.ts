@@ -42,18 +42,10 @@ export class UserDetailsModal implements OnInit {
    * Makes the call to the service to archive the user and handles updating the ui accordingly
    */
   private archiveUser(): void {
-    console.log(this.user)
-    console.log(!this.user.archivedUser)
     this._users.archiveUser(this.user.profileId, !this.user.archivedUser)
       .take(1)
       .subscribe((res) => {
-        console.log(res)
         this.user.archivedUser = !this.user.archivedUser
-        this._users.getUserDetails(this.user.profileId)
-          .take(1)
-          .subscribe((res) => {
-            console.log(res)
-          })
       }, (err) => {
         console.error(err)
       })
