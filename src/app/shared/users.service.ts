@@ -27,9 +27,9 @@ export class UsersService {
     )
   }
 
-  public updateUser(userId: string, update: UserUpdate): Observable<UpdateUserResponse> {
-    return this.http.post<UpdateUserResponse>(
-      [this._auth.getServiceUrl(), "users", "updateUserDetails"].join("/") + `?profileId=${userId}`,
+  public updateUser(update: UserUpdate): Observable<UserDetails> {
+    return this.http.post<UserDetails>(
+      [this._auth.getServiceUrl(), "users", "updateUserDetails"].join("/") + `?profileId=${update.profileId}`,
       update,
       {
         withCredentials: true

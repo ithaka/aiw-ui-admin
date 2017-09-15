@@ -20,7 +20,9 @@ export class UserDetailsModal implements OnInit {
     archiveError?: boolean,
     archiveSuccess?: boolean,
     permissionsError?: boolean,
-    permissionsSuccess?: boolean
+    permissionsSuccess?: boolean,
+    extendAccessError?: boolean,
+    extendAccessSuccess?: boolean
   } = {}
   private submitted: boolean
 
@@ -52,7 +54,7 @@ export class UserDetailsModal implements OnInit {
       return
     }
 
-    this._users.updateUser(update.profileId, update)
+    this._users.updateUser(update)
       .take(1)
       .subscribe((res) => {
         this.messages.permissionsSuccess = true
@@ -75,5 +77,21 @@ export class UserDetailsModal implements OnInit {
         console.error(err)
         this.messages.archiveError = true
       })
+  }
+
+  /**
+   * Extend a user's access by 30 days once per call
+   */
+  private extendUserAccess(): void {
+    this.messages = {}
+    this._users.updateUser({ profileId: this.user.profileId, daysAccessRemaining: this.user.totalAccessDays + 30 })
+      .take(1)
+      .subscribe((res) => {
+        this.user.totalAccessDays = res.daysAccessRemaining
+      }, (err) => {
+        console.error(err)
+        this.messages.extendAccessError = true
+      }
+    )
   }
 }

@@ -65,7 +65,8 @@ form#formPermissions(
         (click)="archiveUser()"
       ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
       button#btnExtendAccess.list-group-item.btn.btn-secondary(
-        type="button"
+        type="button",
+        (click)="extendUserAccess()"
       ) Extend access 30 days
     .form-group.has-danger
       #errorArchiveUser.form-control-feedback.has-danger(*ngIf="messages.archiveError")
