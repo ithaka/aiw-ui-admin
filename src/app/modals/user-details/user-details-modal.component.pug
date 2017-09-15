@@ -57,25 +57,25 @@ form#formPermissions(
           [formControl]="permissionsForm.controls['hasAdminPriv']"
         )
     .form-group.has-danger
-      .form-control-feedback.has-danger(*ngIf="submitted && messages.permissionsError")
+      #errorPermissionsUpdate.form-control-feedback.has-danger(*ngIf="submitted && messages.permissionsError")
         | An error occurred while processing your request. Please try again later.
     .list-group
-      button.list-group-item.btn.btn-secondary(
+      button#btnArchiveUser.list-group-item.btn.btn-secondary(
         type="button",
         (click)="archiveUser()"
       ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
-      button.list-group-item.btn.btn-secondary(
+      button#btnExtendAccess.list-group-item.btn.btn-secondary(
         type="button"
       ) Extend access 30 days
     .form-group.has-danger
-      .form-control-feedback.has-danger(*ngIf="submitted && messages.archiveError")
+      #errorArchiveUser.form-control-feedback.has-danger(*ngIf="submitted && messages.archiveError")
         | An error occurred while processing your request. Please try again later.
   .modal-footer
-    button.btn(
+    button#btnCloseModal.btn(
       (click)="activeModal.close('Close click')",
       type="button"
     ) Close
-    button.btn.btn-primary(
+    button#btnPermissionsUpdate.btn.btn-primary(
       type="submit",
       (click)="updateUser()"
     ) Save
