@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
-import { UserDetails, UserUpdate } from '../../shared'
+import { UserDetails, UserUpdate, UsersService } from '../../shared'
 
 @Component({
   selector: 'ang-user-details-modal',
@@ -19,6 +19,7 @@ export class UserDetailsModal implements OnInit {
 
   constructor(
     private activeModal: NgbActiveModal,
+    private _users: UsersService,
     _fb: FormBuilder
   ) {
     this.permissionsForm = _fb.group({
@@ -35,7 +36,26 @@ export class UserDetailsModal implements OnInit {
   private onSubmit(update: UserUpdate) {
     // the update object requires a user id in order to send it
     update.profileId = this.user.profileId
+  }
 
-
+  /**
+   * Makes the call to the service to archive the user and handles updating the ui accordingly
+   */
+  private archiveUser(): void {
+    console.log(this.user)
+    console.log(!this.user.archivedUser)
+    this._users.archiveUser(this.user.profileId, !this.user.archivedUser)
+      .take(1)
+      .subscribe((res) => {
+        console.log(res)
+        this.user.archivedUser = !this.user.archivedUser
+        this._users.getUserDetails(this.user.profileId)
+          .take(1)
+          .subscribe((res) => {
+            console.log(res)
+          })
+      }, (err) => {
+        console.error(err)
+      })
   }
 }

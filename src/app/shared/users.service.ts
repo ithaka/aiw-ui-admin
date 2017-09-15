@@ -19,17 +19,9 @@ export class UsersService {
     )
   }
 
-  public archiveUser(userId: string): Observable<UpdateUserResponse> {
+  public archiveUser(userId: string, archive: boolean): Observable<UpdateUserResponse> {
     return this.http.post<UpdateUserResponse>(
-      [this._auth.getServiceUrl(), "users", "archive"].join("/") + `?profileId=${userId}`,
-      {},
-      { withCredentials: true }
-    )
-  }
-
-  public unarchiveUser(userId: string): Observable<UpdateUserResponse> {
-    return this.http.post<UpdateUserResponse>(
-      [this._auth.getServiceUrl(), "users", "unarchive"].join("/") + `?profileId=${userId}`,
+      [this._auth.getServiceUrl(), "users", archive ? "archive": "unarchive"].join("/") + `?profileId=${userId}`,
       {},
       { withCredentials: true }
     )

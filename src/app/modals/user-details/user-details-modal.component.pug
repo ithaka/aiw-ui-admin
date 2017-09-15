@@ -52,8 +52,18 @@
         type="checkbox",
         [formControl]="permissionsForm.controls['hasAdminPriv']"
       )
+  .list-group
+    button.list-group-item.btn.btn-secondary(
+      type="button",
+      (click)="archiveUser()"
+    ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
+    button.list-group-item.btn.btn-secondary Extend access 30 days
 .modal-footer
   button.btn(
     (click)="activeModal.close('Close click')",
     type="button"
   ) Close
+  button.btn.btn-primary(
+    type="button",
+    (click)="updateUser()"
+  ) Save
