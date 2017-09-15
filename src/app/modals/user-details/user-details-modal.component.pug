@@ -59,6 +59,8 @@ form#formPermissions(
     .form-group.has-danger(*ngIf="submitted && messages.permissionsError")
       #errorPermissionsUpdate.form-control-feedback
         | An error occurred while processing your request. Please try again later.
+    .form-group.has-success(*ngIf="messages.permissionsSuccess")
+      #msgPermissionsSuccess.form-control-feedback The user's permissions were successfully updated
     .list-group
       button#btnArchiveUser.list-group-item.btn.btn-secondary(
         type="button",
@@ -71,7 +73,7 @@ form#formPermissions(
     .form-group.has-danger(*ngIf="messages.archiveError || messages.extendAccessError")
       #errorArchiveUser.form-control-feedback
         | An error occurred while processing your request. Please try again later.
-    .form-group.has-success(*ngIf="messages.archiveSuccess || messages.extendAccessSuccess")
+    .form-group.has-success(*ngIf="messages.archiveSuccess || messages.extendAccessSuccess || messages.permissionsSuccess")
       #msgArchiveSuccess.form-control-feedback(*ngIf="messages.archiveSuccess")
         | The user was successfully archived
       #msgExtendAccessSuccess.form-control-feedback(*ngIf="messages.extendAccessSuccess")
