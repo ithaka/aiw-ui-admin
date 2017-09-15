@@ -51,6 +51,7 @@ export class UserDetailsModal implements OnInit {
         (user) => {
           // inject the received user into the component's Input
           this.user = user
+          this.setUserPermissions(user)
         },
         (err) => {
           console.error(err)
@@ -61,6 +62,17 @@ export class UserDetailsModal implements OnInit {
           }
         }
       )
+  }
+
+  /**
+   * Sets the initial values for the user permissions form
+   */
+  private setUserPermissions(user: UserDetails): void {
+    this.permissionsForm.controls['ssEnabled'].setValue(user.ssEnabled)
+    this.permissionsForm.controls['optInEmail'].setValue(user.optInEmail)
+    this.permissionsForm.controls['optInSurvey'].setValue(user.optInSurvey)
+    this.permissionsForm.controls['ssAdmin'].setValue(user.ssAdmin)
+    this.permissionsForm.controls['hasAdminPriv'].setValue(user.hasAdminPriv)
   }
 
   private onSubmit(update: UserUpdate) {
