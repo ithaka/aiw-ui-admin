@@ -6,64 +6,68 @@
     (click)="activeModal.dismiss('Cross click')"
   )
     span(aria-hidden="true") &times;
-//- Just a loading icon until the user object gets back
-.modal-body.has-icon-overlay.text-center(*ngIf="!user")
-  i.icon-lg.icon-loading-large
-.modal-body(*ngIf="user")
-  h5 {{ user.user }}
-  .user-info
-    table.table
-      tr
-        td Email
-        td {{ user.user }}
-      tr
-        td Registration Date
-        td {{ user.createdDate }}
-      tr
-        td Last Access Date
-        td {{ user.timeLastAccessed }}
-      tr
-        td Remote login access
-        td {{ user.totalAccessDays }} of 120 days remaining
-  h6 Permissions
-  .form-group
-    label.form-control.form-check-label(for="checkSSEnabled") Enable Shared Shelf
-      input#checkSSEnabled.form-check-input(
-        type="checkbox",
-        [formControl]="permissionsForm.controls['ssEnabled']"
-      )
-    label.form-control.form-check-label(for="checkOptInEmail") Opt in to email
-      input#checkOptInEmail.form-check-input(
-        type="checkbox",
-        [formControl]="permissionsForm.controls['optInEmail']"
-      )
-    label.form-control.form-check-label(for="checkOptInSurvey") Opt in to survey
-      input#checkOptInSurvey.form-check-input(
-        type="checkbox",
-        [formControl]="permissionsForm.controls['optInSurvey']"
-      )
-    label.form-control.form-check-label(for="checkSSAdmin") Grant SS Admin Rights
-      input#checkSSAdmin.form-check-input(
-        type="checkbox",
-        [formControl]="permissionsForm.controls['ssAdmin']"
-      )
-    label.form-control.form-check-label(for="checkArtstorAdmin") Grant Artstor Admin Rights
-      input#checkArtstorAdmin.form-check-input(
-        type="checkbox",
-        [formControl]="permissionsForm.controls['hasAdminPriv']"
-      )
-  .list-group
-    button.list-group-item.btn.btn-secondary(
-      type="button",
-      (click)="archiveUser()"
-    ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
-    button.list-group-item.btn.btn-secondary Extend access 30 days
-.modal-footer
-  button.btn(
-    (click)="activeModal.close('Close click')",
-    type="button"
-  ) Close
-  button.btn.btn-primary(
-    type="button",
-    (click)="updateUser()"
-  ) Save
+form#formPermissions(
+  [formGroup]="permissionsForm",
+  (ngSubmit)="onSubmit(permissionsForm.value)"
+)
+  //- Just a loading icon until the user object gets back
+  .modal-body.has-icon-overlay.text-center(*ngIf="!user")
+    i.icon-lg.icon-loading-large
+  .modal-body(*ngIf="user")
+    h5 {{ user.user }}
+    .user-info
+      table.table
+        tr
+          td Email
+          td {{ user.user }}
+        tr
+          td Registration Date
+          td {{ user.createdDate }}
+        tr
+          td Last Access Date
+          td {{ user.timeLastAccessed }}
+        tr
+          td Remote login access
+          td {{ user.totalAccessDays }} of 120 days remaining
+    h6 Permissions
+    .form-group
+      label.form-control.form-check-label(for="checkSSEnabled") Enable Shared Shelf
+        input#checkSSEnabled.form-check-input(
+          type="checkbox",
+          [formControl]="permissionsForm.controls['ssEnabled']"
+        )
+      label.form-control.form-check-label(for="checkOptInEmail") Opt in to email
+        input#checkOptInEmail.form-check-input(
+          type="checkbox",
+          [formControl]="permissionsForm.controls['optInEmail']"
+        )
+      label.form-control.form-check-label(for="checkOptInSurvey") Opt in to survey
+        input#checkOptInSurvey.form-check-input(
+          type="checkbox",
+          [formControl]="permissionsForm.controls['optInSurvey']"
+        )
+      label.form-control.form-check-label(for="checkSSAdmin") Grant SS Admin Rights
+        input#checkSSAdmin.form-check-input(
+          type="checkbox",
+          [formControl]="permissionsForm.controls['ssAdmin']"
+        )
+      label.form-control.form-check-label(for="checkArtstorAdmin") Grant Artstor Admin Rights
+        input#checkArtstorAdmin.form-check-input(
+          type="checkbox",
+          [formControl]="permissionsForm.controls['hasAdminPriv']"
+        )
+    .list-group
+      button.list-group-item.btn.btn-secondary(
+        type="button",
+        (click)="archiveUser()"
+      ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
+      button.list-group-item.btn.btn-secondary Extend access 30 days
+  .modal-footer
+    button.btn(
+      (click)="activeModal.close('Close click')",
+      type="button"
+    ) Close
+    button.btn.btn-primary(
+      type="submit",
+      (click)="updateUser()"
+    ) Save

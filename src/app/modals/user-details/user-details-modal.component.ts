@@ -16,6 +16,13 @@ export class UserDetailsModal implements OnInit {
   @Input() name: string
 
   private permissionsForm: FormGroup
+  private messages: {
+    archiveError?: boolean,
+    archiveSuccess?: boolean,
+    permissionsError?: boolean,
+    permissionsSuccess?: boolean
+  } = {}
+  private submitted: boolean
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -34,8 +41,24 @@ export class UserDetailsModal implements OnInit {
   ngOnInit() { }
 
   private onSubmit(update: UserUpdate) {
+    // reset all service messages
+    this.messages = {}
+
     // the update object requires a user id in order to send it
     update.profileId = this.user.profileId
+    if (this.permissionsForm.invalid) {
+      this.submitted = true
+      return
+    }
+
+    this._users.updateUser(update.profileId, update)
+      .take(1)
+      .subscribe((res) => {
+        this.messages.permissionsSuccess = true
+      }, (err) => {
+        console.error(err)
+        this.messages.permissionsError = true
+      })
   }
 
   /**
@@ -48,6 +71,7 @@ export class UserDetailsModal implements OnInit {
         this.user.archivedUser = !this.user.archivedUser
       }, (err) => {
         console.error(err)
+        this.messages.archiveError = true
       })
   }
 }
