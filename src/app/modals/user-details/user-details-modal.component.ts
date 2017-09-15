@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
@@ -29,6 +30,7 @@ export class UserDetailsModal implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private _users: UsersService,
+    private route: ActivatedRoute,
     _fb: FormBuilder
   ) {
     this.permissionsForm = _fb.group({
@@ -40,7 +42,17 @@ export class UserDetailsModal implements OnInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._users.getUserDetails(this.route.snapshot.queryParams.user) // yes this profileId has a lowercase 'i'
+      .take(1)
+      .subscribe(
+        (user) => {
+          // inject the received user into the component's Input
+          this.user = user
+        },
+        (err) => { console.error(err) }
+      )
+  }
 
   private onSubmit(update: UserUpdate) {
     // reset all service messages

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
@@ -38,9 +39,13 @@ export class UsersPage implements OnInit {
   constructor(
     private _auth: AuthService,
     private _users: UsersService,
-    private _modal: NgbModal
+    private _modal: NgbModal,
+    private _router: Router,
+    private route: ActivatedRoute
   ) {
-    
+    if (this.route.snapshot.queryParams.user) {
+      this._modal.open(UserDetailsModal)
+    }
   }
   
   public ngOnInit():void {
@@ -146,16 +151,8 @@ export class UsersPage implements OnInit {
   }
 
   public onCellClick(data: any): any {
+    this._router.navigate([], { queryParams: { user: data.row.profileid } })
     // this uses the NgBootstrap modal service
-    let userModal = this._modal.open(UserDetailsModal)
-    this._users.getUserDetails(data.row.profileid) // yes this profileId has a lowercase 'i'
-      .take(1)
-      .subscribe(
-        (res) => {
-          // inject the received user into the component's Input
-          userModal.componentInstance.user = res
-        },
-        (err) => { console.error(err) }
-      )
+    this._modal.open(UserDetailsModal)
   }
 }
