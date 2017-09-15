@@ -18,6 +18,8 @@ export class UserDetailsModal implements OnInit {
 
   private permissionsForm: FormGroup
   private messages: {
+    userNotFoundError?: boolean,
+    userServiceError?: boolean,
     archiveError?: boolean,
     archiveSuccess?: boolean,
     permissionsError?: boolean,
@@ -50,7 +52,14 @@ export class UserDetailsModal implements OnInit {
           // inject the received user into the component's Input
           this.user = user
         },
-        (err) => { console.error(err) }
+        (err) => {
+          console.error(err)
+          if (err.status == 404) {
+            this.messages.userNotFoundError = true
+          } else {
+            this.messages.userServiceError = true
+          }
+        }
       )
   }
 

@@ -6,13 +6,21 @@
     (click)="activeModal.dismiss('Cross click')"
   )
     span(aria-hidden="true") &times;
+//- Just a loading icon until the user object gets back
+.modal-body.has-icon-overlay.text-center(*ngIf="!user && !(messages.userNotFoundError || messages.userServiceError)")
+  i.icon-lg.icon-loading-large
+//- The modal body that contains user service errors
+.modal-body(*ngIf="messages.userNotFoundError || messages.userServiceError")
+  .form-group.has-danger
+    .form-control-feedback(*ngIf="messages.userNotFoundError")
+      | The requested user was not found
+    .form-control-feedback(*ngIf="messages.userServiceError")
+      | There was an error getting the requested user. Please try again.
+//- Wrap the rest of the modal in a form so it can be submitted from the footer
 form#formPermissions(
   [formGroup]="permissionsForm",
   (ngSubmit)="onSubmit(permissionsForm.value)"
 )
-  //- Just a loading icon until the user object gets back
-  .modal-body.has-icon-overlay.text-center(*ngIf="!user")
-    i.icon-lg.icon-loading-large
   .modal-body(*ngIf="user")
     h5 {{ user.user }}
     .user-info

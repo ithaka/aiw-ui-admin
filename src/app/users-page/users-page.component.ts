@@ -43,6 +43,7 @@ export class UsersPage implements OnInit {
     private _router: Router,
     private route: ActivatedRoute
   ) {
+    // if the user is requesting a user's details in the url, go ahead and open the user details modal
     if (this.route.snapshot.queryParams.user) {
       this._modal.open(UserDetailsModal)
     }
