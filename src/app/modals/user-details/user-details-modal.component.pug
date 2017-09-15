@@ -56,8 +56,8 @@ form#formPermissions(
           type="checkbox",
           [formControl]="permissionsForm.controls['hasAdminPriv']"
         )
-    .form-group.has-danger
-      #errorPermissionsUpdate.form-control-feedback.has-danger(*ngIf="submitted && messages.permissionsError")
+    .form-group.has-danger(*ngIf="submitted && messages.permissionsError")
+      #errorPermissionsUpdate.form-control-feedback
         | An error occurred while processing your request. Please try again later.
     .list-group
       button#btnArchiveUser.list-group-item.btn.btn-secondary(
@@ -68,9 +68,14 @@ form#formPermissions(
         type="button",
         (click)="extendUserAccess()"
       ) Extend access 30 days
-    .form-group.has-danger
-      #errorArchiveUser.form-control-feedback.has-danger(*ngIf="messages.archiveError")
+    .form-group.has-danger(*ngIf="messages.archiveError || messages.extendAccessError")
+      #errorArchiveUser.form-control-feedback
         | An error occurred while processing your request. Please try again later.
+    .form-group.has-success(*ngIf="messages.archiveSuccess || messages.extendAccessSuccess")
+      #msgArchiveSuccess.form-control-feedback(*ngIf="messages.archiveSuccess")
+        | The user was successfully archived
+      #msgExtendAccessSuccess.form-control-feedback(*ngIf="messages.extendAccessSuccess")
+        | The user's session was extended to {{ user.totalAccessDays }} days
   .modal-footer
     button#btnCloseModal.btn(
       (click)="activeModal.close('Close click')",

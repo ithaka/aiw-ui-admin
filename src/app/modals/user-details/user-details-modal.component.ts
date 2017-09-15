@@ -73,6 +73,7 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.user.archivedUser = !this.user.archivedUser
+        this.messages.archiveSuccess = true
       }, (err) => {
         console.error(err)
         this.messages.archiveError = true
@@ -88,6 +89,7 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.user.totalAccessDays = res.daysAccessRemaining
+        this.messages.extendAccessSuccess = true
       }, (err) => {
         console.error(err)
         this.messages.extendAccessError = true
