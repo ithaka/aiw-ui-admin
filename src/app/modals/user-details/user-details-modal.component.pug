@@ -22,7 +22,6 @@ form#formPermissions(
   (ngSubmit)="onSubmit(permissionsForm.value)"
 )
   .modal-body(*ngIf="user")
-    h5 {{ user.user }}
     .user-info
       table.table
         tr
