@@ -10,12 +10,16 @@ import { AuthService } from './../shared';
 })
 
 export class UsersPage implements OnInit {
+  private messages: {
+    unauthorized?: boolean,
+    serviceError?: boolean
+  } = {}
   private users: Array<any> = []
   private columns:Array<any> = [
-    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email' } },
-    { title: 'Registration Date', name: 'createdate' },
-    { title: 'Last Log-in Date', name: 'timelastaccessed' },
-    { title: 'Shared Shelf Acces', name: 'ssenabled', filtering: {filterString: '', placeholder: 'Filter by SSA'}}
+    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email' }, className: ['cell-cls'] },
+    { title: 'Registration Date', name: 'createdate', className: ['cell-cls'] },
+    { title: 'Last Log-in Date', name: 'timelastaccessed', className: ['cell-cls'] },
+    { title: 'Shared Shelf Acces', name: 'ssenabled', filtering: { filterString: '', placeholder: 'Filter by SSA' }, className: ['cell-cls'] }
   ]
   
   public rows:Array<any> = []
@@ -50,7 +54,17 @@ export class UsersPage implements OnInit {
         this.length = this.users.length;
         this.onChangeTable(this.config);
 
-        console.log(this.users);
+        this.messages.unauthorized = false
+        this.messages.serviceError = false
+      }
+    }, (err) => {
+      switch (err.status) {
+        case 401:
+          this.messages.unauthorized = true
+          break
+        default:
+          this.messages.serviceError = true
+          console.error(err)
       }
     })
   }

@@ -13,6 +13,12 @@
       "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account"
     }
   },
+  "USERS": {
+    "MESSAGES": {
+      "UNAUTHORIZED": "Unauthorized user. Please sign-in with admin account.",
+      "SERVICE_ERROR": "Server is not responding. Please try again later."
+    }
+  },
   "HEADER": {
     "GREETING": "Welcome, {{email}}"
   }
