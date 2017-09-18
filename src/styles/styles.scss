@@ -64,3 +64,9 @@
 // .test {
 //   background-color: black;
 // }
+
+/* For users table row style */
+table.dataTable tbody tr:hover{
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.1);
+}

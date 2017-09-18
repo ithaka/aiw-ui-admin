@@ -9,3 +9,9 @@ ang-main-nav
         ng-table([config]="config", (tableChanged)="onChangeTable(config)", (cellClicked)="onCellClick($event)", [rows]="rows", [columns]="columns")
         //- pagination(*ngIf="config.paging", class="pagination-sm", [(ngModel)]="page", [totalItems]="length", [itemsPerPage]="itemsPerPage", [maxSize]="maxSize", [boundaryLinks]="true", [rotate]="false", (pageChanged)="onChangeTable(config, $event)", (numPages)="numPages = $event")
         //- pre(*ngIf="config.paging",class="card card-block card-header") | Page: {{page}} / {{numPages}}
+        
+    .error-msg(*ngIf="messages.serviceError") {{ 'USERS.MESSAGES.SERVICE_ERROR' | translate }}
+    .error-msg(*ngIf="messages.unauthorized") {{ 'USERS.MESSAGES.UNAUTHORIZED' | translate }}
+
+
+    
