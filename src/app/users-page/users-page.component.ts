@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Subscription } from 'rxjs/Subscription'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal } from './../modals'
@@ -12,7 +13,9 @@ import { UserDetailsModal } from './../modals'
   styleUrls: ['./users-page.component.scss']
 })
 
-export class UsersPage implements OnInit {
+export class UsersPage implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = []
+
   private users: Array<any> = []
   private columns:Array<any> = [
     { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email' } },
@@ -49,8 +52,14 @@ export class UsersPage implements OnInit {
     }
   }
   
-  public ngOnInit():void {
+  ngOnInit():void {
     this.loadUsers()
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe()
+    })
   }
 
   private loadUsers(): void{

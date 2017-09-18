@@ -38,32 +38,42 @@ form#formPermissions(
           td Remote login access
           td {{ user.totalAccessDays }} of 120 days remaining
     h6 Permissions
-    .form-group
-      label.form-control.form-check-label(for="checkSSEnabled") Enable Shared Shelf
-        input#checkSSEnabled.form-check-input(
-          type="checkbox",
-          [formControl]="permissionsForm.controls['ssEnabled']"
-        )
-      label.form-control.form-check-label(for="checkOptInEmail") Opt in to email
-        input#checkOptInEmail.form-check-input(
-          type="checkbox",
-          [formControl]="permissionsForm.controls['optInEmail']"
-        )
-      label.form-control.form-check-label(for="checkOptInSurvey") Opt in to survey
-        input#checkOptInSurvey.form-check-input(
-          type="checkbox",
-          [formControl]="permissionsForm.controls['optInSurvey']"
-        )
-      label.form-control.form-check-label(for="checkSSAdmin") Grant SS Admin Rights
-        input#checkSSAdmin.form-check-input(
-          type="checkbox",
-          [formControl]="permissionsForm.controls['ssAdmin']"
-        )
-      label.form-control.form-check-label(for="checkArtstorAdmin") Grant Artstor Admin Rights
-        input#checkArtstorAdmin.form-check-input(
-          type="checkbox",
-          [formControl]="permissionsForm.controls['hasAdminPriv']"
-        )
+    ul.list-group.form-group.pb-3
+      li.list-group-item
+        label.form-check-label(for="checkSSEnabled")
+          input#checkSSEnabled.form-check-input(
+            type="checkbox",
+            [formControl]="permissionsForm.controls['ssEnabled']"
+          )
+        | Enable Shared Shelf
+      li.list-group-item
+        label.form-check-label(for="checkOptInEmail")
+          input#checkOptInEmail.form-check-input(
+            type="checkbox",
+            [formControl]="permissionsForm.controls['optInEmail']"
+          )
+        | Opt in to email
+      li.list-group-item
+        label.form-check-label(for="checkOptInSurvey")
+          input#checkOptInSurvey.form-check-input(
+            type="checkbox",
+            [formControl]="permissionsForm.controls['optInSurvey']"
+          )
+        | Opt in to survey
+      li.list-group-item
+        label.form-check-label(for="checkSSAdmin")
+          input#checkSSAdmin.form-check-input(
+            type="checkbox",
+            [formControl]="permissionsForm.controls['ssAdmin']"
+          )
+        | Grant SS Admin Rights
+      li.list-group-item
+        label.form-check-label(for="checkArtstorAdmin")
+          input#checkArtstorAdmin.form-check-input(
+            type="checkbox",
+            [formControl]="permissionsForm.controls['hasAdminPriv']"
+          )
+        | Grant Artstor Admin Rights
     .form-group.has-danger(*ngIf="submitted && messages.permissionsError")
       #errorPermissionsUpdate.form-control-feedback
         | An error occurred while processing your request. Please try again later.
