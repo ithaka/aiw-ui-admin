@@ -96,7 +96,7 @@ form#formPermissions(
       #msgExtendAccessSuccess.form-control-feedback(*ngIf="messages.extendAccessSuccess")
         | The user's session was extended to {{ user.totalAccessDays }} days
   .modal-footer
-    button#btnCloseModal.btn(
+    button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
       type="button"
     ) Close
