@@ -36,10 +36,11 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver'
 import { AppState, InternalStateType } from './app.service'
 import { HeaderComponent } from './header/header.component'
 import { HomeComponent } from './home'
-import { NoContentComponent } from './no-content'
-import { LoginPage } from './login-page/login-page.component'
 import { InstitutionPage } from './institution-page/institution-page.component'
+import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
+import { NoContentComponent } from './no-content'
+import { RegisterModal } from './modals/register/register-modal.component'
 import { SettingsPage } from './settings-page/settings-page.component'
 import { UserDetailsModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
@@ -78,6 +79,7 @@ type StoreType = {
     InstitutionPage,
     NavComponent,
     NoContentComponent,
+    RegisterModal,
     UserDetailsModal,
     SettingsPage,
     UsersPage
