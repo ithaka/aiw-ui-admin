@@ -1,0 +1,226 @@
+/**
+ * # Icons
+ */
+
+.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.05;
+    }
+}
+
+.icon-lg {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.icon-overlay {
+    position: absolute;
+    padding: 40px;
+    width: 100%;
+    height: 100%;
+    background-size: 40px 40px !important;
+    background-color: rgba(255,255,255,0.5);
+    z-index: 5000;
+    pointer-events: none;
+}
+
+.icon-overlay--top {
+    @extend .icon-overlay;
+    background-position: 50% 100px !important;
+}
+
+.has-icon-overlay {
+    min-height: 90px;
+}
+
+@mixin icon($name, $imageType) {
+    .icon-#{ $name } {
+        background-image: url('/assets/img/icon-' + $name + '.' + $imageType);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% auto;
+    }
+}
+
+@mixin icon--hover($name, $imageType) {
+    .icon-#{ $name } {
+        cursor: pointer;
+        background-image: url('/assets/img/icon-' + $name + '.' + $imageType);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% auto;
+        
+        &:hover, &:focus, &:active {
+            background-image: url('/assets/img/icon-' + $name + '--hover.' + $imageType);
+        }
+    }
+}
+
+@include icon('search', 'svg');
+@include icon('up', 'svg');
+@include icon('down', 'svg');
+@include icon('left', 'svg');
+@include icon('right', 'svg');
+@include icon('loading', 'gif');
+@include icon('loading-large', 'gif');
+@include icon('open-link', 'svg');
+@include icon('download', 'svg');
+@include icon('download-white', 'svg');
+@include icon('select-white', 'svg');
+@include icon('reorder-white', 'svg');
+@include icon('export-white', 'svg');
+@include icon('cluster', 'svg');
+@include icon('fit', 'svg');
+@include icon('fullscreen', 'svg');
+@include icon('more', 'svg');
+@include icon('share', 'svg');
+@include icon('share-white', 'svg');
+@include icon('star', 'svg');
+@include icon('zoom-in', 'svg');
+@include icon('zoom-out', 'svg');
+@include icon('large-view', 'svg');
+@include icon('small-view', 'svg');
+@include icon('collab', 'gif');
+@include icon('iap', 'gif');
+@include icon('pdf', 'gif');
+@include icon('doc', 'gif');
+@include icon('xls', 'gif');
+@include icon('ppt', 'gif');
+@include icon('video', 'gif');
+@include icon('audio', 'gif');
+@include icon('3d', 'gif');
+@include icon('qtvr', 'gif');
+@include icon('personal-asset', 'png');
+@include icon('ssc-asset', 'png');
+@include icon('institution-asset', 'png');
+@include icon('artstor-asset', 'png');
+@include icon--hover('icon-slideshow', 'gif');
+
+// Icons with adjustments
+@include icon('close', 'svg');
+.icon-close {
+    background-size: 70% 70%;
+}
+.icon-add {
+    @extend .icon-close;
+    transform: rotate(45deg);
+}
+@include icon('close-white', 'svg');
+.icon-close-white {
+    background-size: 70% 70%;
+}
+.icon-close-white--round {
+    @extend .icon-close-white;
+    background-color: #000;
+    border-radius: 50%;
+    background-size: 60% 60%;
+}
+.icon-add-white {
+    @extend .icon-close-white;
+    transform: rotate(45deg);
+}
+@include icon('text', 'svg');
+.icon-text {
+    background-size: 70% 70%;
+}
+
+.icon-collection-type {
+    float: right;
+}
+
+.icon-search {
+    cursor: pointer;
+    opacity: 0.6;
+
+    &:hover, &:focus {
+        opacity: 1;
+    }    
+}
+ 
+.icon-direction {
+    background-image: url('/assets/img/icon-down.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+
+    transition: transform linear 0.2s;
+    transform: rotate(0deg);
+
+    &.icon-down, &.icon-up, &.icon-right, &.icon-left {
+        background-image: url('/assets/img/icon-down.svg');
+    }
+
+    &.icon-up {
+        transform: rotate(180deg);
+    } 
+    &.icon-right {
+        transform: rotate(-90deg);
+    } 
+    &.icon-left {
+        transform: rotate(90deg);
+    }
+}
+
+.icon-empty {
+    background-image: none !important;
+}
+
+a .icon {
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.contextual-help{
+    margin-left: 5px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    background-color: #999;
+    color: #fff !important;
+
+    &:hover{
+        background-color: #fafafa;
+        color: #999 !important;
+    }
+}
+
+.icon--toggle {
+    cursor: pointer;
+    opacity: 0.3;
+    padding: 2px;
+    display: inline-block;
+
+    &:hover, &:active {
+        opacity: 0.75;
+        background-color: #f0f0f0;
+    }
+
+    &.active {
+        opacity: 1;
+    }
+}
+
+ .icon-bar {
+     font-size: 18px;
+     margin: 0px 6px;
+     display: inline-block;
+     position: relative;
+     vertical-align: middle;
+    line-height: 18px;
+ }

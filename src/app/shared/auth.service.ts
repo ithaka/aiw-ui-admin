@@ -127,17 +127,6 @@ export class AuthService implements CanActivate {
       { withCredentials: true }
     )
   }
-  
-  /**
-   * Gets institutional users
-   */
-  public getUsers(): Observable <UserResponse[]> {
-    return this.http.get<UserResponse[]>(
-      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers?type=active',
-      // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
-      { withCredentials: true }
-    )
-  }
 
   /**
    * Encodes javascript object into a URI component
@@ -199,16 +188,4 @@ interface InstitutionInfoResponse {
     show_option: string
   }
   
-}
-
-interface UserResponse {
-  email: string,
-  active: boolean,
-  roles: string,
-  profileid: number,
-  userid: number,
-  institutionid: number,
-  ssenabled: boolean,
-  createdate: Date,
-  timelastaccessed: Date
 }

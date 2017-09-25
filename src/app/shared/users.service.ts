@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 
-import { AuthService } from './'
+import { AuthService, UserDetails, UserUpdate } from './'
 
 @Injectable()
 export class UsersService {
@@ -12,24 +12,63 @@ export class UsersService {
     private _auth: AuthService
   ) { }
 
-  private getUserDetails(userId: string): Observable<UserDetailsResponse> {
-    return this.http.get<UserDetailsResponse>(
-      [this._auth.getServiceUrl(), "users", "userDetails", userId].join("/")
+  public getUserDetails(userId: string): Observable<UserDetails> {
+    return this.http.get<UserDetails>(
+      [this._auth.getServiceUrl(), "users", "userDetails", userId].join("/"),
+      { withCredentials: true }
+    )
+  }
+
+  public archiveUser(userId: string, archive: boolean): Observable<UpdateUserResponse> {
+    return this.http.post<UpdateUserResponse>(
+      [this._auth.getServiceUrl(), "users", archive ? "archive": "unarchive"].join("/") + `?profileId=${userId}`,
+      {},
+      { withCredentials: true }
+    )
+  }
+
+  public updateUser(update: UserUpdate): Observable<UserDetails> {
+    return this.http.post<UserDetails>(
+      [this._auth.getServiceUrl(), "users", "updateUserDetails"].join("/") + `?profileId=${update.profileId}`,
+      update,
+      {
+        withCredentials: true
+      }
+    )
+  }
+
+  /**
+   * Gets institutional users
+   */
+  public getUsers(): Observable <ListUsersResponse[]> {
+    return this.http.get<ListUsersResponse[]>(
+      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers/?type=active&institutionId=1000',
+      // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
+      { withCredentials: true }
     )
   }
 }
 
-interface UserDetailsResponse {
-  createdDate: string
-  totalAccessDays: number
-  hasAdminPriv: boolean
+interface UpdateUserResponse {
+  profileId: string
+  userId: string
+  institutionId: string
+  portalName: string
+  active: boolean
+  roles: string
+  pcAllowed: boolean
   ssEnabled: boolean
-  archivedUser: boolean
-  optInEmail: boolean
-  user: string,
-  daysAccessRemaining: number
-  profileId: number
-  optInSurvey: boolean
   timeLastAccessed: string
-  ssAdmin: boolean
+}
+
+interface ListUsersResponse {
+  email: string,
+  active: boolean,
+  roles: string,
+  profileid: number,
+  userid: number,
+  institutionid: number,
+  ssenabled: boolean,
+  createdate: Date,
+  timelastaccessed: Date
 }
