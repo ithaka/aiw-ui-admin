@@ -133,7 +133,7 @@ export class AuthService implements CanActivate {
    */
   public getUsers(): Observable <UserResponse[]> {
     return this.http.get<UserResponse[]>(
-      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers/?type=active&institutionId=1000',
+      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers?type=active',
       // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
       { withCredentials: true }
     )
