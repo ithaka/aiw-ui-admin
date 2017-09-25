@@ -42,7 +42,7 @@ export class UsersService {
    */
   public getUsers(): Observable <ListUsersResponse[]> {
     return this.http.get<ListUsersResponse[]>(
-      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers/?type=active&institutionId=1000',
+      'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers?type=active',
       // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
       { withCredentials: true }
     )
