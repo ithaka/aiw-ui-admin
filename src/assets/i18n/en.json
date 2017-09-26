@@ -17,6 +17,9 @@
     "MESSAGES": {
       "UNAUTHORIZED": "Unauthorized user. Please sign-in with admin account.",
       "SERVICE_ERROR": "Server is not responding. Please try again later."
+    },
+    "BUTTONS": {
+      "REGISTER_USER": "Register Users"
     }
   },
   "HEADER": {
