@@ -40,10 +40,18 @@ export class UsersService {
   /**
    * Gets institutional users
    */
-  public getUsers(): Observable <ListUsersResponse[]> {
+  public getUsers(): Observable<ListUsersResponse[]> {
     return this.http.get<ListUsersResponse[]>(
       'http://art-aa-service.apps.test.cirrostratus.org/admin/users/manageUsers?type=active',
       // [this.getServiceUrl(true), "users", "manageUsers"].join("/") + '?type=active',
+      { withCredentials: true }
+    )
+  }
+
+  public registerUsers(users: { email: string, password: string, role: string, portal: string, institutionId: string }[]): Observable<RegisterUsersResponse> {
+    return this.http.post<RegisterUsersResponse>(
+      [this._auth.getServiceUrl(), "users", "create"].join("/"),
+      users,
       { withCredentials: true }
     )
   }
@@ -71,4 +79,38 @@ interface ListUsersResponse {
   ssenabled: boolean,
   createdate: Date,
   timelastaccessed: Date
+}
+
+interface RegisterUsersResponse {
+  status: boolean
+  error: string
+  users: {
+    email: string
+    status: boolean
+    error: string
+    account: {
+      id: string,
+      legacyId: string,
+      internalId: string,
+      type: string,
+      name: string,
+      contactName: string,
+      contactEmail: string,
+      status: string,
+      roles: string,
+      credentials: string,
+      createTime: string
+    }
+    profile: {
+      "profileId": number,
+      "userId": string,
+      "institutionId": string,
+      "portalName": string,
+      "active": boolean,
+      "roles": string,
+      "pcAllowed": boolean,
+      "ssEnabled": boolean,
+      "timeLastAccessed": string
+    }
+  }[]
 }
