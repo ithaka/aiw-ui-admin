@@ -1,92 +1,22 @@
 .modal-header
-  h4.modal-title Register Users
+  h4.modal-title {{ 'REGISTER_MODAL.MAIN_HEADING' | translate }}
   button.close(
     type="button",
     aria-label="Close",
     (click)="activeModal.dismiss('Cross click')"
   )
     span(aria-hidden="true") &times;
-.modal-body(*ngIf="user")
-  .user-info
-    table.table
-      tr
-        td Email
-        td {{ user.user }}
-      tr
-        td Registration Date
-        td {{ user.createdDate }}
-      tr
-        td Last Access Date
-        td {{ user.timeLastAccessed }}
-      tr
-        td Remote login access
-        td {{ user.totalAccessDays }} of 120 days remaining
-  h6 Permissions
-  fieldset([disabled]="user.archivedUser")
-    ul.list-group.form-group.pb-3
-      li.list-group-item
-        label.form-check-label(for="checkSSEnabled")
-          input#checkSSEnabled.form-check-input(
-            type="checkbox",
-            [formControl]="permissionsForm.controls['ssEnabled']"
-          )
-        | Enable Shared Shelf
-      li.list-group-item
-        label.form-check-label(for="checkOptInEmail")
-          input#checkOptInEmail.form-check-input(
-            type="checkbox",
-            [formControl]="permissionsForm.controls['optInEmail']"
-          )
-        | Opt in to email
-      li.list-group-item
-        label.form-check-label(for="checkOptInSurvey")
-          input#checkOptInSurvey.form-check-input(
-            type="checkbox",
-            [formControl]="permissionsForm.controls['optInSurvey']"
-          )
-        | Opt in to survey
-      li.list-group-item
-        label.form-check-label(for="checkSSAdmin")
-          input#checkSSAdmin.form-check-input(
-            type="checkbox",
-            [formControl]="permissionsForm.controls['ssAdmin']"
-          )
-        | Grant SS Admin Rights
-      li.list-group-item
-        label.form-check-label(for="checkArtstorAdmin")
-          input#checkArtstorAdmin.form-check-input(
-            type="checkbox",
-            [formControl]="permissionsForm.controls['hasAdminPriv']"
-          )
-        | Grant Artstor Admin Rights
-  .form-group.has-danger(*ngIf="submitted && messages.permissionsError")
-    #errorPermissionsUpdate.form-control-feedback
-      | An error occurred while processing your request. Please try again later.
-  .form-group.has-success(*ngIf="messages.permissionsSuccess")
-    #msgPermissionsSuccess.form-control-feedback The user's permissions were successfully updated
-  .list-group
-    button#btnArchiveUser.list-group-item.btn.btn-secondary(
-      type="button",
-      (click)="archiveUser()"
-    ) {{ user.archivedUser ? "Unarchive User" : "Archive User" }}
-    button#btnExtendAccess.list-group-item.btn.btn-secondary(
-      type="button",
-      (click)="extendUserAccess()",
-      [disabled]="user.archivedUser"
-    ) Extend access 30 days
-  .form-group.has-danger(*ngIf="messages.archiveError || messages.extendAccessError")
-    #errorArchiveUser.form-control-feedback
-      | An error occurred while processing your request. Please try again later.
-  .form-group.has-success(*ngIf="messages.archiveSuccess || messages.extendAccessSuccess || messages.permissionsSuccess")
-    #msgArchiveSuccess.form-control-feedback(*ngIf="messages.archiveSuccess")
-      | The user was successfully archived
-    #msgExtendAccessSuccess.form-control-feedback(*ngIf="messages.extendAccessSuccess")
-      | The user's session was extended to {{ user.totalAccessDays }} days
-.modal-footer
-  button#btnCloseModal.btn.btn-secondary(
-    (click)="activeModal.close('Close click')",
-    type="button"
-  ) Close
-  button#btnPermissionsUpdate.btn.btn-primary(
-    type="submit"
-  ) Save
+form#formRegisterUsers([formGroup]="registerForm")
+  .modal-body
+    rl-tag-input(
+      [formControl]="registerForm.controls['emails']",
+      placeholder="emails"
+    )
+  .modal-footer
+    button#btnCloseModal.btn.btn-secondary(
+      (click)="activeModal.close('Close click')",
+      type="button"
+    ) Close
+    button#btnPermissionsUpdate.btn.btn-primary(
+      type="submit"
+    ) Save

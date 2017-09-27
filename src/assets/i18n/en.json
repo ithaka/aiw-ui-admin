@@ -24,5 +24,8 @@
   },
   "HEADER": {
     "GREETING": "Welcome, {{email}}"
+  },
+  "REGISTER_MODAL": {
+    "MAIN_HEADING": "Register Users"
   }
 }

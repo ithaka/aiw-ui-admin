@@ -16,8 +16,8 @@ import {
   PreloadAllModules
 } from '@angular/router'
 
-import { Ng2TableModule } from 'ng2-table/ng2-table';
-
+import { Ng2TableModule } from 'ng2-table/ng2-table'
+import { RlTagInputModule } from 'angular2-tag-autocomplete'
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -103,6 +103,7 @@ type StoreType = {
     }),
     LockerModule,
     Ng2CompleterModule,
+    RlTagInputModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
         provide: TranslateLoader,
