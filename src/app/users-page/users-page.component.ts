@@ -20,12 +20,12 @@ export class UsersPage implements OnInit, OnDestroy {
     unauthorized?: boolean,
     serviceError?: boolean
   } = {}
-  private users: Array<any> = []
+  private users:Array<any> = []
   private columns:Array<any> = [
-    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email' }, className: ['cell-cls'] },
-    { title: 'Registration Date', name: 'createdate', className: ['cell-cls'] },
-    { title: 'Last Log-in Date', name: 'timelastaccessed', className: ['cell-cls'] },
-    { title: 'Shared Shelf Acces', name: 'ssenabled', filtering: { filterString: '', placeholder: 'Filter by SSA' }, className: ['cell-cls'] }
+    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
+    { title: 'Registration Date', name: 'createdate', filtering: { filterString: '', placeholder: 'Filter by Registration', columnName: 'createdate' }, className: ['cell-cls'] },
+    { title: 'Last Log-in Date', name: 'timelastaccessed', filtering: { filterString: '', placeholder: 'Filter by Last Login', columnName: 'timelastaccessed' }, className: ['cell-cls'] },
+    { title: 'Shared Shelf Acces', name: 'ssenabled', className: ['cell-cls'] }
   ]
   
   public rows:Array<any> = []
@@ -39,7 +39,7 @@ export class UsersPage implements OnInit, OnDestroy {
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
-    filtering: {filterString: ''},
+    // filtering: {filterString: ''},
     className: ['table-striped', 'table-bordered']
   }
 
@@ -170,8 +170,8 @@ export class UsersPage implements OnInit, OnDestroy {
       Object.assign(this.config.sorting, config.sorting)
     }
 
-    // let filteredData = this.changeFilter(this.users, this.config)
-    let sortedData = this.changeSort(this.users, this.config)
+    let filteredData = this.changeFilter(this.users, this.config)
+    let sortedData = this.changeSort(filteredData, this.config)
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData
     this.length = sortedData.length
   }
