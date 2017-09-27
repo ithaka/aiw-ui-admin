@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
-import { UserDetailsModal } from './../modals'
+import { UserDetailsModal, RegisterModal } from './../modals'
 
 @Component({
   selector: 'ang-users-page',
@@ -176,9 +176,13 @@ export class UsersPage implements OnInit, OnDestroy {
     this.length = sortedData.length
   }
 
-  public onCellClick(data: any): any {
+  public onCellClick(data: any): void {
     this._router.navigate([], { queryParams: { user: data.row.profileid } })
     // this uses the NgBootstrap modal service
     this._modal.open(UserDetailsModal)
+  }
+
+  private openRegisterModal(): void {
+    this._modal.open(RegisterModal)
   }
 }

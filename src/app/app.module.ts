@@ -40,9 +40,8 @@ import { InstitutionPage } from './institution-page/institution-page.component'
 import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
 import { NoContentComponent } from './no-content'
-import { RegisterModal } from './modals/register/register-modal.component'
 import { SettingsPage } from './settings-page/settings-page.component'
-import { UserDetailsModal } from './modals'
+import { UserDetailsModal, RegisterModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
 
 
@@ -88,7 +87,8 @@ type StoreType = {
    * Components which can be dynamically created
    */
   entryComponents: [
-    UserDetailsModal
+    UserDetailsModal,
+    RegisterModal
   ],
   /**
    * Import Angular's modules.

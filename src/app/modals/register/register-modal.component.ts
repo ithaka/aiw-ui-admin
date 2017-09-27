@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'ang-register-modal',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class RegisterModal implements OnInit {
-  constructor() { }
+  constructor(
+    private activeModal: NgbActiveModal
+  ) { }
 
   ngOnInit() { }
 }
