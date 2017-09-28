@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
+import { Angular2Csv } from 'angular2-csv/Angular2-csv'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal } from './../modals'
@@ -180,5 +181,19 @@ export class UsersPage implements OnInit, OnDestroy {
     this._router.navigate([], { queryParams: { user: data.row.profileid } })
     // this uses the NgBootstrap modal service
     this._modal.open(UserDetailsModal)
+  }
+
+  private exportCSV(type: string): void{
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      useBom: true
+    }
+
+    let filteredData = this.changeFilter(this.users, this.config)
+    new Angular2Csv(filteredData, 'institutional-users', options)
   }
 }
