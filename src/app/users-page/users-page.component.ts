@@ -25,7 +25,8 @@ export class UsersPage implements OnInit, OnDestroy {
     { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
     { title: 'Registration Date', name: 'createdate', filtering: { filterString: '', placeholder: 'Filter by Registration', columnName: 'createdate' }, className: ['cell-cls'] },
     { title: 'Last Log-in Date', name: 'timelastaccessed', filtering: { filterString: '', placeholder: 'Filter by Last Login', columnName: 'timelastaccessed' }, className: ['cell-cls'] },
-    { title: 'Shared Shelf Acces', name: 'ssenabled', className: ['cell-cls'] }
+    { title: 'Status', name: 'status', filtering: { filterString: '', placeholder: 'Filter by Status', columnName: 'status' }, className: ['cell-cls'] },
+    { title: 'Shared Shelf Acces', name: 'ssValue', className: ['cell-cls'] }
   ]
   
   public rows:Array<any> = []
@@ -39,7 +40,6 @@ export class UsersPage implements OnInit, OnDestroy {
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
-    // filtering: {filterString: ''},
     className: ['table-striped', 'table-bordered']
   }
 
@@ -67,7 +67,7 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   private loadUsers(): void{
-    this._users.getUsers().subscribe( (res) => {
+    this._users.getAllUsers().subscribe( (res) => {
       if(res){
         this.users = res;
         this.length = this.users.length;

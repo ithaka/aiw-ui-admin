@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/mergeMap'
 
 import { AuthService, UserDetails, UserUpdate } from './'
 
@@ -38,13 +40,30 @@ export class UsersService {
   }
 
   /**
-   * Gets institutional users
+   * Gets all institutional users
    */
-  public getUsers(): Observable<ListUsersResponse[]> {
-    return this.http.get<ListUsersResponse[]>(
-      [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=active',
-      { withCredentials: true }
-    )
+  public getAllUsers(): Observable<any> {
+    return Observable.forkJoin([
+      this.http.get<ListUsersResponse[]>(
+        [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=active',
+        { withCredentials: true }
+      ),
+      this.http.get<ListUsersResponse[]>(
+        [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=archive',
+        { withCredentials: true }
+      )
+    ])
+    .map((data: any[]) => {
+      let resultArray: ListUsersResponse[] = data[0].concat(data[1]);
+
+      // Format values for User Status & SSenabled to show in grid cells
+      for(let user of resultArray){ 
+        user.status = user.active ? 'Active' : 'Archive'
+        user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
+      }
+
+      return resultArray;
+    });
   }
 
   public registerUsers(users: { email: string, password: string, role: string, portal: string, institutionId: string }[]): Observable<RegisterUsersResponse> {
@@ -71,11 +90,13 @@ interface UpdateUserResponse {
 interface ListUsersResponse {
   email: string,
   active: boolean,
+  status: string,
   roles: string,
   profileid: number,
   userid: number,
   institutionid: number,
   ssenabled: boolean,
+  ssValue: string,
   createdate: Date,
   timelastaccessed: Date
 }
