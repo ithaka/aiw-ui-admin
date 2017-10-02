@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { AppState } from '../app.service'
 import { UserDetailsModal } from './../modals'
 import { UserDetails } from './../shared'
-import { UsersService } from '../shared/users.service'
+import { UsersService, InstitutionStatsResponse } from '../shared/users.service'
 
 @Component({
   /**
@@ -27,6 +27,7 @@ import { UsersService } from '../shared/users.service'
 })
 export class HomeComponent implements OnInit {
   private userDetails: UserDetails
+  private instStats: InstitutionStatsResponse
 
   /**
    * TypeScript public modifiers
@@ -38,5 +39,15 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadInstStats();
+  }
+
+  private loadInstStats(): void{
+    this._users.getInstitutionStats().subscribe( res => {
+      if(res){
+        this.instStats = res
+        console.log(this.instStats)
+      }
+    })
   }
 }

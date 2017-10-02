@@ -1,2 +1,54 @@
 ang-main-header
 ang-main-nav
+
+.row.main-content#mainContent.justify-content-md-center.mt-5.mb-5
+    .col-8
+        .stats-cntnr
+            .page-hdr
+            .row.no-gutters(*ngIf="instStats")
+                .col-6
+                    .stat 
+                        span.val {{ instStats.registeredUsers[0] }} 
+                        span.lbl Registered Users
+
+                    .stat 
+                        span.val {{ instStats.activeUsers[0] }} 
+                        span.lbl Active Users
+                .col-6
+                    .stat 
+                        span.val {{ instStats.admin_users.length }} 
+                        span.lbl Admin Users
+
+                    .stat 
+                        span.val {{ instStats.cnt_ssUsers[0] }} 
+                        span.lbl Shared Shelf Users
+            .row.no-gutters
+                .col-12.stats-link For usage statistics go to the 
+                    a(href="http://stats.artstor.org/" target="_blank") Artstor Stats Site
+
+        .row.no-gutters.mt-4
+            .col.questions-cntnr
+                .bg
+                h2 Questions & training
+                div Contact Artstor User Services 
+                div
+                    a(href="mailto:userservices@artstor.org") UserServices@artstor.org
+                    span  with questions and to schedule an Admin training online.
+            .col.offset-md-1.promo-cntnr
+                .bg
+                h2 Need materials to promote Artstor at your institution?
+                div
+                    span Go to 
+                    a(href="http://support.artstor.org/?article=promoting-artstor-on-campus" target="_blank") Promotional materials
+                    span  for more information.
+    .col-4
+        .local-support
+            h3 Local support information
+            div Users with Admin rights:
+            .admin-users(*ngIf="instStats")
+                div(*ngFor="let user of instStats.admin_users") {{ user }}
+            div 
+                span Go to 
+                a User accounts
+                span  to assign Admin privileges to another user.
+

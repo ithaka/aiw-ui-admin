@@ -65,6 +65,16 @@ export class UsersService {
       return resultArray;
     });
   }
+  
+  /**
+   * Gets institutional stats
+   */
+  public getInstitutionStats(): Observable <InstitutionStatsResponse> {
+    return this.http.get<InstitutionStatsResponse>(
+      [this._auth.getServiceUrl(), "users", "stats"].join("/"),
+      { withCredentials: true }
+    )
+  }
 
   public registerUsers(users: { email: string, password: string, role: string, portal: string, institutionId: string }[]): Observable<RegisterUsersResponse> {
     return this.http.post<RegisterUsersResponse>(
@@ -133,4 +143,11 @@ interface RegisterUsersResponse {
       "timeLastAccessed": string
     }
   }[]
+}
+
+export interface InstitutionStatsResponse {
+  admin_users: Array<string>,
+  activeUsers: Array<number>,
+  cnt_ssUsers: Array<number>,
+  registeredUsers: Array<number>
 }
