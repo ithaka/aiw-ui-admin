@@ -56,10 +56,10 @@ export class RegisterModal implements OnInit {
    */
   private onSubmit(value: any): void {
     console.log(value)
+    // tell the form that the user tried submitting the form
+    this.submitted = true
     // don't go past this point if the form is not yet valid
     if (this.registerForm.invalid) { console.log(this.messages); console.log(this.registerForm.controls['emails'].errors); return }
-
-    this.submitted = true
   }
 
   /**

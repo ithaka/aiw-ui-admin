@@ -8,7 +8,7 @@
     span(aria-hidden="true") &times;
 form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(registerForm.value)")
   .modal-body
-    .form-group
+    .form-group([class.has-danger]="registerForm.controls['emails'].hasError('required')")
       label Email Addresses
       rl-tag-input.mb-2(
         [formControl]="registerForm.controls['emails']",
@@ -16,6 +16,7 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
         [allowedTagsPattern]="emailRegExp",
         (disallowTag)="disallowTag($event)"
       )
+      //- This is a dismissable error message for each email that is invalid - the tag input component automatically removes them, so we want to capture them here
       .mb-2.alert.alert-danger(*ngFor="let email of invalidEmails") {{ email }} is not a valid email address and was removed.
         button.close(
           type="button",
@@ -23,6 +24,8 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
           (click)="dismissEmailError(email)"
         )
           span(aria-hidden="true") &times;
+      .form-control-feedback(*ngIf="submitted && registerForm.controls['emails'].hasError('required')")
+        | At least one email is required
     .form-group
       label(for="textareaEmailText") Email Text
       textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
