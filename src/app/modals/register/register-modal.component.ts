@@ -66,6 +66,15 @@ export class RegisterModal implements OnInit {
    * @param email the email that is now allowed
    */
   private disallowTag(email: string): void {
-    email != "" && this.invalidEmails.push(email)
+    if (email != "" && this.invalidEmails.indexOf(email) < 0) {
+      this.invalidEmails.push(email)
+    }
+  }
+
+  private dismissEmailError(email: string): void {
+    let loc = this.invalidEmails.indexOf(email)
+    if (loc > -1) {
+      this.invalidEmails.splice(loc, 1)
+    }
   }
 }

@@ -9,13 +9,20 @@
 form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(registerForm.value)")
   .modal-body
     .form-group
-      rl-tag-input.pb-2(
+      label Email Addresses
+      rl-tag-input.mb-2(
         [formControl]="registerForm.controls['emails']",
-        [placeholder]="'emails'",
+        [placeholder]="'ex: admin@artstor.org'",
         [allowedTagsPattern]="emailRegExp",
         (disallowTag)="disallowTag($event)"
       )
-      .alert.alert-danger(*ngFor="let email of invalidEmails") {{ email }} is not a valid email address and was removed.
+      .mb-2.alert.alert-danger(*ngFor="let email of invalidEmails") {{ email }} is not a valid email address and was removed.
+        button.close(
+          type="button",
+          aria-label="Dismiss Error",
+          (click)="dismissEmailError(email)"
+        )
+          span(aria-hidden="true") &times;
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
