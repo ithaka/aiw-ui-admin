@@ -12,8 +12,9 @@ export class RegisterModal implements OnInit {
   private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   private messages: {
-    invalidEmails?: string[]
   } = {}
+  private invalidEmails: string[] = []
+  private submitted: boolean = false
 
   private registerForm: FormGroup
 
@@ -24,7 +25,7 @@ export class RegisterModal implements OnInit {
     this.registerForm = _fb.group({
       // init emails as empty array and run validators, along with custom validator
       //  rl-tag-input has an allowedTagsPattern property, but it wasn't working so I had to add custom validator
-      emails: [[], Validators.compose([Validators.required, Validators.minLength(1), this.emailsValidator])]
+      emails: [[], Validators.compose([Validators.required, this.emailsValidator])]
     })
   }
 
@@ -33,20 +34,38 @@ export class RegisterModal implements OnInit {
 
   /** 
    * Validates email against the same regex used on the server
-   * @returns error which should be assigned to the email input
+   * @returns object with list of invalid emails
    */
   private emailsValidator(control: FormControl): any {
     let emailRe: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    let error = null // will remain null if no error
-    this.messages.invalidEmails = [] // set to empty array so it is up to date
+    let invalidEmails = []
 
     control.value.forEach(email => {
-      if (emailRe.test(email)) {
-        error = { 'emailListInvalid': true }
-        this.messages.invalidEmails.push(email)
+      if (!emailRe.test(email)) {
+        invalidEmails.push(email)
       }
     })
 
-    return error
+    return invalidEmails.length > 0 ? { invalidEmails: invalidEmails } : null
+  }
+
+  /**
+   * Handles submission of the registration form
+   * @param value value of the registration form
+   */
+  private onSubmit(value: any): void {
+    console.log(value)
+    // don't go past this point if the form is not yet valid
+    if (this.registerForm.invalid) { console.log(this.messages); console.log(this.registerForm.controls['emails'].errors); return }
+
+    this.submitted = true
+  }
+
+  /**
+   * Handles the output of the tag input when the tag is not allowed
+   * @param email the email that is now allowed
+   */
+  private disallowTag(email: string): void {
+    email != "" && this.invalidEmails.push(email)
   }
 }
