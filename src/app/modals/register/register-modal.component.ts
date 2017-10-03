@@ -25,7 +25,8 @@ export class RegisterModal implements OnInit {
     this.registerForm = _fb.group({
       // init emails as empty array and run validators, along with custom validator
       //  rl-tag-input has an allowedTagsPattern property, but it wasn't working so I had to add custom validator
-      emails: [[], Validators.compose([Validators.required, this.emailsValidator])]
+      emails: [[], Validators.compose([Validators.required, this.emailsValidator])],
+      emailText: [null, Validators.required]
     })
   }
 

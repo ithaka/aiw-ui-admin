@@ -23,6 +23,9 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
           (click)="dismissEmailError(email)"
         )
           span(aria-hidden="true") &times;
+    .form-group
+      label(for="textareaEmailText") Email Text
+      textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
