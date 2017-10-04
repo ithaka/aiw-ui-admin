@@ -3,6 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
+import { AuthService, UsersService } from '../../shared'
+
 @Component({
   selector: 'ang-register-modal',
   templateUrl: 'register-modal.component.pug'
@@ -12,14 +14,24 @@ export class RegisterModal implements OnInit {
   private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   private messages: {
+    success?: boolean
   } = {}
   private invalidEmails: string[] = []
   private submitted: boolean = false
+
+  // the institution's default password
+  private password: string
+  // the institution's id
+  private institutionId: string
+  // the portal the user will be given access to
+  private portal: string
 
   private registerForm: FormGroup
 
   constructor(
     private activeModal: NgbActiveModal,
+    private _users: UsersService,
+    private _auth: AuthService,
     _fb: FormBuilder
   ) {
     this.registerForm = _fb.group({
@@ -31,6 +43,13 @@ export class RegisterModal implements OnInit {
   }
 
   ngOnInit() {
+    this._auth.getInstitution().take(1).subscribe(
+      (res) => {
+        res.institution.
+      }, (err) => {
+
+      }
+    )
   }
 
   /** 
@@ -54,12 +73,26 @@ export class RegisterModal implements OnInit {
    * Handles submission of the registration form
    * @param value value of the registration form
    */
-  private onSubmit(value: any): void {
-    console.log(value)
+  private onSubmit(value: { emails: string[], emailText: string }): void {
     // tell the form that the user tried submitting the form
     this.submitted = true
     // don't go past this point if the form is not yet valid
-    if (this.registerForm.invalid) { console.log(this.messages); console.log(this.registerForm.controls['emails'].errors); return }
+    if (this.registerForm.invalid) { return }
+
+    let users = []
+    value.emails.forEach((email) => {
+      users.push({
+        email: email
+      })
+    })
+
+    this._users.registerUsers(users)
+      .take(1)
+      .subscribe((res) => {
+        console.log(res)
+      }, (err) => {
+        console.error(err)
+      })
   }
 
   /**

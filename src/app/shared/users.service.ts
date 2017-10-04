@@ -47,7 +47,7 @@ export class UsersService {
     )
   }
 
-  public registerUsers(users: { email: string, password: string, role: string, portal: string, institutionId: string }[]): Observable<RegisterUsersResponse> {
+  public registerUsers(users: { email: string, password: string, role: string, portal: string, institutionId?: string, profileId?: string }[]): Observable<RegisterUsersResponse> {
     return this.http.post<RegisterUsersResponse>(
       [this._auth.getServiceUrl(), "users", "create"].join("/"),
       users,

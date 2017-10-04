@@ -29,6 +29,9 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
     .form-group
       label(for="textareaEmailText") Email Text
       textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
+    .form-group.has-success(*ngIf="messages.success")
+      #msgRegisterSuccess.form-control-feedback
+        | Registration was successful
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
