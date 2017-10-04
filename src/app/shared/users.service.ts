@@ -63,6 +63,7 @@ export class UsersService {
         user.status = user.active ? 'Active' : 'Archive'
         user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
         user.timelastaccessed = this._date.transform(user.timelastaccessed)
+        user.createdate = this._date.transform(user.createdate)
       }
 
       return resultArray;
