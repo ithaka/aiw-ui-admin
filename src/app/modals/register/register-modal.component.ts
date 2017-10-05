@@ -15,7 +15,8 @@ export class RegisterModal implements OnInit {
 
   private messages: {
     successfullyRegisteredUsers?: string[], // array of emails for successful registrations
-    userRegistrationErrors?: string[] // the string array of emails for which there were errors
+    userRegistrationErrors?: string[], // the string array of emails for which there were errors
+    serviceError?: boolean
   } = {}
   private invalidEmails: string[] = []
   private submitted: boolean = false
@@ -101,6 +102,7 @@ export class RegisterModal implements OnInit {
         })
       }, (err) => {
         console.error(err)
+        this.messages.serviceError = true
       })
   }
 

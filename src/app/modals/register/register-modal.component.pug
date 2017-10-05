@@ -35,6 +35,8 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
     #msgRegisterFailure.form-group(*ngIf="messages.userRegistrationErrors && messages.userRegistrationErrors.length > 0")
       .mb-2.alert.alert-danger(*ngFor="let email of messages.userRegistrationErrors")
         | Registration failed for {{ email }}. Please try again, or contact support.
+    #msgServiceError.form-group.has-danger(*ngIf="messages.serviceError")
+      .form-control-feedback There was an issue processing your request. Please try again or contact support.
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
