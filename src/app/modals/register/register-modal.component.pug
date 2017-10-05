@@ -17,7 +17,8 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
         (disallowTag)="disallowTag($event)"
       )
       //- This is a dismissable error message for each email that is invalid - the tag input component automatically removes them, so we want to capture them here
-      .mb-2.alert.alert-danger(*ngFor="let email of invalidEmails") {{ email }} is not a valid email address and was removed.
+      .mb-2.alert.alert-danger(*ngFor="let email of invalidEmails")
+        | {{ 'REGISTER_MODAL.INVALID_EMAIL_ALERT' | translate:{ email: email } }}
         button.close(
           type="button",
           aria-label="Dismiss Error",

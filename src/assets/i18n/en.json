@@ -28,6 +28,7 @@
   "REGISTER_MODAL": {
     "MAIN_HEADING": "Register Users",
     "EMAIL_LIST_LABEL": "Email Addresses",
+    "INVALID_EMAIL_ALERT": "{{ email }} is not a valid email address and was removed.",
     "EMAIL_TEXT_LABEL": "Custom Email Message",
     "REGISTRATION_SUCCESS": "{{successfulRegistrationCount}} users successfully registered",
     "USER_REGISTRATION_ERROR": "Registration failed for {{ email }}. Please try again, or contact support.",
