@@ -9,7 +9,7 @@
 form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(registerForm.value)")
   .modal-body
     .form-group([class.has-danger]="registerForm.controls['emails'].hasError('required')")
-      label Email Addresses
+      label {{ 'REGISTER_MODAL.EMAIL_LIST_LABEL' | translate }}
       rl-tag-input.mb-2(
         [formControl]="registerForm.controls['emails']",
         [placeholder]="'ex: admin@artstor.org'",
@@ -25,23 +25,22 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
         )
           span(aria-hidden="true") &times;
       .form-control-feedback(*ngIf="submitted && registerForm.controls['emails'].hasError('required')")
-        | At least one email is required
+        | {{ 'REGISTER_MODAL.EMAIL_REQUIRED_ERROR' | translate }}
     .form-group
-      label(for="textareaEmailText") Email Text
+      label(for="textareaEmailText") {{ 'REGISTER_MODAL.EMAIL_TEXT_LABEL' | translate }}
       textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
     #msgRegisterSuccess.form-group.has-success(*ngIf="messages.successfullyRegisteredUsers && messages.successfullyRegisteredUsers.length > 0")
-      .form-control-feedback
-        | {{ messages.successfullyRegisteredUsers.length }} users successfully registered
+      .form-control-feedback {{ 'REGISTER_MODAL.REGISTRATION_SUCCESS' | translate:{ successfulRegistrationCount: messages.successfullyRegisteredUsers.length } }}
     #msgRegisterFailure.form-group(*ngIf="messages.userRegistrationErrors && messages.userRegistrationErrors.length > 0")
       .mb-2.alert.alert-danger(*ngFor="let email of messages.userRegistrationErrors")
-        | Registration failed for {{ email }}. Please try again, or contact support.
+        | {{ 'REGISTER_MODAL.USER_REGISTRATION_ERROR' | translate:{ email: email } }}
     #msgServiceError.form-group.has-danger(*ngIf="messages.serviceError")
-      .form-control-feedback There was an issue processing your request. Please try again or contact support.
+      .form-control-feedback {{ 'REGISTER_MODAL.SERVICE_ERROR' | translate }}
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
       type="button"
-    ) Close
+    ) {{ 'REGISTER_MODAL.BUTTONS.CLOSE' | translate }}
     button#btnPermissionsUpdate.btn.btn-primary(
       type="submit"
-    ) Register
+    ) {{ 'REGISTER_MODAL.BUTTONS.SUBMIT' | translate }}
