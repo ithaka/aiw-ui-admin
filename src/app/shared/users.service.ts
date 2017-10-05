@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/mergeMap'
+import { DatePipe } from '@angular/common'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 import { AuthService, UserDetails, UserUpdate } from './'
 
@@ -11,7 +12,8 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _date: DatePipe
   ) { }
 
   public getUserDetails(userId: string): Observable<UserDetails> {
@@ -60,6 +62,8 @@ export class UsersService {
       for(let user of resultArray){ 
         user.status = user.active ? 'Active' : 'Archive'
         user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
+        user.timelastaccessed = this._date.transform(user.timelastaccessed)
+        user.createdate = this._date.transform(user.createdate)
       }
 
       return resultArray;
@@ -107,8 +111,8 @@ interface ListUsersResponse {
   institutionid: number,
   ssenabled: boolean,
   ssValue: string,
-  createdate: Date,
-  timelastaccessed: Date
+  createdate: string,
+  timelastaccessed: string
 }
 
 interface RegisterUsersResponse {

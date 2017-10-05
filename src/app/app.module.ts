@@ -6,6 +6,7 @@ import {
   NgModule,
   ApplicationRef
 } from '@angular/core'
+import { DatePipe } from '@angular/common'
 import {
   removeNgStyles,
   createNewHosts,
@@ -59,7 +60,8 @@ const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
   AuthService,
-  UsersService
+  UsersService,
+  DatePipe
 ]
 
 type StoreType = {
