@@ -14,7 +14,8 @@ export class RegisterModal implements OnInit {
   private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
   private messages: {
-    success?: boolean
+    successfullyRegisteredUsers?: string[], // array of emails for successful registrations
+    userRegistrationErrors?: string[] // the string array of emails for which there were errors
   } = {}
   private invalidEmails: string[] = []
   private submitted: boolean = false
@@ -23,8 +24,6 @@ export class RegisterModal implements OnInit {
   private password: string
   // the institution's id
   private institutionId: string
-  // the portal the user will be given access to
-  private portal: string
 
   private registerForm: FormGroup
 
@@ -45,9 +44,9 @@ export class RegisterModal implements OnInit {
   ngOnInit() {
     this._auth.getInstitution().take(1).subscribe(
       (res) => {
-        res.institution.
+        this.institutionId = res.institution.id
       }, (err) => {
-
+        console.error(err)
       }
     )
   }
@@ -74,6 +73,7 @@ export class RegisterModal implements OnInit {
    * @param value value of the registration form
    */
   private onSubmit(value: { emails: string[], emailText: string }): void {
+    this.messages = {}
     // tell the form that the user tried submitting the form
     this.submitted = true
     // don't go past this point if the form is not yet valid
@@ -90,6 +90,15 @@ export class RegisterModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         console.log(res)
+        res.users.forEach((user) => {
+          if (!user.status) { // the registration failed
+            if (!this.messages.userRegistrationErrors) { this.messages.userRegistrationErrors = [] }
+            this.messages.userRegistrationErrors.push(user.email)
+          } else {
+            if (!this.messages.successfullyRegisteredUsers) { this.messages.successfullyRegisteredUsers = [] }
+            this.messages.successfullyRegisteredUsers.push(user.email)
+          }
+        })
       }, (err) => {
         console.error(err)
       })

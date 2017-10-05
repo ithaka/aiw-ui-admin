@@ -29,9 +29,12 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
     .form-group
       label(for="textareaEmailText") Email Text
       textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
-    .form-group.has-success(*ngIf="messages.success")
-      #msgRegisterSuccess.form-control-feedback
-        | Registration was successful
+    #msgRegisterSuccess.form-group.has-success(*ngIf="messages.successfullyRegisteredUsers && messages.successfullyRegisteredUsers.length > 0")
+      .form-control-feedback
+        | {{ messages.successfullyRegisteredUsers.length }} users successfully registered
+    #msgRegisterFailure.form-group(*ngIf="messages.userRegistrationErrors && messages.userRegistrationErrors.length > 0")
+      .mb-2.alert.alert-danger(*ngFor="let email of messages.userRegistrationErrors")
+        | Registration failed for {{ email }}. Please try again, or contact support.
   .modal-footer
     button#btnCloseModal.btn.btn-secondary(
       (click)="activeModal.close('Close click')",
