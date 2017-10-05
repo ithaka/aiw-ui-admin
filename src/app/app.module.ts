@@ -29,6 +29,9 @@ import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-tra
 import { Ng2CompleterModule } from 'ng2-completer'
 import { LockerModule } from 'angular2-locker'
 
+// ng2-idle
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
+
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -42,7 +45,7 @@ import { NavComponent } from './nav/nav.component'
 import { NoContentComponent } from './no-content'
 import { RegisterModal } from './modals/register/register-modal.component'
 import { SettingsPage } from './settings-page/settings-page.component'
-import { UserDetailsModal } from './modals'
+import { UserDetailsModal, SessionExpireModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
 
 
@@ -81,6 +84,7 @@ type StoreType = {
     NoContentComponent,
     RegisterModal,
     UserDetailsModal,
+    SessionExpireModal,
     SettingsPage,
     UsersPage
   ],
@@ -101,6 +105,7 @@ type StoreType = {
     HttpClientXsrfModule.withOptions({
       cookieName: 'sessionid'
     }),
+    NgIdleKeepaliveModule.forRoot(),
     LockerModule,
     Ng2CompleterModule,
     ReactiveFormsModule,

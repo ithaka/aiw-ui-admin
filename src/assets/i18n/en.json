@@ -24,5 +24,12 @@
   },
   "HEADER": {
     "GREETING": "Welcome, {{email}}"
+  },
+  "MODAL": {
+    "SESSION_EXPIRE":{
+      "HEADER": "Logged out",
+      "MESSAGE": "We logged you out after being idle for 90 minutes. Please login again.",
+      "BUTTON": "Okay"
+    }
   }
 }

@@ -1,0 +1,11 @@
+#inactiveUserLogoutModal.modal.fade-in.show
+    .modal-dialog.modal-lg
+        .modal-content
+            span.close-icon( (click)="showinactiveUserLogoutModal = false" )
+            .modal-body
+                .container-fluid
+                    .row.hdr
+                        h1 {{ 'MODAL.SESSION_EXPIRE.HEADER' | translate }}
+                    .row.pt-3.main-content {{ 'MODAL.SESSION_EXPIRE.MESSAGE' | translate }}
+            .modal-footer
+                button.btn.btn-primary( (click)="closeModal.emit()" ) {{ 'MODAL.SESSION_EXPIRE.BUTTON' | translate }}

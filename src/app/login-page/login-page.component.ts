@@ -39,6 +39,7 @@ export class LoginPage implements OnInit {
     this._auth.login(loginForm.value.username, loginForm.value.password)
       .take(1)
       .subscribe((res) => {
+        this._auth.resetIdleWatcher();
         this._auth.user = new PrimaryUser({
           email: res.email,
           firstname: res.firstname,
