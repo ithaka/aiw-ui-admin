@@ -9,46 +9,38 @@ ang-main-nav
                 .col-6
                     .stat 
                         span.val {{ instStats.registeredUsers[0] }} 
-                        span.lbl Registered Users
+                        span.lbl {{ 'HOME.STATS.REG_USRS' | translate }}
 
                     .stat 
                         span.val {{ instStats.activeUsers[0] }} 
-                        span.lbl Active Users
+                        span.lbl {{ 'HOME.STATS.ACTIVE_USRS' | translate }}
                 .col-6
                     .stat 
                         span.val {{ instStats.admin_users.length }} 
-                        span.lbl Admin Users
+                        span.lbl {{ 'HOME.STATS.ADMIN_USRS' | translate }}
 
                     .stat 
                         span.val {{ instStats.cnt_ssUsers[0] }} 
-                        span.lbl Shared Shelf Users
+                        span.lbl {{ 'HOME.STATS.SS_USRS' | translate }}
             .row.no-gutters
-                .col-12.stats-link For usage statistics go to the 
-                    a(href="http://stats.artstor.org/" target="_blank") Artstor Stats Site
+                .col-12.stats-link([innerHTML]="'HOME.ARTSTOR_STATS.CONTENT' | translate")
 
         .row.no-gutters.mt-4
             .col.questions-cntnr
                 .bg
-                h2 Questions & training
-                div Contact Artstor User Services 
-                div
-                    a(href="mailto:userservices@artstor.org") UserServices@artstor.org
-                    span  with questions and to schedule an Admin training online.
+                h2 {{ 'HOME.QUESTIONS_TRAINING.HDR' | translate }}
+                div {{ 'HOME.QUESTIONS_TRAINING.TXT' | translate }} 
+                div([innerHTML]="'HOME.QUESTIONS_TRAINING.CONTENT' | translate")
+
             .col.offset-md-1.promo-cntnr
                 .bg
-                h2 Need materials to promote Artstor at your institution?
-                div
-                    span Go to 
-                    a(href="http://support.artstor.org/?article=promoting-artstor-on-campus" target="_blank") Promotional materials
-                    span  for more information.
+                h2 {{ 'HOME.PROMO.HDR' | translate }}
+                div([innerHTML]="'HOME.PROMO.CONTENT' | translate")
     .col-4
         .local-support
-            h3 Local support information
-            div Users with Admin rights:
+            h3 {{ 'HOME.LOCAL_SUPPORT.HDR' | translate }}
+            div {{ 'HOME.LOCAL_SUPPORT.TXT' | translate }}
             .admin-users(*ngIf="instStats")
                 div(*ngFor="let user of instStats.admin_users") {{ user }}
-            div 
-                span Go to 
-                a User accounts
-                span  to assign Admin privileges to another user.
+            div([innerHTML]="'HOME.LOCAL_SUPPORT.TXT2' | translate")
 
