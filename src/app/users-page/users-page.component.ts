@@ -194,6 +194,28 @@ export class UsersPage implements OnInit, OnDestroy {
     }
 
     let filteredData = this.changeFilter(this.users, this.config)
-    new Angular2Csv(filteredData, 'institutional-users', options)
+
+    let csvArray = []
+    let headerRow = {
+      'email': 'Email',
+      'createdate': 'Registration Date',
+      'timelastaccessed': 'Last Log-in Date',
+      'status': 'Status',
+      'ssenabled': 'Shared Shelf Acces'
+    }
+    csvArray.push(headerRow)
+
+    for(let data of filteredData){
+      let obj = {
+        'email': data.email,
+        'createdate': data.createdate,
+        'timelastaccessed': data.timelastaccessed,
+        'status': data.status,
+        'ssenabled': data.ssenabled
+      }
+      csvArray.push(obj)
+    }
+    
+    new Angular2Csv(csvArray, 'institutional-users', options)
   }
 }
