@@ -29,11 +29,11 @@ export class AuthService implements CanActivate {
   public showUserInactiveModal: Subject<boolean> = new Subject() //Set up subject observable for showing inactive user modal
 
   constructor(
+    private idle: Idle,
+    private keepalive: Keepalive,
     private _router: Router,
     private http: HttpClient,
-    locker: Locker,
-    private idle: Idle,
-    private keepalive: Keepalive
+    locker: Locker
   ) {
     this._storage = locker.useDriver(Locker.DRIVERS.LOCAL)
 
