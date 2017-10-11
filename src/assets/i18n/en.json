@@ -45,7 +45,8 @@
       "SERVICE_ERROR": "Server is not responding. Please try again later."
     },
     "BUTTONS": {
-      "REGISTER_USER": "Register Users"
+      "REGISTER_USER": "Register Users",
+      "EXPORT": "Export"
     }
   },
   "HEADER": {
