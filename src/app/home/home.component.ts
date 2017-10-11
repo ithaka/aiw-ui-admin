@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadInstStats();
+    this.loadInstStats()
   }
 
   private loadInstStats(): void{
