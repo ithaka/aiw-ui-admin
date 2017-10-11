@@ -95,12 +95,6 @@ export class AuthService implements CanActivate {
     return serviceUrl
   }
 
-  public getGroupServiceURL(): string{
-    let serviceURL = this.ENV === 'dev' ? '//library.artstor.org' : '//library.artstor.org'
-    serviceURL += '/api/v1/group'
-    return serviceURL;
-  }
-
   get user(): PrimaryUser {
     return this._user
   }

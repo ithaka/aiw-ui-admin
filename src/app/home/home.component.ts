@@ -46,14 +46,8 @@ export class HomeComponent implements OnInit {
     this._users.getInstitutionStats().subscribe( res => {
       if(res){
         this.instStats = res
-        this.loadGroupsCount()
+        console.log(this.instStats)
       }
-    })
-  }
-
-  private loadGroupsCount(): void{
-    this._users.getAllGroups().subscribe( (res) => {
-      this.instStats['groupsCount'] = res.total
     })
   }
 }

@@ -87,16 +87,6 @@ export class UsersService {
       { withCredentials: true }
     )
   }
-
-  /**
-   * Gets all groups
-   */
-  public getAllGroups(): Observable <any> {
-    return this.http.get<any>(
-      [this._auth.getGroupServiceURL(), ""].join("/"),
-      { withCredentials: true }
-    )
-  }
 }
 
 interface UpdateUserResponse {
@@ -163,6 +153,5 @@ export interface InstitutionStatsResponse {
   admin_users: Array<string>,
   activeUsers: Array<number>,
   cnt_ssUsers: Array<number>,
-  registeredUsers: Array<number>,
-  groupsCount: number
+  registeredUsers: Array<number>
 }
