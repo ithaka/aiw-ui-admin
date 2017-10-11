@@ -16,12 +16,11 @@ ang-main-nav
                         span.lbl {{ 'HOME.STATS.ACTIVE_USRS' | translate }}
                 .col-6
                     .stat 
-                        span.val {{ instStats.admin_users.length }} 
-                        span.lbl {{ 'HOME.STATS.ADMIN_USRS' | translate }}
-
-                    .stat 
                         span.val {{ instStats.cnt_ssUsers[0] }} 
                         span.lbl {{ 'HOME.STATS.SS_USRS' | translate }}
+                    .stat 
+                        span.val {{ instStats.groupsCount }} 
+                        span.lbl {{ 'HOME.STATS.IMAGE_GROUPS' | translate }}
             .row.no-gutters
                 .col-12.stats-link([innerHTML]="'HOME.ARTSTOR_STATS.CONTENT' | translate")
 

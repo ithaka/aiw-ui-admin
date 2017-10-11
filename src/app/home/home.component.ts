@@ -39,15 +39,21 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadInstStats();
+    this.loadInstStats()
   }
 
   private loadInstStats(): void{
     this._users.getInstitutionStats().subscribe( res => {
       if(res){
         this.instStats = res
-        console.log(this.instStats)
+        this.loadGroupsCount()
       }
+    })
+  }
+
+  private loadGroupsCount(): void{
+    this._users.getAllGroups().subscribe( (res) => {
+      this.instStats['groupsCount'] = res.total
     })
   }
 }
