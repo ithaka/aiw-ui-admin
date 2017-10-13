@@ -66,7 +66,29 @@
 // }
 
 /* For users table row style */
-table.dataTable tbody tr:hover{
+table.dataTable tbody tr:not(:first-child):hover{
     cursor: pointer;
     background: rgba(0, 0, 0, 0.1);
+}
+
+.tickIcon{
+    margin: auto;
+    display: block;
+}
+
+/* For Home Page */
+.stats-link a,  .questions-cntnr a, .promo-cntnr a{
+    color: #b64404;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.local-support a{
+    color: #b64404;
+    text-decoration: none;
+}
+
+.questions-cntnr div, .promo-cntnr div {
+    font-size: .9em;
+    color: #4F5557;
 }

@@ -1,2 +1,46 @@
 ang-main-header
 ang-main-nav
+
+.row.main-content#mainContent.justify-content-md-center.mt-5.mb-5
+    .col-8
+        .stats-cntnr
+            .page-hdr
+            .row.no-gutters(*ngIf="instStats")
+                .col-6
+                    .stat 
+                        span.val {{ instStats.registeredUsers[0] }} 
+                        span.lbl {{ 'HOME.STATS.REG_USRS' | translate }}
+
+                    .stat 
+                        span.val {{ instStats.activeUsers[0] }} 
+                        span.lbl {{ 'HOME.STATS.ACTIVE_USRS' | translate }}
+                .col-6
+                    .stat 
+                        span.val {{ instStats.admin_users.length }} 
+                        span.lbl {{ 'HOME.STATS.ADMIN_USRS' | translate }}
+
+                    .stat 
+                        span.val {{ instStats.cnt_ssUsers[0] }} 
+                        span.lbl {{ 'HOME.STATS.SS_USRS' | translate }}
+            .row.no-gutters
+                .col-12.stats-link([innerHTML]="'HOME.ARTSTOR_STATS.CONTENT' | translate")
+
+        .row.no-gutters.mt-4
+            .col.questions-cntnr
+                .bg
+                h2 {{ 'HOME.QUESTIONS_TRAINING.HDR' | translate }}
+                div {{ 'HOME.QUESTIONS_TRAINING.TXT' | translate }} 
+                div([innerHTML]="'HOME.QUESTIONS_TRAINING.CONTENT' | translate")
+
+            .col.offset-md-1.promo-cntnr
+                .bg
+                h2 {{ 'HOME.PROMO.HDR' | translate }}
+                div([innerHTML]="'HOME.PROMO.CONTENT' | translate")
+    .col-4
+        .local-support
+            h3 {{ 'HOME.LOCAL_SUPPORT.HDR' | translate }}
+            div {{ 'HOME.LOCAL_SUPPORT.TXT' | translate }}
+            .admin-users(*ngIf="instStats")
+                div(*ngFor="let user of instStats.admin_users") {{ user }}
+            div([innerHTML]="'HOME.LOCAL_SUPPORT.TXT2' | translate")
+

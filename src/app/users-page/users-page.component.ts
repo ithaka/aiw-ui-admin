@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
+import { Angular2Csv } from 'angular2-csv/Angular2-csv'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal, RegisterModal } from './../modals'
@@ -20,12 +21,13 @@ export class UsersPage implements OnInit, OnDestroy {
     unauthorized?: boolean,
     serviceError?: boolean
   } = {}
-  private users: Array<any> = []
+  private users:Array<any> = []
   private columns:Array<any> = [
-    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email' }, className: ['cell-cls'] },
-    { title: 'Registration Date', name: 'createdate', className: ['cell-cls'] },
-    { title: 'Last Log-in Date', name: 'timelastaccessed', className: ['cell-cls'] },
-    { title: 'Shared Shelf Acces', name: 'ssenabled', filtering: { filterString: '', placeholder: 'Filter by SSA' }, className: ['cell-cls'] }
+    { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
+    { title: 'Registration Date', name: 'createdate', filtering: { filterString: '', placeholder: 'Filter by Registration', columnName: 'createdate' }, className: ['cell-cls'] },
+    { title: 'Last Log-in Date', name: 'timelastaccessed', filtering: { filterString: '', placeholder: 'Filter by Last Login', columnName: 'timelastaccessed' }, className: ['cell-cls'] },
+    { title: 'Status', name: 'status',  className: ['cell-cls'] },
+    { title: 'Shared Shelf Acces', name: 'ssValue', className: ['cell-cls'] }
   ]
   
   public rows:Array<any> = []
@@ -39,7 +41,6 @@ export class UsersPage implements OnInit, OnDestroy {
   public config:any = {
     paging: true,
     sorting: {columns: this.columns},
-    filtering: {filterString: ''},
     className: ['table-striped', 'table-bordered']
   }
 
@@ -67,7 +68,7 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   private loadUsers(): void{
-    this._users.getUsers().subscribe( (res) => {
+    this._users.getAllUsers().subscribe( (res) => {
       if(res){
         this.users = res;
         this.length = this.users.length;
@@ -170,8 +171,8 @@ export class UsersPage implements OnInit, OnDestroy {
       Object.assign(this.config.sorting, config.sorting)
     }
 
-    // let filteredData = this.changeFilter(this.users, this.config)
-    let sortedData = this.changeSort(this.users, this.config)
+    let filteredData = this.changeFilter(this.users, this.config)
+    let sortedData = this.changeSort(filteredData, this.config)
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData
     this.length = sortedData.length
   }
@@ -184,5 +185,41 @@ export class UsersPage implements OnInit, OnDestroy {
 
   private openRegisterModal(): void {
     this._modal.open(RegisterModal)
+  }
+  
+  private exportCSV(type: string): void{
+    let options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      useBom: true
+    }
+
+    let filteredData = this.changeFilter(this.users, this.config)
+
+    let csvArray = []
+    let headerRow = {
+      'email': 'Email',
+      'createdate': 'Registration Date',
+      'timelastaccessed': 'Last Log-in Date',
+      'status': 'Status',
+      'ssenabled': 'Shared Shelf Acces'
+    }
+    csvArray.push(headerRow)
+
+    for(let data of filteredData){
+      let obj = {
+        'email': data.email,
+        'createdate': data.createdate,
+        'timelastaccessed': data.timelastaccessed,
+        'status': data.status,
+        'ssenabled': data.ssenabled
+      }
+      csvArray.push(obj)
+    }
+    
+    new Angular2Csv(csvArray, 'institutional-users', options)
   }
 }

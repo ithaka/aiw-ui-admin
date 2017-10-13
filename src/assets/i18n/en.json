@@ -13,13 +13,40 @@
       "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account"
     }
   },
+  "HOME": {
+    "STATS": {
+      "REG_USRS": "Registered Users",
+      "ACTIVE_USRS": "Active Users",
+      "ADMIN_USRS": "Admin Users",
+      "SS_USRS": "Shared Shelf Users",
+      "IMAGE_GROUPS": "Image Groups"
+    },
+    "ARTSTOR_STATS": {
+      "CONTENT": "For usage statistics go to the <a href='http://report.artstor.org/' target='_blank'>Artstor Stats Site</a>"
+    },
+    "QUESTIONS_TRAINING": {
+      "HDR": "Questions & training",
+      "TXT": "Contact Artstor User Services",
+      "CONTENT": "<a href='mailto:userservices@artstor.org'>UserServices@artstor.org</a><span> with questions and to schedule an Admin training online.</span>"
+    },
+    "PROMO": {
+      "HDR": "Need materials to promote Artstor at your institution?",
+      "CONTENT": "<span>Go to </span><a href='http://support.artstor.org/?article=promoting-artstor-on-campus' target='_blank'>Promotional materials</a><span> for more information.</span>"
+    },
+    "LOCAL_SUPPORT": {
+      "HDR": "Local support information",
+      "TXT": "Users with Admin rights:",
+      "TXT2": "<span>Go to <a class=\"link\" tabindex=\"0\" href=\"/#/users\">User accounts</a> to assign Admin privileges to another user.</span>"
+    }
+  },
   "USERS": {
     "MESSAGES": {
       "UNAUTHORIZED": "Unauthorized user. Please sign-in with admin account.",
       "SERVICE_ERROR": "Server is not responding. Please try again later."
     },
     "BUTTONS": {
-      "REGISTER_USER": "Register Users"
+      "REGISTER_USER": "Register Users",
+      "EXPORT": "Export"
     }
   },
   "HEADER": {
@@ -37,6 +64,13 @@
     "BUTTONS": {
       "CLOSE": "Close",
       "SUBMIT": "Register"
+    }
+  },
+  "MODAL": {
+    "SESSION_EXPIRE":{
+      "HEADER": "Logged out",
+      "MESSAGE": "We logged you out after being idle for 90 minutes. Please login again.",
+      "BUTTON": "Okay"
     }
   }
 }

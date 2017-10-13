@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs'
+import { DatePipe } from '@angular/common'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 import { AuthService, UserDetails, UserUpdate } from './'
 
@@ -9,7 +12,8 @@ export class UsersService {
 
   constructor(
     private http: HttpClient,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _date: DatePipe
   ) { }
 
   public getUserDetails(userId: string): Observable<UserDetails> {
@@ -38,11 +42,40 @@ export class UsersService {
   }
 
   /**
-   * Gets institutional users
+   * Gets all institutional users
    */
-  public getUsers(): Observable<ListUsersResponse[]> {
-    return this.http.get<ListUsersResponse[]>(
-      [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=active',
+  public getAllUsers(): Observable<any> {
+    return Observable.forkJoin([
+      this.http.get<ListUsersResponse[]>(
+        [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=active',
+        { withCredentials: true }
+      ),
+      this.http.get<ListUsersResponse[]>(
+        [this._auth.getServiceUrl(), "users", "manageUsers"].join("/") + '?type=archive',
+        { withCredentials: true }
+      )
+    ])
+    .map((data: any[]) => {
+      let resultArray: ListUsersResponse[] = data[0].concat(data[1]);
+
+      // Format values for User Status & SSenabled to show in grid cells
+      for(let user of resultArray){ 
+        user.status = user.active ? 'Active' : 'Archive'
+        user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
+        user.timelastaccessed = this._date.transform(user.timelastaccessed)
+        user.createdate = this._date.transform(user.createdate)
+      }
+
+      return resultArray;
+    });
+  }
+  
+  /**
+   * Gets institutional stats
+   */
+  public getInstitutionStats(): Observable <InstitutionStatsResponse> {
+    return this.http.get<InstitutionStatsResponse>(
+      [this._auth.getServiceUrl(), "users", "stats"].join("/"),
       { withCredentials: true }
     )
   }
@@ -71,13 +104,15 @@ interface UpdateUserResponse {
 interface ListUsersResponse {
   email: string,
   active: boolean,
+  status: string,
   roles: string,
   profileid: number,
   userid: number,
   institutionid: number,
   ssenabled: boolean,
-  createdate: Date,
-  timelastaccessed: Date
+  ssValue: string,
+  createdate: string,
+  timelastaccessed: string
 }
 
 interface RegisterUsersResponse {
@@ -112,4 +147,11 @@ interface RegisterUsersResponse {
       "timeLastAccessed": string
     }
   }[]
+}
+
+export interface InstitutionStatsResponse {
+  admin_users: Array<string>,
+  activeUsers: Array<number>,
+  cnt_ssUsers: Array<number>,
+  registeredUsers: Array<number>
 }

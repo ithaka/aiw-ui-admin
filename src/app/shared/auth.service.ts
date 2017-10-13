@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Rx'
 
 import { LockerModule, Locker, LockerConfig } from 'angular2-locker'
 
-import { iPrimaryUser, PrimaryUser } from './datatypes';
+import { iPrimaryUser, PrimaryUser } from './datatypes' 
+
+import { IdleWatcherUtil } from './idle-watcher'
+import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core'
+import { Keepalive } from '@ng-idle/keepalive'
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -19,7 +24,13 @@ export class AuthService implements CanActivate {
   private _user: PrimaryUser = <PrimaryUser>{}
   private _storage: Locker
 
+  private idleState: string = 'Not started.'
+  private idleUtil: IdleWatcherUtil = new IdleWatcherUtil() // Idle watcher, session timeout values are abstracted to a utility
+  public showUserInactiveModal: Subject<boolean> = new Subject() //Set up subject observable for showing inactive user modal
+
   constructor(
+    private idle: Idle,
+    private keepalive: Keepalive,
     private _router: Router,
     private http: HttpClient,
     locker: Locker
@@ -31,6 +42,48 @@ export class AuthService implements CanActivate {
     if (savedUser) {
       this.user = new PrimaryUser(savedUser)
     }
+
+    // For session timeout on user inactivity
+    idle.setIdle(this.idleUtil.generateIdleTime()); // Set an idle time of 1 min, before starting to watch for timeout
+    idle.setTimeout(this.idleUtil.generateSessionLength()); // Log user out after 90 mins of inactivity
+    idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
+
+    idle.onIdleEnd.subscribe(() => {
+      this.idleState = 'No longer idle.';
+    });
+    idle.onTimeout.subscribe(() => {
+      if(this._user && this._user.isLoggedIn){
+        this.expireSession();
+        this.showUserInactiveModal.next(true);
+        this.idleState = 'Timed out!';
+      }
+      else{
+        this.resetIdleWatcher()
+      }
+    });
+    idle.onIdleStart.subscribe(() => {
+      this.idleState = 'You\'ve gone idle!';
+
+      let currentDateTime = new Date().toUTCString();
+      this._storage.set('userGoneIdleAt', currentDateTime);
+    });
+    idle.onTimeoutWarning.subscribe((countdown) => {
+      this.idleState = 'You will time out in ' + countdown + ' seconds!'
+    });
+
+    this.resetIdleWatcher();
+  }
+
+  // Reset the idle watcher
+  public resetIdleWatcher(): void {
+    this.idle.watch();
+    this.idleState = 'Idle watcher started';
+  }
+
+  private expireSession(): void {
+    setTimeout( () => {
+      this.logoutUser()
+    }, 1500)
   }
 
   public getServiceUrl(legacy?: boolean): string {
