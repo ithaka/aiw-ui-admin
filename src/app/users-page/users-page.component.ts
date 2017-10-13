@@ -186,7 +186,7 @@ export class UsersPage implements OnInit, OnDestroy {
   private openRegisterModal(): void {
     this._modal.open(RegisterModal)
   }
-  
+
   private exportCSV(type: string): void{
     let options = {
       fieldSeparator: ',',

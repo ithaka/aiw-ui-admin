@@ -46,6 +46,7 @@ export class RegisterModal implements OnInit {
     this._auth.getInstitution().take(1).subscribe(
       (res) => {
         this.institutionId = res.institution.id
+        this.password = res.institution.default_user_pwd
       }, (err) => {
         console.error(err)
       }
@@ -83,7 +84,8 @@ export class RegisterModal implements OnInit {
     let users = []
     value.emails.forEach((email) => {
       users.push({
-        email: email
+        email: email,
+        password: this.password
       })
     })
 
@@ -100,6 +102,10 @@ export class RegisterModal implements OnInit {
             this.messages.successfullyRegisteredUsers.push(user.email)
           }
         })
+
+        // after successful registration, reset the form
+        this.registerForm.controls['emails'].setValue([])
+        this.submitted = false
       }, (err) => {
         console.error(err)
         this.messages.serviceError = true
