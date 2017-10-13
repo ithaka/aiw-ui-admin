@@ -92,7 +92,8 @@ export class RegisterModal implements OnInit {
     this._users.registerUsers(users)
       .take(1)
       .subscribe((res) => {
-        console.log(res)
+
+        // go through each user and collate the data into number of successes and a list of failed emails to display
         res.users.forEach((user) => {
           if (!user.status) { // the registration failed
             if (!this.messages.userRegistrationErrors) { this.messages.userRegistrationErrors = [] }
@@ -122,6 +123,10 @@ export class RegisterModal implements OnInit {
     }
   }
 
+  /**
+   * Cycles through list of erred emails and removes the passed email
+   * @param email the email for which the error was dismissed
+   */
   private dismissEmailError(email: string): void {
     let loc = this.invalidEmails.indexOf(email)
     if (loc > -1) {

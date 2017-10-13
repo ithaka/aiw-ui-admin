@@ -121,7 +121,7 @@ export class AuthService implements CanActivate {
       { withCredentials: true }
     )
     .take(1)
-    .subscribe((res) => { console.log(res) }, (err) => { console.error(err) })
+    .subscribe((res) => { /** do nothing, it was successful */ }, (err) => { console.error(err) })
   }
 
   /**
