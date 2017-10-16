@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
-import { AuthService } from './../shared'
+import { PrimaryUser, AuthService } from './../shared'
 
 @Component({
   selector: 'ang-institution-page',
@@ -56,29 +56,27 @@ export class InstitutionPage implements OnInit {
   private updateInstitutionalDetails(): void{
     this.messages = {} // reset object that displays messages
     if (this.manageInstForm.invalid) { return }
-    this._auth.updateInst(this.manageInstForm).subscribe( (res) => {
-      console.log(res)
-    });
-      // .take(1)
-      // .subscribe((res) => {
-      //   this._auth.user = new PrimaryUser({
-      //     email: res.email,
-      //     firstname: res.firstname,
-      //     lastname: res.lastname
-      //   })
-      //   this._router.navigate(['/home'])
-      // }, (err) => {
-      //   switch (err.status) {
-      //     case 401:
-      //       this.messages.unauthorized = true
-      //       break
-      //     case 400: // we shouldn't let the client submit a request and get a 400
-      //     case 500:
-      //     default:
-      //       this.messages.serviceError = true
-      //       console.error(err)
-      //   }
-      // })
+    this._auth.updateInst(this.manageInstForm)
+      .take(1)
+      .subscribe((res) => {
+        this._auth.user = new PrimaryUser({
+          email: res.email,
+          firstname: res.firstname,
+          lastname: res.lastname
+        })
+        this._router.navigate(['/home'])
+      }, (err) => {
+        switch (err.status) {
+          case 401:
+            this.messages.unauthorized = true
+            break
+          case 400: // we shouldn't let the client submit a request and get a 400
+          case 500:
+          default:
+            this.messages.serviceError = true
+            console.error(err)
+        }
+      })
   }
 
 }
