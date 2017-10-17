@@ -4,7 +4,8 @@ import { Http } from '@angular/http'
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
 import {
   NgModule,
-  ApplicationRef
+  ApplicationRef,
+  ErrorHandler
 } from '@angular/core'
 import { DatePipe } from '@angular/common'
 import {
@@ -33,6 +34,18 @@ import { LockerModule } from 'angular2-locker'
 // ng2-idle
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
 
+// error tracking
+import * as Raven from 'raven-js'
+const { version: appVersion } = require('../../package.json')
+
+Raven.config('https://abcdee57ec1f4ae6ac3128bdcaef39bd@sentry.io/230749')
+  .install()
+
+export class RavenErrorHandler implements ErrorHandler {
+  handleError(err:any) : void {
+    Raven.captureException(err)
+  }
+}
 
 // App is our top level component
 import { AppComponent } from './app.component'
@@ -60,7 +73,8 @@ const APP_PROVIDERS = [
   AppState,
   AuthService,
   UsersService,
-  DatePipe
+  DatePipe,
+  { provide: ErrorHandler, useClass: RavenErrorHandler }
 ]
 
 type StoreType = {
