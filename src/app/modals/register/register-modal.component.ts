@@ -106,6 +106,7 @@ export class RegisterModal implements OnInit {
 
         // after successful registration, reset the form
         this.registerForm.controls['emails'].setValue([])
+        this.registerForm.controls['emailText'].setValue('')
         this.submitted = false
       }, (err) => {
         console.error(err)
