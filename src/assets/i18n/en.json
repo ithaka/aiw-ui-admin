@@ -5,7 +5,7 @@
     "PASSWORD_LABEL": "Password",
     "LOGIN_BTN": "Log in",
     "TERMS": "By using Artstor Digital Library, I agree to the <a id=\"linkTermsAndConditions\" href=\"http://www.artstor.org/terms\" class=\"link\" target=\"_blank\">Terms</a>",
-    "LOGIN_HELP": "Having trouble logging in? Contact <a href=\"mailto:userservices@artstor.org\" class=\"link\" target=\"_blank\">userservices@artstor.org</a>",
+    "LOGIN_HELP": "Having trouble logging in? Contact <a href=\"mailto:support@artstor.org\" class=\"link\" target=\"_blank\">support@artstor.org</a>",
     "MESSAGES": {
       "UNAUTHORIZED": "Invalid email address or password. Try again.",
       "SERVICE_ERROR": "Server is not responding. Please try again later.",
@@ -27,7 +27,7 @@
     "QUESTIONS_TRAINING": {
       "HDR": "Questions & training",
       "TXT": "Contact Artstor User Services",
-      "CONTENT": "<a href='mailto:userservices@artstor.org'>UserServices@artstor.org</a><span> with questions and to schedule an Admin training online.</span>"
+      "CONTENT": "<a href='mailto:support@artstor.org'>support@artstor.org</a><span> with questions and to schedule an Admin training online.</span>"
     },
     "PROMO": {
       "HDR": "Need materials to promote Artstor at your institution?",
