@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
-import { UserDetails, UserUpdate, UsersService } from '../../shared'
+import { AuthService, UserDetails, UsersService, UserUpdate } from '../../shared'
 
 @Component({
   selector: 'ang-user-details-modal',
@@ -29,9 +29,13 @@ export class UserDetailsModal implements OnInit {
   } = {}
   private submitted: boolean
 
+  // set on init, determins whether or not the ss options should be displayed
+  private ssEnabled: boolean = false
+
   constructor(
     private activeModal: NgbActiveModal,
     private _users: UsersService,
+    private _auth: AuthService,
     private route: ActivatedRoute,
     _fb: FormBuilder
   ) {
@@ -62,6 +66,13 @@ export class UserDetailsModal implements OnInit {
           }
         }
       )
+    this._auth.getInstitution().take(1).subscribe(
+      (res) => {
+        this.ssEnabled = res.institution.ss_enabled === "1"
+      }, (err) => {
+        console.error(err)
+      }
+    )
   }
 
   /**
