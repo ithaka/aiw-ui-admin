@@ -15,7 +15,7 @@ export class RegisterModal implements OnInit {
 
   private messages: {
     successfullyRegisteredUsers?: string[], // array of emails for successful registrations
-    userRegistrationErrors?: string[], // the string array of emails for which there were errors
+    userRegistrationErrors?: { email: string, type: string }[], // the string array of emails for which there were errors
     serviceError?: boolean
   } = {}
   private invalidEmails: string[] = []
@@ -97,7 +97,15 @@ export class RegisterModal implements OnInit {
         res.users.forEach((user) => {
           if (!user.status) { // the registration failed
             if (!this.messages.userRegistrationErrors) { this.messages.userRegistrationErrors = [] }
-            this.messages.userRegistrationErrors.push(user.email)
+
+            // unfortunately the only information returned by the service about the error is a string, so decide
+            //  which error to show based on that string
+            // the type is used to signal the i18n file which error to display
+            if (user.error.indexOf("User Account Exists") > -1) {
+              this.messages.userRegistrationErrors.push({ email: user.email, type: "ACCOUNT_ALREADY_EXISTS" })
+            } else {
+              this.messages.userRegistrationErrors.push({ email: user.email, type: "GENERIC_ERROR" })
+            }
           } else {
             if (!this.messages.successfullyRegisteredUsers) { this.messages.successfullyRegisteredUsers = [] }
             this.messages.successfullyRegisteredUsers.push(user.email)

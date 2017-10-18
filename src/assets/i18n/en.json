@@ -58,7 +58,10 @@
     "INVALID_EMAIL_ALERT": "{{ email }} is not a valid email address and was removed.",
     "EMAIL_TEXT_LABEL": "Custom Email Message",
     "REGISTRATION_SUCCESS": "{{successfulRegistrationCount}} users successfully registered",
-    "USER_REGISTRATION_ERROR": "Registration failed for {{ email }}. Please try again, or contact support.",
+    "USER_REGISTRATION_ERRORS": {
+      "GENERIC_ERROR": "Registration failed for {{ email }}. Please try again, or contact support.",
+      "ACCOUNT_ALREADY_EXISTS": "Registration failed for {{ email }} because an account with that email already exists."
+    },
     "EMAIL_REQUIRED_ERROR": "At least one email is required",
     "SERVICE_ERROR": "There was an issue processing your request. Please try again or contact support.",
     "BUTTONS": {
