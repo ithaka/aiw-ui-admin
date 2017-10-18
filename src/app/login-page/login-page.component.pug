@@ -31,7 +31,7 @@ ang-main-header([showUserPanel]="false")
               //- #errorMsg.form-text.text-danger(*ngIf="errorMsg") {{ errorMsg | translate }}
               //- p.form-text.text-danger(*ngIf="forcePwdRst", [innerHtml]="'LOGIN.FORCE_PW_RESET_MSG' | translate")
             p.notranslate([innerHtml]="'LOGIN.TERMS' | translate")
-            .form-group([class.has-danger]="messages.serviceError" [class.has-danger]="messages.unauthorized")
+            .form-group( [ngClass]="{ 'has-danger': messages.serviceError || messages.unauthorized }")
               button#btnLogin.btn.btn-primary(
                 (click)="formSubmitted = true",
                 [class.loading]="loginLoading",
