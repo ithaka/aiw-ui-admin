@@ -4,8 +4,8 @@ ang-main-nav
 .row.main-content#mainContent
     .col-12.col-md-7.page-hdr
         h1 Manage Users
-    button.btn.btn-primary.col-2((click)="openRegisterModal()") {{ 'USERS.BUTTONS.REGISTER_USER' | translate }}
-    button.btn.btn-secondary.col-2.ml-2((click)="exportCSV()") {{ 'USERS.BUTTONS.EXPORT' | translate }}
+    button.btn.btn-primary.col-5.col-md-2((click)="openRegisterModal()") {{ 'USERS.BUTTONS.REGISTER_USER' | translate }}
+    button.btn.btn-secondary.col-5.col-md-2.ml-2((click)="exportCSV()") {{ 'USERS.BUTTONS.EXPORT' | translate }}
     .grid-cntnr.col-12
         ng-table([config]="config", (tableChanged)="onChangeTable(config)", (cellClicked)="onCellClick($event)", [rows]="rows", [columns]="columns")
         //- pagination(*ngIf="config.paging", class="pagination-sm", [(ngModel)]="page", [totalItems]="length", [itemsPerPage]="itemsPerPage", [maxSize]="maxSize", [boundaryLinks]="true", [rotate]="false", (pageChanged)="onChangeTable(config, $event)", (numPages)="numPages = $event")
