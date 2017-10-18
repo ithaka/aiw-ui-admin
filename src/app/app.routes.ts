@@ -14,8 +14,8 @@ export const ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent, canActivate: [AuthService] },
   { path: 'login', component: LoginPage },
-  { path: 'settings', component: SettingsPage },
-  { path: 'users', component: UsersPage },
-  { path: 'institution', component: InstitutionPage },
+  { path: 'settings', component: SettingsPage, canActivate: [AuthService] },
+  { path: 'users', component: UsersPage, canActivate: [AuthService] },
+  { path: 'institution', component: InstitutionPage, canActivate: [AuthService] },
   { path: '**', component: NoContentComponent }
 ]
