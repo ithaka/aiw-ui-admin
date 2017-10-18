@@ -129,10 +129,14 @@ export class UserDetailsModal implements OnInit {
    */
   private extendUserAccess(): void {
     this.messages = {}
-    this._users.updateUser({ profileId: this.user.profileId, daysAccessRemaining: this.user.totalAccessDays + 30 })
+
+    let daysRemaining: number = this.user.daysAccessRemaining
+    let updatedDaysRemaining: number = daysRemaining > 0 ? daysRemaining += 30 : 30
+
+    this._users.updateUser({ profileId: this.user.profileId, daysAccessRemaining: updatedDaysRemaining })
       .take(1)
       .subscribe((res) => {
-        this.user.totalAccessDays = res.daysAccessRemaining
+        this.user.daysAccessRemaining = res.daysAccessRemaining
         this.messages.extendAccessSuccess = true
       }, (err) => {
         console.error(err)
