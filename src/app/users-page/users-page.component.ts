@@ -4,6 +4,7 @@ import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, Ng
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv'
+import * as Moment from 'moment'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal, RegisterModal } from './../modals'
@@ -96,16 +97,17 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   public changeSort(data:any, config:any):any {
+    // back out if there is no sorting to be done
     if (!config.sorting) {
       return data
     }
 
-    let columns = this.config.sorting.columns || []
-    let columnName:string = void 0
-    let sort:string = void 0
+    let columns: any[] = this.config.sorting.columns || []
+    let columnName:string
+    let sort:string
 
     for (let i = 0; i < columns.length; i++) {
-      if (columns[i].sort !== '' && columns[i].sort !== false) {
+      if (columns[i].sort) {
         columnName = columns[i].name
         sort = columns[i].sort
       }
