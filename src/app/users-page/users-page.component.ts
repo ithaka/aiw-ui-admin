@@ -119,6 +119,9 @@ export class UsersPage implements OnInit, OnDestroy {
     }
 
     // variable to determine whether to sort the column as a date or a simple type
+    //  note if there's a place this is likely to fail, it could be here. moment falls back to the js Date functions
+    //  in many cases, so it's possible that this mis-detects the date sorting (although altering the column name to
+    //  something that doesn't pass this test should fix that)
     let isDate: boolean = false
     if (moment(data[0][columnName]).isValid()) {
       isDate = true
