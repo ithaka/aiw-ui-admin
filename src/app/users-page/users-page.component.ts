@@ -123,19 +123,28 @@ export class UsersPage implements OnInit, OnDestroy {
     if (moment(data[0][columnName]).isValid()) {
       isDate = true
     }
-    console.log(data)
-    console.log(moment('10/10/2'))
-    console.log('date is', isDate)
 
-    // simple sorting
-    return data.sort((previous:any, current:any) => {
-      if (previous[columnName] > current[columnName]) {
-        return sort === 'desc' ? -1 : 1
-      } else if (previous[columnName] < current[columnName]) {
-        return sort === 'asc' ? -1 : 1
-      }
-      return 0
-    })
+    if (isDate) {
+      // date sorting
+      return data.sort((previous, current) => {
+        if (moment(previous[columnName]).isAfter(moment(current[columnName]))) {
+          return sort === 'desc' ? -1 : 1
+        } else if (moment(previous[columnName]).isBefore(moment(current[columnName]))) {
+          return sort === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+    } else {
+      // simple sorting
+      return data.sort((previous, current) => {
+        if (previous[columnName] > current[columnName]) {
+          return sort === 'desc' ? -1 : 1
+        } else if (previous[columnName] < current[columnName]) {
+          return sort === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+    }
   }
 
   public changeFilter(data:any, config:any):any {
