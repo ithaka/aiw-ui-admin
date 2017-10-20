@@ -4,7 +4,7 @@ import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, Ng
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv'
-import * as Moment from 'moment'
+import * as moment from 'moment'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal, RegisterModal } from './../modals'
@@ -98,6 +98,7 @@ export class UsersPage implements OnInit, OnDestroy {
 
   public changeSort(data:any, config:any):any {
     // back out if there is no sorting to be done
+    console.log('running sort')
     if (!config.sorting) {
       return data
     }
@@ -116,6 +117,15 @@ export class UsersPage implements OnInit, OnDestroy {
     if (!columnName) {
       return data
     }
+
+    // variable to determine whether to sort the column as a date or a simple type
+    let isDate: boolean = false
+    if (moment(data[0][columnName]).isValid()) {
+      isDate = true
+    }
+    console.log(data)
+    console.log(moment('10/10/2'))
+    console.log('date is', isDate)
 
     // simple sorting
     return data.sort((previous:any, current:any) => {
