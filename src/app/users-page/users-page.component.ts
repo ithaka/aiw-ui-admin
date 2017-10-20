@@ -4,6 +4,7 @@ import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, Ng
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv'
+import * as moment from 'moment'
 
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal, RegisterModal } from './../modals'
@@ -96,16 +97,18 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   public changeSort(data:any, config:any):any {
+    // back out if there is no sorting to be done
+    console.log('running sort')
     if (!config.sorting) {
       return data
     }
 
-    let columns = this.config.sorting.columns || []
-    let columnName:string = void 0
-    let sort:string = void 0
+    let columns: any[] = this.config.sorting.columns || []
+    let columnName:string
+    let sort:string
 
     for (let i = 0; i < columns.length; i++) {
-      if (columns[i].sort !== '' && columns[i].sort !== false) {
+      if (columns[i].sort) {
         columnName = columns[i].name
         sort = columns[i].sort
       }
@@ -115,15 +118,36 @@ export class UsersPage implements OnInit, OnDestroy {
       return data
     }
 
-    // simple sorting
-    return data.sort((previous:any, current:any) => {
-      if (previous[columnName] > current[columnName]) {
-        return sort === 'desc' ? -1 : 1
-      } else if (previous[columnName] < current[columnName]) {
-        return sort === 'asc' ? -1 : 1
-      }
-      return 0
-    })
+    // variable to determine whether to sort the column as a date or a simple type
+    //  note if there's a place this is likely to fail, it could be here. moment falls back to the js Date functions
+    //  in many cases, so it's possible that this mis-detects the date sorting (although altering the column name to
+    //  something that doesn't pass this test should fix that)
+    let isDate: boolean = false
+    if (moment(data[0][columnName]).isValid()) {
+      isDate = true
+    }
+
+    if (isDate) {
+      // date sorting
+      return data.sort((previous, current) => {
+        if (moment(previous[columnName]).isAfter(moment(current[columnName]))) {
+          return sort === 'desc' ? -1 : 1
+        } else if (moment(previous[columnName]).isBefore(moment(current[columnName]))) {
+          return sort === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+    } else {
+      // simple sorting
+      return data.sort((previous, current) => {
+        if (previous[columnName] > current[columnName]) {
+          return sort === 'desc' ? -1 : 1
+        } else if (previous[columnName] < current[columnName]) {
+          return sort === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+    }
   }
 
   public changeFilter(data:any, config:any):any {

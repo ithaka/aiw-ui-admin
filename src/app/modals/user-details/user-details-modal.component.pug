@@ -29,10 +29,10 @@ form#formPermissions(
           td {{ user.user }}
         tr
           td Registration Date
-          td {{ user.createdDate }}
+          td {{ user.createdDate | date}}
         tr
           td Last Access Date
-          td {{ user.timeLastAccessed }}
+          td {{ user.timeLastAccessed | date }}
         tr
           td Remote login access
           td {{ user.daysAccessRemaining > 0 ? user.daysAccessRemaining : 0 }} of 120 days remaining
