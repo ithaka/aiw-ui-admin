@@ -37,8 +37,7 @@ export class RegisterModal implements OnInit {
     this.registerForm = _fb.group({
       // init emails as empty array and run validators, along with custom validator
       //  rl-tag-input has an allowedTagsPattern property, but it wasn't working so I had to add custom validator
-      emails: [[], Validators.compose([Validators.required, this.emailsValidator])],
-      emailText: null
+      emails: [[], Validators.compose([Validators.required, this.emailsValidator])]
     })
   }
 
@@ -53,7 +52,7 @@ export class RegisterModal implements OnInit {
     )
   }
 
-  /** 
+  /**
    * Validates email against the same regex used on the server
    * @returns object with list of invalid emails
    */
@@ -74,7 +73,7 @@ export class RegisterModal implements OnInit {
    * Handles submission of the registration form
    * @param value value of the registration form
    */
-  private onSubmit(value: { emails: string[], emailText: string }): void {
+  private onSubmit(value: { emails: string[] }): void {
     this.messages = {}
     // tell the form that the user tried submitting the form
     this.submitted = true
@@ -114,7 +113,6 @@ export class RegisterModal implements OnInit {
 
         // after successful registration, reset the form
         this.registerForm.controls['emails'].setValue([])
-        this.registerForm.controls['emailText'].setValue('')
         this.submitted = false
       }, (err) => {
         console.error(err)
