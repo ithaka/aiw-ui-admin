@@ -21,6 +21,11 @@
   <script src="/webpack-dev-server.js"></script>
   <% } %>
 
+  <!--Force not caching index.html to make sure user gets updated version-->
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+
   <!-- Async Google Analytics: change UA-71073175-1 to be your site's ID -->
   <script>
     window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
