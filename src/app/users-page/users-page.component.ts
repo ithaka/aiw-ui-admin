@@ -30,11 +30,11 @@ export class UsersPage implements OnInit, OnDestroy {
     { title: 'Status', name: 'status',  className: ['cell-cls'] },
     { title: 'Shared Shelf Acces', name: 'ssValue', className: ['cell-cls'] }
   ]
-  
+
   public rows:Array<any> = []
 
   public page:number = 1
-  public itemsPerPage:number = 100
+  public itemsPerPage:number
   public maxSize:number = 50
   public numPages:number = 1
   public length:number = 0
@@ -57,7 +57,7 @@ export class UsersPage implements OnInit, OnDestroy {
       this._modal.open(UserDetailsModal)
     }
   }
-  
+
   ngOnInit():void {
     this.loadUsers()
   }
@@ -216,7 +216,7 @@ export class UsersPage implements OnInit, OnDestroy {
       fieldSeparator: ',',
       quoteStrings: '"',
       decimalseparator: '.',
-      showLabels: true, 
+      showLabels: true,
       showTitle: true,
       useBom: true
     }
@@ -243,7 +243,7 @@ export class UsersPage implements OnInit, OnDestroy {
       }
       csvArray.push(obj)
     }
-    
+
     new Angular2Csv(csvArray, 'institutional-users', options)
   }
 }
