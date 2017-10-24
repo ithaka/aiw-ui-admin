@@ -27,9 +27,6 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
           span(aria-hidden="true") &times;
       .form-control-feedback(*ngIf="submitted && registerForm.controls['emails'].hasError('required')")
         | {{ 'REGISTER_MODAL.EMAIL_REQUIRED_ERROR' | translate }}
-    .form-group
-      label(for="textareaEmailText") {{ 'REGISTER_MODAL.EMAIL_TEXT_LABEL' | translate }}
-      textarea#textareaEmailText.form-control([formControl]="registerForm.controls['emailText']")
     #msgRegisterSuccess.form-group.has-success(*ngIf="messages.successfullyRegisteredUsers && messages.successfullyRegisteredUsers.length > 0")
       .form-control-feedback {{ 'REGISTER_MODAL.REGISTRATION_SUCCESS' | translate:{ successfulRegistrationCount: messages.successfullyRegisteredUsers.length } }}
     #msgRegisterFailure.form-group(*ngIf="messages.userRegistrationErrors && messages.userRegistrationErrors.length > 0")
