@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv'
@@ -30,12 +31,14 @@ export class UsersPage implements OnInit, OnDestroy {
     { title: 'Status', name: 'status',  className: ['cell-cls'] },
     { title: 'Shared Shelf Acces', name: 'ssValue', className: ['cell-cls'] }
   ]
-  
+
   public rows:Array<any> = []
 
-  public page:number = 1
-  public itemsPerPage:number = 100
-  public maxSize:number = 50
+  public page:any = {
+    page: 1,
+    itemsPerPage: 100
+  }
+  public maxSize:number = 5
   public numPages:number = 1
   public length:number = 0
 
@@ -57,7 +60,7 @@ export class UsersPage implements OnInit, OnDestroy {
       this._modal.open(UserDetailsModal)
     }
   }
-  
+
   ngOnInit():void {
     this.loadUsers()
   }
@@ -186,7 +189,7 @@ export class UsersPage implements OnInit, OnDestroy {
     return filteredData
   }
 
-  public onChangeTable(config:any, page:any = {page: this.page, itemsPerPage: this.itemsPerPage}):any {
+  public onChangeTable(config:any, page:any = this.page):any {
     if (config.filtering) {
       Object.assign(this.config.filtering, config.filtering)
     }
@@ -199,6 +202,8 @@ export class UsersPage implements OnInit, OnDestroy {
     let sortedData = this.changeSort(filteredData, this.config)
     this.rows = page && config.paging ? this.changePage(page, sortedData) : sortedData
     this.length = sortedData.length
+
+    this.numPages = Math.ceil(this.length / page.itemsPerPage)
   }
 
   public onCellClick(data: any): void {
@@ -216,7 +221,7 @@ export class UsersPage implements OnInit, OnDestroy {
       fieldSeparator: ',',
       quoteStrings: '"',
       decimalseparator: '.',
-      showLabels: true, 
+      showLabels: true,
       showTitle: true,
       useBom: true
     }
@@ -243,7 +248,7 @@ export class UsersPage implements OnInit, OnDestroy {
       }
       csvArray.push(obj)
     }
-    
+
     new Angular2Csv(csvArray, 'institutional-users', options)
   }
 }

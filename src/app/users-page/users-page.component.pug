@@ -8,8 +8,17 @@ ang-main-nav
     button.btn.btn-secondary.col-5.col-md-2.ml-2((click)="exportCSV()") {{ 'USERS.BUTTONS.EXPORT' | translate }}
     .grid-cntnr.col-12
         ng-table([config]="config", (tableChanged)="onChangeTable(config)", (cellClicked)="onCellClick($event)", [rows]="rows", [columns]="columns")
-        //- pagination(*ngIf="config.paging", class="pagination-sm", [(ngModel)]="page", [totalItems]="length", [itemsPerPage]="itemsPerPage", [maxSize]="maxSize", [boundaryLinks]="true", [rotate]="false", (pageChanged)="onChangeTable(config, $event)", (numPages)="numPages = $event")
-        //- pre(*ngIf="config.paging",class="card card-block card-header") | Page: {{page}} / {{numPages}}
-        
+        ngb-pagination(*ngIf="config.paging",
+            size="sm",
+            class="pull-right",
+            [(page)]="page.page",
+            [collectionSize]="length",
+            [maxSize]="maxSize",
+            [boundaryLinks]="true",
+            [rotate]="false",
+            [pageSize]="page.itemsPerPage",
+            (pageChange)="onChangeTable(config, {page: $event, itemsPerPage: page.itemsPerPage})")
+        pre(*ngIf="config.paging", class="pull-right") Page: {{page.page}} / {{numPages}} |
+
     .error-msg(*ngIf="messages.serviceError") {{ 'USERS.MESSAGES.SERVICE_ERROR' | translate }}
     .error-msg(*ngIf="messages.unauthorized") {{ 'USERS.MESSAGES.UNAUTHORIZED' | translate }}
