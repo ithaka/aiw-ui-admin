@@ -46,7 +46,7 @@ export class InstitutionPage implements OnInit {
       this.instituion = res
 
       // Setting form values
-      this.manageInstForm.controls['pwd'].setValue(this.instituion.institution.access_password)
+      this.manageInstForm.controls['pwd'].setValue(this.instituion.institution.default_user_pwd)
       this.manageInstForm.controls['admin_name'].setValue(this.instituion.instsupport.contact_name)
       this.manageInstForm.controls['admin_email'].setValue(this.instituion.instsupport.contact_email)
       this.manageInstForm.controls['admin_phone'].setValue(this.instituion.instsupport.contact_tel)
@@ -55,7 +55,8 @@ export class InstitutionPage implements OnInit {
 
   private updateInstitutionalDetails(): void{
     this.messages = {} // reset object that displays messages
-    if (this.manageInstForm.invalid) { return }
+    if (this.manageInstForm.invalid) { return console.log('hey it didnt work') }
+
     this._auth.updateInst(this.manageInstForm)
       .take(1)
       .subscribe((res) => {

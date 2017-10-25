@@ -14,11 +14,11 @@ ang-main-nav
         .usr-settings-cntnr.mt-2
             .cntnr
                 h3 Update Password
-                p.small The default password for all newly registered users is #[b artstor].
+                p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
                 p.small.mb-1 (7-20 characters, no special characters)
                 div
                     input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
-                    input#inputCPWD(type="password", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
+                    input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
 
         h2.mt-3 Local support contacts for Artstor
         p.small There are locations in Artstor where your institution can publish local support contact information.
@@ -38,7 +38,7 @@ ang-main-nav
                     input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone")
 
                 p.small *Note: This email address will also be displayed on the Search & Browse page of the digital library.
-    
+
         .btn-grp
             button#btnCancel.btn.btn-secondary([routerLink]="['/home']") Cancel
             button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") Update
