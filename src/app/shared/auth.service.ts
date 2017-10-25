@@ -15,7 +15,6 @@ import { Keepalive } from '@ng-idle/keepalive'
 @Injectable()
 export class AuthService implements CanActivate {
 
-  private hostname = "//admin.stage.artstor.org"
   private ENV = 'dev'
   /**
    * This is typcast to create an initial object reference
@@ -87,9 +86,9 @@ export class AuthService implements CanActivate {
   }
 
   public getServiceUrl(legacy?: boolean): string {
-    let serviceUrl = '//art-aa-service.apps.'
-    serviceUrl += this.ENV === 'dev' ? 'test' : 'prod' // switch between dev and prod urls
-    serviceUrl += '.cirrostratus.org'
+    let serviceUrl: string = '//admin'
+    serviceUrl += this.ENV === 'dev' ? '.stage' : ''
+    serviceUrl += '.artstor.org'
     legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
 
     return serviceUrl
