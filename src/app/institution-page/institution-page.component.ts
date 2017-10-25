@@ -13,12 +13,13 @@ import { PrimaryUser, AuthService } from './../shared'
 
 export class InstitutionPage implements OnInit {
 
-  private instituion: any = {};
+  private institution: any = {};
 
   private manageInstForm: FormGroup
   private formSubmitted: boolean = false
   private messages: {
     unauthorized?: boolean,
+    invalid?: boolean,
     serviceError?: boolean
   } = {}
 
@@ -42,20 +43,29 @@ export class InstitutionPage implements OnInit {
 
   
   private loadInstitutionDetails(): void{
-    this._auth.getInstitution().subscribe( (res) => {
-      this.instituion = res
+    this._auth.getInstitution().take(1)
+      .subscribe( (res) => {
+        this.institution = res
 
-      // Setting form values
-      this.manageInstForm.controls['pwd'].setValue(this.instituion.institution.default_user_pwd)
-      this.manageInstForm.controls['admin_name'].setValue(this.instituion.instsupport.contact_name)
-      this.manageInstForm.controls['admin_email'].setValue(this.instituion.instsupport.contact_email)
-      this.manageInstForm.controls['admin_phone'].setValue(this.instituion.instsupport.contact_tel)
-    })
+        // Setting form values
+        this.manageInstForm.controls['pwd'].setValue(this.institution.institution.default_user_pwd)
+        let contact = this.institution.institutionContact[0]
+        if (contact) {
+          this.manageInstForm.controls['admin_name'].setValue(contact.name)
+          this.manageInstForm.controls['admin_email'].setValue(contact.email)
+          this.manageInstForm.controls['admin_phone'].setValue(contact.phone)
+        }
+      }, (err) => {
+        // this.messages.serviceError = true
+      })
   }
 
   private updateInstitutionalDetails(): void{
     this.messages = {} // reset object that displays messages
-    if (this.manageInstForm.invalid) { return console.log('hey it didnt work') }
+    if (this.manageInstForm.invalid) {
+      this.messages.invalid = true
+      return
+    }
 
     this._auth.updateInst(this.manageInstForm)
       .take(1)

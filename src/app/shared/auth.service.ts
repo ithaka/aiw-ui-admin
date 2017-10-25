@@ -89,7 +89,7 @@ export class AuthService implements CanActivate {
     let serviceUrl: string = '//admin'
     serviceUrl += this.ENV === 'dev' ? '.stage' : ''
     serviceUrl += '.artstor.org'
-    legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
+    serviceUrl += legacy ? "/api" : '/admin'
 
     return serviceUrl
   }

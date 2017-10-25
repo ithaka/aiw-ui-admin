@@ -14,7 +14,7 @@ ang-main-nav
         .usr-settings-cntnr.mt-2
             .cntnr
                 h3 Update Password
-                p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
+                //- p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
                 p.small.mb-1 (7-20 characters, no special characters)
                 div
                     input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
