@@ -26,7 +26,6 @@ ang-main-nav
             .cntnr
                 h3 Emails
                 p.small Emails sent from the Admin site will include the following contact information:
-
                 .cntct-row
                     .lbl Administrator:
                     input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name")
@@ -39,6 +38,8 @@ ang-main-nav
 
                 p.small *Note: This email address will also be displayed on the Search & Browse page of the digital library.
 
+        .has-danger(*ngIf="messages.userListError")
+            .form-control-feedback There was an error while retrieving the contact information. Please try again or contact support.
         .btn-grp
             button#btnCancel.btn.btn-secondary([routerLink]="['/home']") Cancel
             button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") Update

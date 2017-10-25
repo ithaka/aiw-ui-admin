@@ -20,8 +20,9 @@ export class InstitutionPage implements OnInit {
   private messages: {
     unauthorized?: boolean,
     invalid?: boolean,
-    serviceError?: boolean
-  } = {}
+    serviceError?: boolean,
+    userListError?: boolean
+  } = { }
 
   constructor(
     _fb: FormBuilder,
@@ -56,7 +57,7 @@ export class InstitutionPage implements OnInit {
           this.manageInstForm.controls['admin_phone'].setValue(contact.phone)
         }
       }, (err) => {
-        // this.messages.serviceError = true
+        this.messages.userListError = true
       })
   }
 
