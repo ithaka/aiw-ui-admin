@@ -57,12 +57,14 @@ export class InstitutionPage implements OnInit {
           this.manageInstForm.controls['admin_phone'].setValue(contact.phone)
         }
       }, (err) => {
+        console.error(err)
         this.messages.userListError = true
       })
   }
 
   private updateInstitutionalDetails(): void{
     this.messages = {} // reset object that displays messages
+    this.formSubmitted = true
     if (this.manageInstForm.invalid) {
       this.messages.invalid = true
       return
