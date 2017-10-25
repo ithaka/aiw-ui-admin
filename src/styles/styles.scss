@@ -17,7 +17,7 @@
 @import './core/variables';
 
 // ----------------------------------------------------
-// [I] Libraries 
+// [I] Libraries
 // Imported by webpack in config/webpack.common.js
 // or referenced from node_modules
 // ----------------------------------------------------
@@ -96,4 +96,10 @@ table.dataTable tbody tr:not(:first-child):hover{
 /* For Register Modal Input tags field */
 .ng2-tag-input-field{
     padding: 8px 6px !important;
+}
+
+/* pagination */
+.page-item.active .page-link {
+  background-color: #ef6e1e;
+  border-color: #ef6e1e;
 }
