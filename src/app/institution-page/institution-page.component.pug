@@ -15,10 +15,10 @@ ang-main-nav
             .cntnr
                 h3 {{ 'INTITUTION.HEADINGS.UPDATE_PWD' | translate }}
                 //- p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
-                p.small.mb-1 {{ 'INTITUTION.TEXTS.PWD_CHARS' | translate }}
+                //- p.small.mb-1 {{ 'INTITUTION.TEXTS.PWD_CHARS' | translate }}
                 div
-                    input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
-                    input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
+                    input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd", readonly)
+                    //- input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd", readonly)
                     .has-danger(*ngIf="formSubmitted && manageInstForm.controls['pwd'].hasError('required')")
                         .form-control-feedback {{ 'INTITUTION.MESSAGES.VALID_PWD' | translate }}
 
@@ -30,17 +30,17 @@ ang-main-nav
                 p.small {{ 'INTITUTION.TEXTS.EMAILS' | translate }}
                 .cntct-row                    
                     .lbl {{ 'INTITUTION.LABELS.ADMIN' | translate }}:
-                    input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name")
+                    input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name", readonly)
                     .has-danger(*ngIf="formSubmitted && manageInstForm.controls['admin_name'].hasError('required')")
                         .form-control-feedback {{ 'INTITUTION.MESSAGES.ADMIN_NAME' | translate }}
                 .cntct-row
                     .lbl *{{ 'INTITUTION.LABELS.EMAIL' | translate }}:
-                    input#inputAdminEmail(type="text", [formControl]="manageInstForm.controls['admin_email']", name="admin_email")
+                    input#inputAdminEmail(type="text", [formControl]="manageInstForm.controls['admin_email']", name="admin_email", readonly)
                     .has-danger(*ngIf="formSubmitted && manageInstForm.controls['admin_email'].hasError('email')")
                         .form-control-feedback {{ 'INTITUTION.MESSAGES.ADMIN_VALID_EMAIL' | translate }}
                 .cntct-row
                     .lbl {{ 'INTITUTION.LABELS.PHONE' | translate }}:
-                    input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone")
+                    input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone", readonly)
 
                 p.small *{{ 'INTITUTION.LABELS.NOTE' | translate }}
 
@@ -48,6 +48,8 @@ ang-main-nav
             .form-control-feedback {{ 'INTITUTION.MESSAGES.CONTACT_INFO_ERROR' | translate }}
         .has-danger(*ngIf="messages.serviceError")
             .form-control-feedback {{ 'INTITUTION.MESSAGES.SERVICE_ERROR' | translate }}
-        .btn-grp
-            button#btnCancel.btn.btn-secondary([routerLink]="['/home']") {{ 'INTITUTION.BUTTONS.CANCEL' | translate }}
-            button#btnUpdate.btn.btn-primary(type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}
+        
+        //- Make the page readonly till we get an update service from FIRE
+        //- .btn-grp
+        //-     button#btnCancel.btn.btn-secondary([routerLink]="['/home']") {{ 'INTITUTION.BUTTONS.CANCEL' | translate }}
+        //-     button#btnUpdate.btn.btn-primary(type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}
