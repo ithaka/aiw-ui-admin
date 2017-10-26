@@ -19,6 +19,7 @@ ang-main-nav
             [pageSize]="page.itemsPerPage",
             (pageChange)="onChangeTable(config, {page: $event, itemsPerPage: page.itemsPerPage})")
         pre(*ngIf="config.paging", class="pull-right") Page: {{page.page}} / {{numPages}} |
+        i.icon.icon-loading-large(*ngIf="usersLoading")
 
     .error-msg(*ngIf="messages.serviceError") {{ 'USERS.MESSAGES.SERVICE_ERROR' | translate }}
     .error-msg(*ngIf="messages.unauthorized") {{ 'USERS.MESSAGES.UNAUTHORIZED' | translate }}

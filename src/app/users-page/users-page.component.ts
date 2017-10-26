@@ -48,6 +48,8 @@ export class UsersPage implements OnInit, OnDestroy {
     className: ['table-striped', 'table-bordered']
   }
 
+  public usersLoading:boolean = false;
+
   constructor(
     private _auth: AuthService,
     private _users: UsersService,
@@ -72,6 +74,8 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   private loadUsers(): void{
+    this.usersLoading = true
+
     this._users.getAllUsers().subscribe( (res) => {
       if(res){
         this.users = res;
@@ -80,6 +84,8 @@ export class UsersPage implements OnInit, OnDestroy {
 
         this.messages.unauthorized = false
         this.messages.serviceError = false
+
+        this.usersLoading = false
       }
     }, (err) => {
       switch (err.status) {
@@ -90,6 +96,8 @@ export class UsersPage implements OnInit, OnDestroy {
           this.messages.serviceError = true
           console.error(err)
       }
+
+      this.usersLoading = false
     })
   }
 
