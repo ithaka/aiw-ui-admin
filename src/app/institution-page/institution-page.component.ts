@@ -31,15 +31,28 @@ export class InstitutionPage implements OnInit {
   ) {
     this.manageInstForm = _fb.group({
       pwd: [null, Validators.required],
-      cpwd: [null, Validators.required],
+      cpwd: [null, null],
       admin_name: [null, Validators.required],
-      admin_email: [null, Validators.required],
-      admin_phone: [null, Validators.required]
+      admin_email: [null, Validators.email],
+      admin_phone: [null, null]
     })
   }
 
   ngOnInit() { 
     this.loadInstitutionDetails();
+  }
+
+  validatePwd(control: FormControl) {
+    let length = control.value.length;
+    if( (length < 7) || (length > 20)){
+      
+    }
+
+    return ( (length >= 7) && (length <= 20)) ? null : {
+      validatePwd: {
+        valid: false
+      }
+    }
   }
 
   

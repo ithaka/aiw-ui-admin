@@ -19,6 +19,8 @@ ang-main-nav
                 div
                     input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
                     input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
+                    .has-danger(*ngIf="formSubmitted && manageInstForm.controls['pwd'].hasError('required')")
+                        .form-control-feedback {{ 'INTITUTION.MESSAGES.VALID_PWD' | translate }}
 
         h2.mt-3 {{ 'INTITUTION.HEADINGS.LOCAL_SUPPORT' | translate }}
         p.small {{ 'INTITUTION.TEXTS.LOCAL_SUPPORT' | translate }}
@@ -29,9 +31,13 @@ ang-main-nav
                 .cntct-row                    
                     .lbl {{ 'INTITUTION.LABELS.ADMIN' | translate }}:
                     input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name")
+                    .has-danger(*ngIf="formSubmitted && manageInstForm.controls['admin_name'].hasError('required')")
+                        .form-control-feedback {{ 'INTITUTION.MESSAGES.ADMIN_NAME' | translate }}
                 .cntct-row
                     .lbl *{{ 'INTITUTION.LABELS.EMAIL' | translate }}:
                     input#inputAdminEmail(type="text", [formControl]="manageInstForm.controls['admin_email']", name="admin_email")
+                    .has-danger(*ngIf="formSubmitted && manageInstForm.controls['admin_email'].hasError('email')")
+                        .form-control-feedback {{ 'INTITUTION.MESSAGES.ADMIN_VALID_EMAIL' | translate }}
                 .cntct-row
                     .lbl {{ 'INTITUTION.LABELS.PHONE' | translate }}:
                     input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone")
@@ -39,7 +45,7 @@ ang-main-nav
                 p.small *{{ 'INTITUTION.LABELS.NOTE' | translate }}
 
         .has-danger(*ngIf="messages.userListError")
-            .form-control-feedback {{ 'INTITUTION.MESSAGES.USER_LIST_ERROR' | translate }}
+            .form-control-feedback {{ 'INTITUTION.MESSAGES.CONTACT_INFO_ERROR' | translate }}
         .btn-grp
             button#btnCancel.btn.btn-secondary([routerLink]="['/home']") {{ 'INTITUTION.BUTTONS.CANCEL' | translate }}
-            button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}
+            button#btnUpdate.btn.btn-primary(type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}

@@ -51,8 +51,10 @@
   },
   "INTITUTION": {
     "MESSAGES": {
-      "USER_LIST_ERROR": "There was an error while retrieving the contact information. Please try again or contact support.",
-      "SERVICE_ERROR": "Server is not responding. Please try again later."
+      "CONTACT_INFO_ERROR": "There was an error while retrieving the contact information. Please try again or contact support.",
+      "ADMIN_NAME": "Please enter the Admin name.",
+      "ADMIN_VALID_EMAIL": "Please enter a valid email.",
+      "VALID_PWD": "Password must be 7-20 characters long and should not contain any special characters."
     },
     "LABELS": {
       "ADMIN": "Administrator",
