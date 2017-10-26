@@ -7,39 +7,39 @@ ang-main-nav
             (ngSubmit)="updateInstitutionalDetails(manageInstForm)"
             )    
         .page-hdr
-            h1 Manage Institution
-        p.small.pt-2.info-txt To make the most of Artstor at your institution, go to #[a(href="http://support.artstor.org/?article=promoting-artstor-on-campus" target="_blank") Promotional materials].
+            h1 {{ 'INTITUTION.HEADINGS.MANAGE_INST' | translate }}
+        p.small.pt-2.info-txt([innerHTML]="'INTITUTION.TEXTS.PROMO_MATERIALS' | translate")
         
-        h2 User settings
+        h2 {{ 'INTITUTION.HEADINGS.USERS_SETTINGS' | translate }}
         .usr-settings-cntnr.mt-2
             .cntnr
-                h3 Update Password
+                h3 {{ 'INTITUTION.HEADINGS.UPDATE_PWD' | translate }}
                 //- p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
-                p.small.mb-1 (7-20 characters, no special characters)
+                p.small.mb-1 {{ 'INTITUTION.TEXTS.PWD_CHARS' | translate }}
                 div
                     input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd")
                     input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd")
 
-        h2.mt-3 Local support contacts for Artstor
-        p.small There are locations in Artstor where your institution can publish local support contact information.
+        h2.mt-3 {{ 'INTITUTION.HEADINGS.LOCAL_SUPPORT' | translate }}
+        p.small {{ 'INTITUTION.TEXTS.LOCAL_SUPPORT' | translate }}
         .usr-contact-cntnr
             .cntnr
-                h3 Emails
-                p.small Emails sent from the Admin site will include the following contact information:
-                .cntct-row
-                    .lbl Administrator:
+                h3 {{ 'INTITUTION.HEADINGS.EMAILS' | translate }}
+                p.small {{ 'INTITUTION.TEXTS.EMAILS' | translate }}
+                .cntct-row                    
+                    .lbl {{ 'INTITUTION.LABELS.ADMIN' | translate }}:
                     input#inputAdminName(type="text", [formControl]="manageInstForm.controls['admin_name']", name="admin_name")
                 .cntct-row
-                    .lbl *Email address:
+                    .lbl *{{ 'INTITUTION.LABELS.EMAIL' | translate }}:
                     input#inputAdminEmail(type="text", [formControl]="manageInstForm.controls['admin_email']", name="admin_email")
                 .cntct-row
-                    .lbl Phone number:
+                    .lbl {{ 'INTITUTION.LABELS.PHONE' | translate }}:
                     input#inputAdminPhone(type="text", [formControl]="manageInstForm.controls['admin_phone']", name="admin_phone")
 
-                p.small *Note: This email address will also be displayed on the Search & Browse page of the digital library.
+                p.small *{{ 'INTITUTION.LABELS.NOTE' | translate }}
 
         .has-danger(*ngIf="messages.userListError")
-            .form-control-feedback There was an error while retrieving the contact information. Please try again or contact support.
+            .form-control-feedback {{ 'INTITUTION.MESSAGES.USER_LIST_ERROR' | translate }}
         .btn-grp
-            button#btnCancel.btn.btn-secondary([routerLink]="['/home']") Cancel
-            button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") Update
+            button#btnCancel.btn.btn-secondary([routerLink]="['/home']") {{ 'INTITUTION.BUTTONS.CANCEL' | translate }}
+            button#btnUpdate.btn.btn-primary((click)="formSubmitted = true", type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}

@@ -49,6 +49,35 @@
       "EXPORT": "Export"
     }
   },
+  "INTITUTION": {
+    "MESSAGES": {
+      "USER_LIST_ERROR": "There was an error while retrieving the contact information. Please try again or contact support.",
+      "SERVICE_ERROR": "Server is not responding. Please try again later."
+    },
+    "LABELS": {
+      "ADMIN": "Administrator",
+      "EMAIL": "Email address",
+      "PHONE": "Phone number",
+      "NOTE": "Note: This email address will also be displayed on the Search & Browse page of the digital library."
+    },
+    "HEADINGS": {
+      "EMAILS": "Emails",
+      "LOCAL_SUPPORT": "Local support contacts for Artstor",
+      "USERS_SETTINGS": "User settings",
+      "UPDATE_PWD": "Update Password",
+      "MANAGE_INST": "Manage Institution"
+    },
+    "TEXTS": {
+      "PROMO_MATERIALS": "To make the most of Artstor at your institution, go to <a class='promoLink' href='http://support.artstor.org/?article=promoting-artstor-on-campus' target='_blank'>Promotional materials</a>.",
+      "PWD_CHARS": "(7-20 characters, no special characters)",
+      "LOCAL_SUPPORT": "There are locations in Artstor where your institution can publish local support contact information.",
+      "EMAILS": "Emails sent from the Admin site will include the following contact information:"
+    },
+    "BUTTONS": {
+      "CANCEL": "Cancel",
+      "UPDATE": "Update"
+    }
+  },
   "HEADER": {
     "GREETING": "Welcome, {{email}}"
   },
