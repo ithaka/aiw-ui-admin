@@ -94,14 +94,13 @@ export class InstitutionPage implements OnInit {
         this._router.navigate(['/home'])
       }, (err) => {
         switch (err.status) {
-          case 401:
-            this.messages.unauthorized = true
-            break
-          case 400: // we shouldn't let the client submit a request and get a 400
-          case 500:
+          // case 401:
+          //   this.messages.unauthorized = true
+          //   break
+          // case 400: // we shouldn't let the client submit a request and get a 400
+          // case 500:
           default:
             this.messages.serviceError = true
-            console.error(err)
         }
       })
   }

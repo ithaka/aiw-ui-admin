@@ -46,6 +46,8 @@ ang-main-nav
 
         .has-danger(*ngIf="messages.userListError")
             .form-control-feedback {{ 'INTITUTION.MESSAGES.CONTACT_INFO_ERROR' | translate }}
+        .has-danger(*ngIf="messages.serviceError")
+            .form-control-feedback {{ 'INTITUTION.MESSAGES.SERVICE_ERROR' | translate }}
         .btn-grp
             button#btnCancel.btn.btn-secondary([routerLink]="['/home']") {{ 'INTITUTION.BUTTONS.CANCEL' | translate }}
             button#btnUpdate.btn.btn-primary(type="submit", name="action") {{ 'INTITUTION.BUTTONS.UPDATE' | translate }}
