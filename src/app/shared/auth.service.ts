@@ -89,7 +89,7 @@ export class AuthService implements CanActivate {
     let serviceUrl: string = '//admin'
     serviceUrl += this.ENV === 'dev' ? '.stage' : ''
     serviceUrl += '.artstor.org'
-    legacy ? serviceUrl += "/api" : serviceUrl += '/admin'
+    serviceUrl += legacy ? "/api" : '/admin'
 
     return serviceUrl
   }
@@ -161,7 +161,7 @@ export class AuthService implements CanActivate {
     })
 
     return this.http.post<any>(
-      [this.getServiceUrl(), "api/insitution"].join("/"),
+      [this.getServiceUrl(true), "insitution"].join("/"),
       data,
       {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
