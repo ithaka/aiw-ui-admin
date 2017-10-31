@@ -29,7 +29,7 @@ export class UsersPage implements OnInit, OnDestroy {
     { title: 'Registration Date', name: 'createdate', filtering: { filterString: '', placeholder: 'Filter by Registration', columnName: 'createdate' }, className: ['cell-cls'] },
     { title: 'Last Log-in Date', name: 'timelastaccessed', filtering: { filterString: '', placeholder: 'Filter by Last Login', columnName: 'timelastaccessed' }, className: ['cell-cls'] },
     { title: 'Status', name: 'status',  className: ['cell-cls'] },
-    { title: 'Shared Shelf Acces', name: 'ssValue', className: ['cell-cls'] }
+    { title: 'Shared Shelf Access', name: 'ssValue', className: ['cell-cls'] }
   ]
 
   public rows:Array<any> = []
