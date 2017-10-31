@@ -122,6 +122,7 @@ interface RegisterUsersResponse {
   error: string
   users: {
     email: string
+    accountStatus: string
     status: boolean
     error: string
     account: {
@@ -136,7 +137,7 @@ interface RegisterUsersResponse {
       roles: string,
       credentials: string,
       createTime: string
-    }
+    }[]
     profile: {
       "profileId": number,
       "userId": string,

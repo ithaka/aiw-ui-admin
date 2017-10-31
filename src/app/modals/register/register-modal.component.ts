@@ -100,7 +100,7 @@ export class RegisterModal implements OnInit {
             // unfortunately the only information returned by the service about the error is a string, so decide
             //  which error to show based on that string
             // the type is used to signal the i18n file which error to display
-            if (user.error.indexOf("User Account Exists") > -1) {
+            if (user.accountStatus.indexOf("ERR_USER_EXISTS") > -1) {
               this.messages.userRegistrationErrors.push({ email: user.email, type: "ACCOUNT_ALREADY_EXISTS" })
             } else {
               this.messages.userRegistrationErrors.push({ email: user.email, type: "GENERIC_ERROR" })
