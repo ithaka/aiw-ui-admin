@@ -34,6 +34,11 @@ export class AuthService implements CanActivate {
     private http: HttpClient,
     locker: Locker
   ) {
+    // set to production urls
+    if (window.location.hostname.indexOf('admin.artstor.org') > -1) {
+      this.ENV = 'prod'
+    }
+
     this._storage = locker.useDriver(Locker.DRIVERS.LOCAL)
 
     // if the user is already logged in, we can check for their object
@@ -71,6 +76,7 @@ export class AuthService implements CanActivate {
     });
 
     this.resetIdleWatcher();
+
   }
 
   // Reset the idle watcher
