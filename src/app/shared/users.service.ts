@@ -64,8 +64,8 @@ export class UsersService {
         user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
         
         // Making sure that the date format is compatible with the date pipe on all browsers incl. Safari
-        user.timelastaccessed = this._date.transform( user.timelastaccessed.replace(' ', 'T') )
-        user.createdate = this._date.transform( user.createdate.replace(' ', 'T') )
+        if (user.timelastaccessed) { user.timelastaccessed = this._date.transform( user.timelastaccessed.replace(' ', 'T') )}
+        if (user.createdate) { user.createdate = this._date.transform( user.createdate.replace(' ', 'T') )}
       }
 
       return resultArray;
