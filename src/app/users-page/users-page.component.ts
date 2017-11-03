@@ -76,17 +76,16 @@ export class UsersPage implements OnInit, OnDestroy {
   private loadUsers(): void{
     this.usersLoading = true
 
-    this._users.getAllUsers().subscribe( (res) => {
-      if(res){
-        this.users = res;
-        this.length = this.users.length;
-        this.onChangeTable(this.config);
+    this._users.getAllUsers().take(1).subscribe( (res) => {
+      this.users = res
+      this.length = this.users.length
+      this.onChangeTable(this.config)
 
-        this.messages.unauthorized = false
-        this.messages.serviceError = false
+      this.messages.unauthorized = false
+      this.messages.serviceError = false
 
-        this.usersLoading = false
-      }
+      this.usersLoading = false
+      
     }, (err) => {
       switch (err.status) {
         case 401:
@@ -109,7 +108,6 @@ export class UsersPage implements OnInit, OnDestroy {
 
   public changeSort(data:any, config:any):any {
     // back out if there is no sorting to be done
-    console.log('running sort')
     if (!config.sorting) {
       return data
     }
@@ -166,6 +164,7 @@ export class UsersPage implements OnInit, OnDestroy {
     this.columns.forEach((column:any) => {
       if (column.filtering) {
         filteredData = filteredData.filter((item:any) => {
+          if (!item[column.name]) { return false } // some corrupted data exists so we'll basically filter it out
           return item[column.name].match(column.filtering.filterString)
         })
       }
