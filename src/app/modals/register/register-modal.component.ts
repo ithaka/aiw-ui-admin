@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { DatePipe } from '@angular/common'
 
 import { AuthService, UsersService } from '../../shared'
 
@@ -32,6 +33,7 @@ export class RegisterModal implements OnInit {
     private activeModal: NgbActiveModal,
     private _users: UsersService,
     private _auth: AuthService,
+    private _date: DatePipe,
     _fb: FormBuilder
   ) {
     this.registerForm = _fb.group({
@@ -108,6 +110,23 @@ export class RegisterModal implements OnInit {
           } else {
             if (!this.messages.successfullyRegisteredUsers) { this.messages.successfullyRegisteredUsers = [] }
             this.messages.successfullyRegisteredUsers.push(user.email)
+          
+            // Contruct & push the new user object to users observable
+            let newUser = {
+              'active': user.profile['active'],
+              'status': user.profile['active'] ? 'Active' : 'Archive',
+              'createdate': this._date.transform( user.account['createTime'].replace(' ', 'T') ),
+              'email': user.email,
+              'institutionid': user.profile['institutionId'],
+              'profileid': user.profile['profileId'],
+              'roles': user.profile['roles'],
+              'ssenabled': user.profile['ssEnabled'],
+              'ssValue': user.profile['ssEnabled'] ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
+              'timelastaccessed': this._date.transform( user.profile['timeLastAccessed'].replace(' ', 'T') ),
+              'userid': user.profile['userId']
+            }
+
+            this._users.updatedUser.next( newUser )
           }
         })
 

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { DatePipe } from '@angular/common'
 
 import { AuthService, UserDetails, UsersService, UserUpdate } from '../../shared'
 
@@ -22,6 +23,7 @@ export class UserDetailsModal implements OnInit {
     userServiceError?: boolean,
     archiveError?: boolean,
     archiveSuccess?: boolean,
+    unarchiveSuccess?: boolean,
     permissionsError?: boolean,
     permissionsSuccess?: boolean,
     extendAccessError?: boolean,
@@ -37,6 +39,7 @@ export class UserDetailsModal implements OnInit {
     private _users: UsersService,
     private _auth: AuthService,
     private route: ActivatedRoute,
+    private _date: DatePipe,
     _fb: FormBuilder
   ) {
     this.permissionsForm = _fb.group({
@@ -102,6 +105,20 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.messages.permissionsSuccess = true
+
+        // Contruct & push the updated user object to users observable
+        let updatedUser = {
+          'active': !res.archivedUser,
+          'status': !res.archivedUser ? 'Active' : 'Archive',
+          'createdate': this._date.transform( res.createdDate.replace(' ', 'T') ),
+          'email': res.user,
+          'profileid': res.profileId,
+          'ssenabled': res.ssEnabled,
+          'ssValue': res.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
+          'timelastaccessed': this._date.transform( res.timeLastAccessed.replace(' ', 'T') )
+        }
+
+        this._users.updatedUser.next( updatedUser )
       }, (err) => {
         console.error(err)
         this.messages.permissionsError = true
@@ -116,8 +133,25 @@ export class UserDetailsModal implements OnInit {
     this._users.archiveUser(this.user.profileId, !this.user.archivedUser)
       .take(1)
       .subscribe((res) => {
+        console.log(res)
+
         this.user.archivedUser = !this.user.archivedUser
-        this.messages.archiveSuccess = true
+        
+        this.messages.archiveSuccess = this.user.archivedUser
+        this.messages.unarchiveSuccess = !this.user.archivedUser
+
+        // Contruct & push the updated user object to users observable
+        let updatedUser = {
+          'active': res.active,
+          'status': res.active ? 'Active' : 'Archive',
+          'userid': res.userId,
+          'profileid': res.profileId,
+          'ssenabled': res.ssEnabled,
+          'ssValue': res.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
+          'timelastaccessed': this._date.transform( res.timeLastAccessed.replace(' ', 'T') )
+        }
+
+        this._users.updatedUser.next( updatedUser )
       }, (err) => {
         console.error(err)
         this.messages.archiveError = true

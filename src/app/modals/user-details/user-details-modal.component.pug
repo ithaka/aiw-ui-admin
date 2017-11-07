@@ -92,9 +92,11 @@ form#formPermissions(
     .form-group.has-danger(*ngIf="messages.archiveError || messages.extendAccessError")
       #errorArchiveUser.form-control-feedback
         | An error occurred while processing your request. Please try again later.
-    .form-group.has-success(*ngIf="messages.archiveSuccess || messages.extendAccessSuccess || messages.permissionsSuccess")
+    .form-group.has-success(*ngIf="messages.archiveSuccess || messages.unarchiveSuccess || messages.extendAccessSuccess || messages.permissionsSuccess")
       #msgArchiveSuccess.form-control-feedback(*ngIf="messages.archiveSuccess")
         | The user was successfully archived
+      #msgArchiveSuccess.form-control-feedback(*ngIf="messages.unarchiveSuccess")
+        | The user was successfully unarchived
       #msgExtendAccessSuccess.form-control-feedback(*ngIf="messages.extendAccessSuccess")
         | The user's session was extended to {{ user.daysAccessRemaining }} days
   .modal-footer
