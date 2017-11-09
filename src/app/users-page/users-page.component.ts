@@ -65,6 +65,28 @@ export class UsersPage implements OnInit, OnDestroy {
 
   ngOnInit():void {
     this.loadUsers()
+    
+    // Subscribe for updatedUser to update the users list
+    this._users.updatedUser.subscribe( (updatedUser) => {
+      // If the user exists then update the user object else push the user object in users array
+      let updated: boolean = false
+
+      let matchedUser = this.users.find( user => (user.email === updatedUser.email) || (user.userid === updatedUser.userid) );
+
+      if( matchedUser ){
+        matchedUser.active = updatedUser.active
+        matchedUser.status = updatedUser.status
+        matchedUser.ssenabled = updatedUser.ssenabled
+        matchedUser.ssValue = updatedUser.ssValue
+        matchedUser.timelastaccessed = updatedUser.timelastaccessed
+
+        updated = true
+      }
+
+      if(!updated){
+        this.users.push(updatedUser)
+      }
+    })
   }
 
   ngOnDestroy(): void {

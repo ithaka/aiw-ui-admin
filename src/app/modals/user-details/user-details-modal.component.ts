@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { DatePipe } from '@angular/common'
 
 import { AuthService, UserDetails, UsersService, UserUpdate } from '../../shared'
 
@@ -22,6 +23,7 @@ export class UserDetailsModal implements OnInit {
     userServiceError?: boolean,
     archiveError?: boolean,
     archiveSuccess?: boolean,
+    unarchiveSuccess?: boolean,
     permissionsError?: boolean,
     permissionsSuccess?: boolean,
     extendAccessError?: boolean,
@@ -37,6 +39,7 @@ export class UserDetailsModal implements OnInit {
     private _users: UsersService,
     private _auth: AuthService,
     private route: ActivatedRoute,
+    private _date: DatePipe,
     _fb: FormBuilder
   ) {
     this.permissionsForm = _fb.group({
@@ -102,6 +105,7 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.messages.permissionsSuccess = true
+        this.pushUpdatedUser(res)
       }, (err) => {
         console.error(err)
         this.messages.permissionsError = true
@@ -117,11 +121,41 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.user.archivedUser = !this.user.archivedUser
-        this.messages.archiveSuccess = true
+        
+        this.messages.archiveSuccess = this.user.archivedUser
+        this.messages.unarchiveSuccess = !this.user.archivedUser
+        this.pushUpdatedUser(res, true)
       }, (err) => {
         console.error(err)
         this.messages.archiveError = true
       })
+  }
+
+  /**
+   * Contruct updated user object from the api response & push it to the users observable
+   */
+  private pushUpdatedUser(resObj: any, toggleArchive?: boolean): void{
+    let updatedUser = {
+      'userid': resObj.userId ? resObj.userId : '',
+      'email': resObj.user ? resObj.user : '',
+      'profileid': resObj.profileId,
+      'ssenabled': resObj.ssEnabled,
+      'ssValue': resObj.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
+      'createdate': resObj.createdDate ? this._date.transform( resObj.createdDate.replace(' ', 'T') ) : '',
+      'timelastaccessed': this._date.transform( resObj.timeLastAccessed.replace(' ', 'T') )
+    }
+
+    // Api response is different for the archive and update calls, so we have to handle them accordingly
+    if( toggleArchive ){
+      updatedUser['active'] = resObj.active
+      updatedUser['status'] = resObj.active ? 'Active' : 'Archive'
+    }
+    else{
+      updatedUser['active'] = !resObj.archivedUser
+      updatedUser['status'] = !resObj.archivedUser ? 'Active' : 'Archive'
+    }
+
+    this._users.updatedUser.next( updatedUser )
   }
 
   /**

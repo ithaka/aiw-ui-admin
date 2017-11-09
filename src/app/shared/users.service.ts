@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { DatePipe } from '@angular/common'
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
@@ -9,6 +9,9 @@ import { AuthService, UserDetails, UserUpdate } from './'
 
 @Injectable()
 export class UsersService {
+
+  //Subject observable for updatedUser
+  public updatedUser: Subject<any> = new Subject();
 
   constructor(
     private http: HttpClient,
