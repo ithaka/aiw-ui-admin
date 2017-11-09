@@ -71,17 +71,16 @@ export class UsersPage implements OnInit, OnDestroy {
       // If the user exists then update the user object else push the user object in users array
       let updated: boolean = false
 
-      for( let user of this.users ){
-        if( (user.email === updatedUser.email) || (user.userid === updatedUser.userid) ){
-          user.active = updatedUser.active
-          user.status = updatedUser.status
-          user.ssenabled = updatedUser.ssenabled
-          user.ssValue = updatedUser.ssValue
-          user.timelastaccessed = updatedUser.timelastaccessed
+      let matchedUser = this.users.find( user => (user.email === updatedUser.email) || (user.userid === updatedUser.userid) );
 
-          updated = true
-          break;
-        }
+      if( matchedUser ){
+        matchedUser.active = updatedUser.active
+        matchedUser.status = updatedUser.status
+        matchedUser.ssenabled = updatedUser.ssenabled
+        matchedUser.ssValue = updatedUser.ssValue
+        matchedUser.timelastaccessed = updatedUser.timelastaccessed
+
+        updated = true
       }
 
       if(!updated){

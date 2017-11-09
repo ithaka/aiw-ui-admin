@@ -105,20 +105,7 @@ export class UserDetailsModal implements OnInit {
       .take(1)
       .subscribe((res) => {
         this.messages.permissionsSuccess = true
-
-        // Contruct & push the updated user object to users observable
-        let updatedUser = {
-          'active': !res.archivedUser,
-          'status': !res.archivedUser ? 'Active' : 'Archive',
-          'createdate': this._date.transform( res.createdDate.replace(' ', 'T') ),
-          'email': res.user,
-          'profileid': res.profileId,
-          'ssenabled': res.ssEnabled,
-          'ssValue': res.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
-          'timelastaccessed': this._date.transform( res.timeLastAccessed.replace(' ', 'T') )
-        }
-
-        this._users.updatedUser.next( updatedUser )
+        this.pushUpdatedUser(res)
       }, (err) => {
         console.error(err)
         this.messages.permissionsError = true
@@ -133,29 +120,42 @@ export class UserDetailsModal implements OnInit {
     this._users.archiveUser(this.user.profileId, !this.user.archivedUser)
       .take(1)
       .subscribe((res) => {
-        console.log(res)
-
         this.user.archivedUser = !this.user.archivedUser
         
         this.messages.archiveSuccess = this.user.archivedUser
         this.messages.unarchiveSuccess = !this.user.archivedUser
-
-        // Contruct & push the updated user object to users observable
-        let updatedUser = {
-          'active': res.active,
-          'status': res.active ? 'Active' : 'Archive',
-          'userid': res.userId,
-          'profileid': res.profileId,
-          'ssenabled': res.ssEnabled,
-          'ssValue': res.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
-          'timelastaccessed': this._date.transform( res.timeLastAccessed.replace(' ', 'T') )
-        }
-
-        this._users.updatedUser.next( updatedUser )
+        this.pushUpdatedUser(res, true)
       }, (err) => {
         console.error(err)
         this.messages.archiveError = true
       })
+  }
+
+  /**
+   * Contruct updated user object from the api response & push it to the users observable
+   */
+  private pushUpdatedUser(resObj: any, toggleArchive?: boolean): void{
+    let updatedUser = {
+      'userid': resObj.userId ? resObj.userId : '',
+      'email': resObj.user ? resObj.user : '',
+      'profileid': resObj.profileId,
+      'ssenabled': resObj.ssEnabled,
+      'ssValue': resObj.ssEnabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : '',
+      'createdate': resObj.createdDate ? this._date.transform( resObj.createdDate.replace(' ', 'T') ) : '',
+      'timelastaccessed': this._date.transform( resObj.timeLastAccessed.replace(' ', 'T') )
+    }
+
+    // Api response is different for the archive and update calls, so we have to handle them accordingly
+    if( toggleArchive ){
+      updatedUser['active'] = resObj.active
+      updatedUser['status'] = resObj.active ? 'Active' : 'Archive'
+    }
+    else{
+      updatedUser['active'] = !resObj.archivedUser
+      updatedUser['status'] = !resObj.archivedUser ? 'Active' : 'Archive'
+    }
+
+    this._users.updatedUser.next( updatedUser )
   }
 
   /**
