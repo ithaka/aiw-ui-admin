@@ -67,12 +67,30 @@ export class UsersService {
         user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
         
         // Making sure that the date format is compatible with the date pipe on all browsers incl. Safari
-        if (user.timelastaccessed) { user.timelastaccessed = this._date.transform( user.timelastaccessed.replace(' ', 'T') )}
-        if (user.createdate) { user.createdate = this._date.transform( user.createdate.replace(' ', 'T') )}
+        user.timelastaccessed = this.formatDate(user.timelastaccessed)
+        user.createdate = this.formatDate(user.createdate)
       }
 
       return resultArray;
     });
+  }
+
+  /**
+   * We've been having some issue with data that comes in from services formatted incorrectly,
+   *  so this is just a wrapper function to make sure errors are handled properly
+   * @param date the date string you want formatted
+   */
+  private formatDate(date: string): string {
+    if (date) {
+      try {
+        return this._date.transform( date.replace(' ', 'T') )
+      } catch (err) {
+        console.error(err)
+        return null
+      }
+    } else {
+      return null
+    }
   }
   
   /**
