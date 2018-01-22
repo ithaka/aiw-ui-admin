@@ -66,14 +66,14 @@ form#formPermissions(
               type="checkbox",
               [formControl]="permissionsForm.controls['ssEnabled']"
             )
-          | Enable Shared Shelf
+          | Enable Forum
         li.list-group-item(*ngIf="ssEnabled")
           label.form-check-label(for="checkSSAdmin")
             input#checkSSAdmin.form-check-input(
               type="checkbox",
               [formControl]="permissionsForm.controls['ssAdmin']"
             )
-          | Grant SS Admin Rights
+          | Grant Forum Admin Rights
     .form-group.has-danger(*ngIf="submitted && messages.permissionsError")
       #errorPermissionsUpdate.form-control-feedback
         | An error occurred while processing your request. Please try again later.
