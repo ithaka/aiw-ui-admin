@@ -9,18 +9,6 @@ ang-main-nav
         .page-hdr
             h1 {{ 'INTITUTION.HEADINGS.MANAGE_INST' | translate }}
         p.small.pt-2.info-txt([innerHTML]="'INTITUTION.TEXTS.PROMO_MATERIALS' | translate")
-        
-        h2 {{ 'INTITUTION.HEADINGS.USERS_SETTINGS' | translate }}
-        .usr-settings-cntnr.mt-2
-            .cntnr
-                h3 {{ 'INTITUTION.HEADINGS.UPDATE_PWD' | translate }}
-                //- p.small The default password for all newly registered users is #[b {{instituion.institution.default_user_pwd}}].
-                //- p.small.mb-1 {{ 'INTITUTION.TEXTS.PWD_CHARS' | translate }}
-                div
-                    input#inputPWD(type="text", placeholder="Password", [formControl]="manageInstForm.controls['pwd']", name="pwd", readonly)
-                    //- input#inputCPWD(type="text", placeholder="Confirm Password", [formControl]="manageInstForm.controls['cpwd']", name="cpwd", readonly)
-                    .has-danger(*ngIf="formSubmitted && manageInstForm.controls['pwd'].hasError('required')")
-                        .form-control-feedback {{ 'INTITUTION.MESSAGES.VALID_PWD' | translate }}
 
         h2.mt-3 {{ 'INTITUTION.HEADINGS.LOCAL_SUPPORT' | translate }}
         p.small {{ 'INTITUTION.TEXTS.LOCAL_SUPPORT' | translate }}

@@ -30,8 +30,6 @@ export class InstitutionPage implements OnInit {
     private _router: Router
   ) {
     this.manageInstForm = _fb.group({
-      pwd: [null, Validators.required],
-      cpwd: [null, null],
       admin_name: [null, Validators.required],
       admin_email: [null, Validators.email],
       admin_phone: [null, null]
@@ -42,19 +40,6 @@ export class InstitutionPage implements OnInit {
     this.loadInstitutionDetails();
   }
 
-  validatePwd(control: FormControl) {
-    let length = control.value.length;
-    if( (length < 7) || (length > 20)){
-      
-    }
-
-    return ( (length >= 7) && (length <= 20)) ? null : {
-      validatePwd: {
-        valid: false
-      }
-    }
-  }
-
   
   private loadInstitutionDetails(): void{
     this._auth.getInstitution().take(1)
@@ -62,7 +47,6 @@ export class InstitutionPage implements OnInit {
         this.institution = res
 
         // Setting form values
-        this.manageInstForm.controls['pwd'].setValue(this.institution.institution.default_user_pwd)
         let contact = this.institution.institutionContact[0]
         if (contact) {
           this.manageInstForm.controls['admin_name'].setValue(contact.name)
