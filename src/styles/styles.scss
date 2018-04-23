@@ -109,3 +109,8 @@ table.dataTable tbody tr:not(:first-child):hover{
     color: #b64404 !important;
     font-weight: bold;
 }
+
+// Style for cookie banner
+body body{
+  height: unset;
+}
