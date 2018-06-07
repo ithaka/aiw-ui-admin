@@ -1,26 +1,13 @@
-<p align="center">
-  <a href="https://onespeed.io/" target="_blank">
-    <img  alt="OneSpeed" src="https://user-images.githubusercontent.com/1016365/28749799-58e89da4-7488-11e7-9470-e0022f668687.png">
-  </a>
-</p>
+# Artstor Admin Tool
+The latest version of the Artstor Admin Tool, used for managing permissions for users within Artstor Image Workspace
 
-___
+If you are a new developer to the project, please read through the entire README. 
+You won't regret it.
 
-[![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
-[![Build Status](https://travis-ci.org/AngularClass/angular2-webpack-starter.svg?branch=master)](https://travis-ci.org/AngularClass/angular2-webpack-starter)
-[![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter)
-[![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
-[![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/angularclass/angular-2-webpack-starter)
+## Ithaka Open Source Initiative
+This repository is open sourced by Ithaka as part of our initiative to increase transparency and contribute to the community. This particular repository is a working repository not intended as software available for consumption.
 
-<p align="center">
-  <a href="https://onespeed.io" target="_blank">
-    <img src="https://cloud.githubusercontent.com/assets/1016365/26219144/aa986cfa-3bdb-11e7-9f04-7296dc9ae945.png" alt="Angular Starter with Webpack by OneSpeed" />
-  </a>
-</p>
-
-# Angular4 Webpack Starter [![Join Slack](https://img.shields.io/badge/slack-join-brightgreen.svg)](https://angularclass.com/slack-join) [![Join the chat at https://gitter.im/angularclass/angular2-webpack-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angularclass/angular2-webpack-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+[Learn more](http://artstor.org/open-source) about our open source initiative
 
 > An Angular starter kit featuring [Angular 4](https://angular.io), [Ahead of Time Compile](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), [Router](https://angular.io/docs/ts/latest/guide/router.html), [Forms](https://angular.io/docs/ts/latest/guide/forms.html),
 [Http](https://angular.io/docs/ts/latest/guide/server-communication.html),
