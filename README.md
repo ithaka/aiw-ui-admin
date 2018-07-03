@@ -9,6 +9,8 @@ This repository is open sourced by Ithaka as part of our initiative to increase 
 
 [Learn more](http://artstor.org/open-source) about our open source initiative
 
+**Copyright 2018 Ithaka Harbors, Inc.**
+
 ## Quick start
 **Make sure you have Node version >= 6.0 and NPM >= 3.0
 > Clone/Download the repo then edit `app.component.ts` inside [`/src/app/app.component.ts`](/src/app/app.component.ts)
