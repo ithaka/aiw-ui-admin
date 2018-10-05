@@ -86,10 +86,10 @@ export class UsersService {
         return this._date.transform( date.replace(' ', 'T') )
       } catch (err) {
         console.error(err)
-        return null
+        return '-'
       }
     } else {
-      return null
+      return '-'
     }
   }
   
