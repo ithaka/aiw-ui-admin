@@ -66,7 +66,7 @@ import '../styles/styles.scss'
 // import '../styles/headings.css'
 
 // Application wide providers
-import { AuthService, UsersService } from './shared'
+import { AuthService, FlagService, UsersService } from './shared'
 
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -74,6 +74,7 @@ const APP_PROVIDERS = [
   AuthService,
   UsersService,
   DatePipe,
+  FlagService,
   { provide: ErrorHandler, useClass: RavenErrorHandler }
 ]
 

@@ -65,6 +65,10 @@
 //   background-color: black;
 // }
 
+.hidden {
+    display: none;
+}
+
 /* For users table row style */
 table.dataTable tbody tr:not(:first-child):hover{
     cursor: pointer;

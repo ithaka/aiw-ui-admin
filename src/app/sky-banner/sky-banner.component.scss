@@ -19,7 +19,7 @@
   // border: 1px solid $gray;
   padding: 5px 35px;
 
-  @media (max-width: $phone) {
+  @media (max-width: 576px) {
     position: fixed;
     width: 100%;
     z-index: 9500;
