@@ -60,7 +60,7 @@ import { NoContentComponent } from './no-content'
 import { SettingsPage } from './settings-page/settings-page.component'
 import { UserDetailsModal, RegisterModal, SessionExpireModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
-
+import { SkyBannerComponent } from './sky-banner/sky-banner.component'
 
 import '../styles/styles.scss'
 // import '../styles/headings.css'
@@ -101,6 +101,7 @@ type StoreType = {
     UserDetailsModal,
     SessionExpireModal,
     SettingsPage,
+    SkyBannerComponent,
     UsersPage
   ],
   /**
