@@ -60,13 +60,13 @@ import { NoContentComponent } from './no-content'
 import { SettingsPage } from './settings-page/settings-page.component'
 import { UserDetailsModal, RegisterModal, SessionExpireModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
-
+import { SkyBannerComponent } from './sky-banner/sky-banner.component'
 
 import '../styles/styles.scss'
 // import '../styles/headings.css'
 
 // Application wide providers
-import { AuthService, UsersService } from './shared'
+import { AuthService, FlagService, UsersService } from './shared'
 
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
@@ -74,6 +74,7 @@ const APP_PROVIDERS = [
   AuthService,
   UsersService,
   DatePipe,
+  FlagService,
   { provide: ErrorHandler, useClass: RavenErrorHandler }
 ]
 
@@ -101,6 +102,7 @@ type StoreType = {
     UserDetailsModal,
     SessionExpireModal,
     SettingsPage,
+    SkyBannerComponent,
     UsersPage
   ],
   /**

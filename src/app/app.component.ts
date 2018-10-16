@@ -10,6 +10,7 @@ import { Title } from '@angular/platform-browser'
 
 import { AppState } from './app.service'
 import { TranslateService } from 'ng2-translate'
+import { FlagService } from './shared/flags.service'
 
 /**
  * App Component
@@ -24,16 +25,16 @@ import { TranslateService } from 'ng2-translate'
   templateUrl: './app.component.pug'
 })
 export class AppComponent implements OnInit {
-  public angularclassLogo = 'assets/img/angularclass-avatar.png'
-  public name = 'Angular 2 Webpack Starter'
-  public url = 'https://twitter.com/AngularClass'
+  public showSkyBanner: boolean = false
+  public skyBannerCopy: string = ''
+  
 
   constructor(
     public appState: AppState,
     private _title: Title,
+    private _flags: FlagService,
     translate: TranslateService
   ) {
-    
     this._title.setTitle('Artstor Admin')
     // see https://www.npmjs.com/package/ng2-translate
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -43,6 +44,19 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+
+
+    this._flags.getFlagsFromService()
+    .take(1)
+    .subscribe((flags) => {
+      // don't need to handle successful response here - this just initiates the flags
+      console.log(flags)
+      // Set skybanner
+      this.showSkyBanner = flags.bannerShow
+      this.skyBannerCopy = flags.bannerCopy
+    }, (err) => {
+      console.error(err)
+    })
   }
 
 }
