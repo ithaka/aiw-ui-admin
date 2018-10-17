@@ -1,7 +1,7 @@
 {
   "LOGIN": {
     "HEADING": "Log in to Artstor Admin",
-    "EMAIL_LABEL": "Email",
+    "EMAIL_LABEL": "Email or Username",
     "PASSWORD_LABEL": "Password",
     "LOGIN_BTN": "Log in",
     "TERMS": "By using Artstor Digital Library, I agree to the <a id=\"linkTermsAndConditions\" href=\"http://www.artstor.org/terms\" class=\"link\" target=\"_blank\">Terms</a>",

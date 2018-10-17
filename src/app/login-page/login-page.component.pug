@@ -15,7 +15,7 @@ ang-main-header([showUserPanel]="false")
               label(for="loginEmail") {{ 'LOGIN.EMAIL_LABEL' | translate }}
               input#inputLoginEmail.form-control(
                 [formControl]="loginForm.controls['username']",
-                name="username" type="text" placeholder="Username"
+                name="username" type="text" placeholder="Email or Username"
               )
               .form-control-feedback(*ngIf="formSubmitted && loginForm.controls['username'].hasError('required')")
                 | {{ 'LOGIN.MESSAGES.USERNAME_REQUIRED' | translate }}
