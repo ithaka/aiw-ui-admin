@@ -12,7 +12,7 @@ import { AuthService, UsersService } from '../../shared'
 })
 
 export class RegisterModal implements OnInit {
-  private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,16})+$/
 
   private messages: {
     successfullyRegisteredUsers?: string[], // array of emails for successful registrations
