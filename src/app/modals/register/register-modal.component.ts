@@ -59,7 +59,7 @@ export class RegisterModal implements OnInit {
    * @returns object with list of invalid emails
    */
   private emailsValidator(control: FormControl): any {
-    let emailRe: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,16})+$/
+    let emailRe: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,30})+$/
     let invalidEmails = []
 
     control.value.forEach(email => {
