@@ -40,6 +40,7 @@ ang-main-header([showUserPanel]="false")
                 | {{ 'LOGIN.LOGIN_BTN' | translate }}
               .form-control-feedback(*ngIf="messages.serviceError") {{ 'LOGIN.MESSAGES.SERVICE_ERROR' | translate }}
               .form-control-feedback(*ngIf="messages.unauthorized") {{ 'LOGIN.MESSAGES.UNAUTHORIZED' | translate }}
+              .form-control-feedback(*ngIf="messages.lostPassword") {{ 'LOGIN.LOST_PASSWORD' | translate }}
               
       br
       p#linkLoginHelp([innerHtml]="'LOGIN.LOGIN_HELP' | translate")

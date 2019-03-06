@@ -10,7 +10,8 @@
       "UNAUTHORIZED": "Invalid email address or password. Try again.",
       "SERVICE_ERROR": "Server is not responding. Please try again later.",
       "USERNAME_REQUIRED": "Please enter the email associated with your Admin account.",
-      "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account"
+      "PASSWORD_REQUIRED": "Please enter the password associated with your Admin account",
+      "LOST_PASSWORD": "Your password has expired. Please click \"Forgot password?\" to set a new one."
     }
   },
   "HOME": {
