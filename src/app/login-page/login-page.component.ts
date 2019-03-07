@@ -16,7 +16,8 @@ export class LoginPage implements OnInit {
   private formSubmitted: boolean = false
   private messages: {
     unauthorized?: boolean,
-    serviceError?: boolean
+    serviceError?: boolean,
+    lostPassword?: boolean
   } = {}
 
   constructor(
@@ -51,6 +52,8 @@ export class LoginPage implements OnInit {
           case 401:
             this.messages.unauthorized = true
             break
+          case 422:
+            this.messages.lostPassword = true
           case 400: // we shouldn't let the client submit a request and get a 400
           case 500:
           default:
