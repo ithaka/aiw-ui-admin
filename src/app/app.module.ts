@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { Http } from '@angular/http'
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http'
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import {
   NgModule,
   ApplicationRef,
@@ -31,6 +31,8 @@ import { TranslateModule, TranslateStaticLoader, TranslateLoader } from 'ng2-tra
 import { Ng2CompleterModule } from 'ng2-completer'
 import { LockerModule } from 'angular2-locker'
 
+import { UnauthorizedInterceptor } from './interceptors'
+
 // ng2-idle
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
 
@@ -58,7 +60,7 @@ import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
 import { NoContentComponent } from './no-content'
 import { SettingsPage } from './settings-page/settings-page.component'
-import { UserDetailsModal, RegisterModal, SessionExpireModal } from './modals'
+import { UserDetailsModal, RegisterModal, SessionExpireModal, LoginRequiredModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
 import { SkyBannerComponent } from './sky-banner/sky-banner.component'
 
@@ -75,7 +77,8 @@ const APP_PROVIDERS = [
   UsersService,
   DatePipe,
   FlagService,
-  { provide: ErrorHandler, useClass: RavenErrorHandler }
+  { provide: ErrorHandler, useClass: RavenErrorHandler },
+  { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true }
 ]
 
 type StoreType = {
@@ -101,6 +104,7 @@ type StoreType = {
     RegisterModal,
     UserDetailsModal,
     SessionExpireModal,
+    LoginRequiredModal,
     SettingsPage,
     SkyBannerComponent,
     UsersPage

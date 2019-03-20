@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   private subscriptions: Subscription[] = []
   private showinactiveUserLogoutModal: boolean = false
+  private showLoginRequiredModal: boolean = false
 
   // holds variables used for translate
   private translateParams: {
@@ -32,6 +33,13 @@ export class HeaderComponent implements OnInit {
     this.subscriptions.push(
       this._auth.showUserInactiveModal.subscribe( value => {
         this.showinactiveUserLogoutModal = value
+      })
+    );
+
+    // Show Login Required Modal if we get a 401 response
+    this.subscriptions.push(
+      this._auth.showLoginRequiredModal.subscribe( value => {
+        this.showLoginRequiredModal = value
       })
     );
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name'
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Locker } from 'angular2-locker'
 
 import { AuthService, PrimaryUser, iPrimaryUser } from './../shared'
 
@@ -19,12 +20,15 @@ export class LoginPage implements OnInit {
     serviceError?: boolean,
     lostPassword?: boolean
   } = {}
+  private _storage: Locker
 
   constructor(
     _fb: FormBuilder,
     private _auth: AuthService,
-    private _router: Router
+    private _router: Router,
+    locker: Locker
   ) {
+    this._storage = locker.useDriver(Locker.DRIVERS.LOCAL)
     this.loginForm = _fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required]
@@ -46,7 +50,19 @@ export class LoginPage implements OnInit {
           firstname: res.firstname,
           lastname: res.lastname
         })
-        this._router.navigate(['/home'])
+        let stashedRoute = this._storage.get('stashedRoute')
+        if (stashedRoute && typeof(stashedRoute) == 'string') {
+          // We do not want to navigate to the page we are already on
+          if (stashedRoute.indexOf('login') > -1) {
+            this._router.navigate(['/home']);
+          } else {
+            this._router.navigateByUrl(stashedRoute);
+          }
+          this._storage.remove('stashedRoute')
+        } else {
+          this._router.navigate(['/home']);
+        }
+
       }, (err) => {
         switch (err.status) {
           case 401:
