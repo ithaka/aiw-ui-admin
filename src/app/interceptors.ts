@@ -17,7 +17,6 @@ import { AuthService } from './shared/auth.service'
 export class UnauthorizedInterceptor implements HttpInterceptor {
  
   constructor(
-    // public errorHandler : ErrorHandler,
     private _inj: Injector
   ) {}
  
@@ -25,8 +24,6 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
     return next.handle(request).do((event: HttpEvent<any>) => {}, (error: any) => {
       if (error instanceof HttpErrorResponse) {
-        // this.errorHandler.handleError(err);
-        console.error("caught you thief", error)
         if(error.status === 401) {
           this._inj.get(AuthService).showLoginRequiredModal.next(true)
         }
