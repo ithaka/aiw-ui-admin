@@ -33,9 +33,4 @@ export class LoginRequiredModal implements OnInit {
     this._storage.set('stashedRoute', this.location.path(false));
     this._router.navigate([routeValue])
   }
-
-  goToHome(): void {
-    this.closeModal.emit()
-    this._router.navigate(['/home'])
-  }
 }
