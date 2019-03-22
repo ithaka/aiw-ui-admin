@@ -26,6 +26,7 @@ export class AuthService implements CanActivate {
   private idleState: string = 'Not started.'
   private idleUtil: IdleWatcherUtil = new IdleWatcherUtil() // Idle watcher, session timeout values are abstracted to a utility
   public showUserInactiveModal: Subject<boolean> = new Subject() //Set up subject observable for showing inactive user modal
+  public showLoginRequiredModal: Subject<boolean> = new Subject() //Set up subject observable for showing login required modal
 
   constructor(
     private idle: Idle,

@@ -107,6 +107,14 @@
       "HEADER": "Logged out",
       "MESSAGE": "We logged you out after being idle for 30 minutes. Please login again.",
       "BUTTON": "Okay"
+    },
+    "LOGIN_REQUIRED": {
+      "HEADING": "Session Expired",
+      "MESSAGE": "Your session has expired and you were logged out",
+      "BUTTONS": {
+        "STAY_LOGGED_OUT": "Stay Logged Out",
+        "LOG_IN": "Log In"
+      }
     }
   }
 }

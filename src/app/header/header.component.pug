@@ -10,4 +10,5 @@
         div {{ 'HEADER.GREETING' | translate:translateParams }}
         .link.text-center((click)="_auth.logoutUser()") Log Out
         
-ang-session-expire-modal(*ngIf="showinactiveUserLogoutModal" "(closeModal)"="inactiveUsrLogOut()")
+ang-session-expire-modal(*ngIf="showinactiveUserLogoutModal", (closeModal)="inactiveUsrLogOut()")
+ang-login-required-modal(*ngIf="showLoginRequiredModal", (closeModal)="showLoginRequiredModal = false")
