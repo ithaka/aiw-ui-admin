@@ -115,6 +115,11 @@
         "STAY_LOGGED_OUT": "Stay Logged Out",
         "LOG_IN": "Log In"
       }
+    },
+    "LOST_PWD": {
+      "HEADING": "Please reset your password",
+      "BODY_HTML": "We’ve updated our login experience. To access your account, we need you to reset your password on <a href='https://library.artstor.org/' class='link' target='_blank'>library.artstor.org</a>.",
+      "BTN_TXT": "Take me to Artstor"
     }
   }
 }

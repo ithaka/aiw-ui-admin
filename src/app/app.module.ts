@@ -60,7 +60,7 @@ import { LoginPage } from './login-page/login-page.component'
 import { NavComponent } from './nav/nav.component'
 import { NoContentComponent } from './no-content'
 import { SettingsPage } from './settings-page/settings-page.component'
-import { UserDetailsModal, RegisterModal, SessionExpireModal, LoginRequiredModal } from './modals'
+import { UserDetailsModal, RegisterModal, SessionExpireModal, LoginRequiredModal, LostPwdModal } from './modals'
 import { UsersPage } from './users-page/users-page.component'
 import { SkyBannerComponent } from './sky-banner/sky-banner.component'
 
@@ -105,6 +105,7 @@ type StoreType = {
     UserDetailsModal,
     SessionExpireModal,
     LoginRequiredModal,
+    LostPwdModal,
     SettingsPage,
     SkyBannerComponent,
     UsersPage
