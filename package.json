@@ -1,6 +1,6 @@
 {
   "name": "ang-ui-admin",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Admin tools for controlling users and access to library.artstor.org",
   "keywords": [
     "angular",
