@@ -11,6 +11,7 @@ import { Title } from '@angular/platform-browser'
 import { AppState } from './app.service'
 import { TranslateService } from 'ng2-translate'
 import { FlagService } from './shared/flags.service'
+import { version } from '../../package.json'
 
 /**
  * App Component
@@ -27,6 +28,8 @@ import { FlagService } from './shared/flags.service'
 export class AppComponent implements OnInit {
   public showSkyBanner: boolean = false
   public skyBannerCopy: string = ''
+  public currentYear
+  public appVersion: string = ''
   
 
   constructor(
@@ -41,6 +44,10 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('en');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('en');
+    // Set current year
+    this.currentYear = new Date().getFullYear()
+    // Set app version
+    this.appVersion = version
   }
 
   public ngOnInit() {
