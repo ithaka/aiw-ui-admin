@@ -1,0 +1,10 @@
+#lostPwdModal.modal.fade-in.show
+  .modal-dialog(role="dialog", (keydown.esc)="closeModal.emit()")
+    .modal-content
+      .modal-body
+        .container-fluid
+          .row.hdr
+            h1 {{ 'MODAL.LOST_PWD.HEADING' | translate }}
+          .row.pt-3.main-content.d-inline-block([innerHTML]=" 'MODAL.LOST_PWD.BODY_HTML' | translate ")
+      .modal-footer
+        button.btn.btn-primary((click)="proccedToArtstor()") {{ 'MODAL.LOST_PWD.BTN_TXT' | translate }}
