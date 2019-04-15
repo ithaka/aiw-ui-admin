@@ -1,3 +1,8 @@
 ang-sky-banner(*ngIf="showSkyBanner", [textValue]="skyBannerCopy", (closeBanner)="showSkyBanner = false")
 .container
   router-outlet
+  .row.mt-4
+    .col-12.text-center
+      p.small &copy;2000-{{ currentYear }} ITHAKA.
+      p.small All Rights Reserved. JSTOR®, ITHAKA®, and Artstor® are registered trademarks of ITHAKA.
+      p.small v.{{ appVersion }}
