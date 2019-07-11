@@ -64,7 +64,8 @@ export class UsersService {
       // Format values for User Status & SSenabled to show in grid cells
       for(let user of resultArray){ 
         user.status = user.active ? 'Active' : 'Archive'
-        user.ssValue = user.ssenabled ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
+        // Rely on `roles` list for evaluating `SSEnabled`
+        user.ssValue = user.roles.includes("SHARED_SHELF_USER") ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
         
         // Making sure that the date format is compatible with the date pipe on all browsers incl. Safari
         user.timelastaccessed = this.formatDate(user.timelastaccessed)
