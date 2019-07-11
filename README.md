@@ -35,8 +35,9 @@ npm install
 # start the server
 npm start
 
-# if you're in China use cnpm
-# https://github.com/cnpm/cnpm
+# deploying changes, assuming Sagoku remotes are set as test and prod
+git push test master
+git push prod master
 ```
 go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http://localhost:3000) in your browser
 
@@ -54,7 +55,6 @@ go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http
 * [@Types](#types)
 * [Frequently asked questions](#frequently-asked-questions)
 * [Support, Questions, or Feedback](#support-questions-or-feedback)
-* [Deployment](#deployment)
 * [License](#license)
 
 
