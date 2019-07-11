@@ -65,7 +65,7 @@ export class UsersService {
       for(let user of resultArray){ 
         user.status = user.active ? 'Active' : 'Archive'
         // Rely on `roles` list for evaluating `SSEnabled`
-        user.ssValue = user.roles.includes("SHARED_SHELF_USER") ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
+        user.ssValue = (user.roles && user.roles.includes("SHARED_SHELF_USER")) ? '<img src="/assets/img/checkMark.gif" class="tickIcon">' : ''
         
         // Making sure that the date format is compatible with the date pipe on all browsers incl. Safari
         user.timelastaccessed = this.formatDate(user.timelastaccessed)
