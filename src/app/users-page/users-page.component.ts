@@ -26,7 +26,6 @@ export class UsersPage implements OnInit, OnDestroy {
   private users:Array<any> = []
   private columns:Array<any> = [
     { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
-    { title: 'Registration Date', name: 'createdate', filtering: { filterString: '', placeholder: 'Filter by Registration', columnName: 'createdate' }, className: ['cell-cls'] },
     { title: 'Last Log-in Date', name: 'timelastaccessed', filtering: { filterString: '', placeholder: 'Filter by Last Login', columnName: 'timelastaccessed' }, className: ['cell-cls'] },
     { title: 'Status', name: 'status',  className: ['cell-cls'] },
     { title: 'Forum Access', name: 'ssValue', className: ['cell-cls'] }
@@ -260,7 +259,6 @@ export class UsersPage implements OnInit, OnDestroy {
     let csvArray = []
     let headerRow = {
       'email': 'Email',
-      'createdate': 'Registration Date',
       'timelastaccessed': 'Last Log-in Date',
       'status': 'Status',
       'ssenabled': 'Forum Access'
@@ -270,7 +268,6 @@ export class UsersPage implements OnInit, OnDestroy {
     for(let data of filteredData){
       let obj = {
         'email': data.email,
-        'createdate': data.createdate,
         'timelastaccessed': data.timelastaccessed,
         'status': data.status,
         'ssenabled': data.ssenabled
