@@ -71,7 +71,7 @@ export class UsersPage implements OnInit, OnDestroy {
     // Script needs to be initiated on init in order to run the the Feedback Widget
     const s = this.renderer2.createElement('script');
     s.type = 'text/javascript';
-    s.src = 'http://localhost:4200/fetch-widget/feedback.js';
+    s.src = '/fetch-widget/feedback.js'
     s.text = ``;
     this.renderer2.appendChild(this._document.body, s);
 
