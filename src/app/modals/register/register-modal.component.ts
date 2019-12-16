@@ -48,7 +48,7 @@ export class RegisterModal implements OnInit {
     this._auth.getInstitution().take(1).subscribe(
       (res) => {
         this.institutionId = res.institution.id
-        adminUser = res.institution
+        this.adminUser = res.institution
         this.password = res.institution.default_user_pwd
       }, (err) => {
         console.error(err)
