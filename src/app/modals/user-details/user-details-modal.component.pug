@@ -102,6 +102,10 @@ form#formPermissions(
       type="button"
     ) Close
     button#btnPermissionsUpdate.btn.btn-primary(
-      data-nsfw="Edit Existing User",
+      data-nsfw="Save Edited User"
+      attr.data-user-id="{{user.default_user_id}}-id"
+      attr.data-session-id="{{user.id}}-session"
+      attr.data-site-code="{{user.id}}-code"
+      data-page-name="Manage Users",
       type="submit"
     ) Save
