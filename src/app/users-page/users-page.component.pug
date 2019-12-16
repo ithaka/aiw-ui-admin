@@ -7,9 +7,9 @@ ang-main-nav
     button.btn.btn-primary.col-5.col-md-2((click)="openRegisterModal()") {{ 'USERS.BUTTONS.REGISTER_USER' | translate }}
     button.btn.btn-secondary.col-5.col-md-2.ml-2(
         data-nsfw="Export User"
-        attr.data-user-id="{{user.default_user_id}}-id"
-        attr.data-session-id="{{user.id}}-session"
-        attr.data-site-code="{{user.id}}-code"
+        attr.data-user-id="{{adminUser.default_user_id}}-id"
+        attr.data-session-id="{{adminUser.id}}-session"
+        attr.data-site-code="{{adminUser.id}}-code"
         data-page-name="Manage Users",
         (click)="exportCSV()") {{ 'USERS.BUTTONS.EXPORT' | translate }}
 

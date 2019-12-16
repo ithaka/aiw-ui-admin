@@ -24,7 +24,7 @@ export class UsersPage implements OnInit, OnDestroy {
     unauthorized?: boolean,
     serviceError?: boolean
   } = {}
-  private user = this.getPrimaryUser( this._auth )
+  private adminUser = this.getAdminUser( this._auth )
   private users:Array<any> = []
   private columns:Array<any> = [
     { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
@@ -229,14 +229,14 @@ export class UsersPage implements OnInit, OnDestroy {
     return filteredData
   }
 
-  public getPrimaryUser(user) {
+  public getAdminUser(user) {
     this._auth.getInstitution().subscribe( res => {
       if(res){
-        return this.user = res.institution
+        return this.adminUser = res.institution
       }
     })
 
-    return this.user
+    return this.adminUser
   }
 
   public onChangeTable(config:any, page:any = this.page):any {
