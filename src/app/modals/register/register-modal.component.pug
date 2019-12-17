@@ -40,5 +40,10 @@ form#formRegisterUsers([formGroup]="registerForm", (ngSubmit)="onSubmit(register
       type="button"
     ) {{ 'REGISTER_MODAL.BUTTONS.CLOSE' | translate }}
     button#btnPermissionsUpdate.btn.btn-primary(
+      data-nsfw="Register New User"
+      data-user-id="123e4567-e89b-12d3-a456-123456780000"
+      data-session-id="123-session"
+      attr.data-site-code="{{adminUser.id}}"
+      data-page-name="Manage Users",
       type="submit"
     ) {{ 'REGISTER_MODAL.BUTTONS.SUBMIT' | translate }}

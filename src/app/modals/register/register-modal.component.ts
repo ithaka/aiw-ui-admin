@@ -12,6 +12,7 @@ import { AuthService, UsersService } from '../../shared'
 })
 
 export class RegisterModal implements OnInit {
+  private adminUser?: object
   private emailRegExp: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,16})+$/
 
   private messages: {
@@ -47,6 +48,7 @@ export class RegisterModal implements OnInit {
     this._auth.getInstitution().take(1).subscribe(
       (res) => {
         this.institutionId = res.institution.id
+        this.adminUser = res.institution
         this.password = res.institution.default_user_pwd
       }, (err) => {
         console.error(err)
