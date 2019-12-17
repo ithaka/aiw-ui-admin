@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, Inject, ComponentFactoryResolver } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -68,13 +68,15 @@ export class UsersPage implements OnInit, OnDestroy {
 
   ngOnInit():void {
 
-    // Script needs to be initiated on init in order to run the the Feedback Widget
-    const s = this.renderer2.createElement('script');
-    s.type = 'text/javascript';
-    s.src = '/fetch-widget/feedback.js'
-    s.text = ``;
-    this.renderer2.appendChild(this._document.body, s);
+	    // Script needs to be initiated on init in order to run the the Feedback Widget
+      const s = this.renderer2.createElement('script');
+      const isLocal = process.env.ENV === "development";
 
+      s.type = 'text/javascript';
+      s.src = `${isLocal ? "http://localhost:4200" : ""}/fetch-widget/feedback.js`
+      s.text = ``;
+      this.renderer2.appendChild(this._document.body, s);
+  
     this.loadUsers()
     
     // Subscribe for updatedUser to update the users list
