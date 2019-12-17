@@ -12,7 +12,7 @@ cd $SRC_DIR
 
 # Grab a newer node.js
 wget https://nodejs.org/dist/v8.9.0/node-v8.9.0-linux-x64.tar.xz
-xz -dc node-v8.9.0-linux-x64.tar.xz | tar xf - -C /usr/local/
+xz -dc node-v8.10.0-linux-x64.tar.xz | tar xf - -C /usr/local/
 
 export PATH=/usr/local/node-v8.9.0-linux-x64/bin:$PATH
 
