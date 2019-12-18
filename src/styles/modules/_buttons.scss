@@ -57,6 +57,10 @@ $iconBtnSize: $btnHeight;
         border-color: darken($primaryBtnBg, 10%);
      }
  }
+
+ .btn-primary.expanded {
+    width: 100%;
+ }
  
  .btn-secondary, a.btn-secondary {
     background: $secondaryBtnBg;
