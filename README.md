@@ -17,10 +17,10 @@ This repository is open sourced by Ithaka as part of our initiative to increase 
 
 ```bash
 # clone our repo
-git clone git@github.com:ithaka/ang-ui-admin.git
+git clone git@github.com:ithaka/aiw-ui-admin.git
 
 # change directory to our repo
-cd ang-ui-admin
+cd aiw-ui-admin
 
 # WINDOWS only. In terminal as administrator
 npm install -g node-pre-gyp
