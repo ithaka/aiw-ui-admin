@@ -17,6 +17,7 @@ export class UserDetailsModal implements OnInit {
   @Input() user: UserDetails
   @Input() name: string
 
+  private adminUser?: object
   private permissionsForm: FormGroup
   private messages: {
     userNotFoundError?: boolean,
@@ -72,6 +73,7 @@ export class UserDetailsModal implements OnInit {
     this._auth.getInstitution().take(1).subscribe(
       (res) => {
         this.ssEnabled = res.institution.ss_enabled === "1"
+        this.adminUser = res.institution
       }, (err) => {
         console.error(err)
       }

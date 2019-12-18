@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, Inject, ComponentFactoryResolver } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, NgTableSortingDirective } from 'ng2-table/ng2-table'
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import * as moment from 'moment'
 import { AuthService, UsersService, UserDetails } from './../shared'
 import { UserDetailsModal, RegisterModal } from './../modals'
 
+import { DOCUMENT } from '@angular/platform-browser';
 @Component({
   selector: 'ang-users-page',
   templateUrl: 'users-page.component.pug',
@@ -23,6 +24,7 @@ export class UsersPage implements OnInit, OnDestroy {
     unauthorized?: boolean,
     serviceError?: boolean
   } = {}
+  private adminUser = this.getAdminUser( this._auth )
   private users:Array<any> = []
   private columns:Array<any> = [
     { title: 'Email', name: 'email', filtering: { filterString: '', placeholder: 'Filter by email', columnName: 'email' }, className: ['cell-cls'] },
@@ -54,7 +56,9 @@ export class UsersPage implements OnInit, OnDestroy {
     private _users: UsersService,
     private _modal: NgbModal,
     private _router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document
   ) {
     // if the user is requesting a user's details in the url, go ahead and open the user details modal
     if (this.route.snapshot.queryParams.user) {
@@ -63,6 +67,16 @@ export class UsersPage implements OnInit, OnDestroy {
   }
 
   ngOnInit():void {
+
+	    // Script needs to be initiated on init in order to run the the Feedback Widget
+      const s = this.renderer2.createElement('script');
+      const isLocal = process.env.ENV === "development";
+
+      s.type = 'text/javascript';
+      s.src = `${isLocal ? "http://localhost:4200" : ""}/fetch-widget/feedback.js`
+      s.text = ``;
+      this.renderer2.appendChild(this._document.body, s);
+  
     this.loadUsers()
     
     // Subscribe for updatedUser to update the users list
@@ -215,6 +229,16 @@ export class UsersPage implements OnInit, OnDestroy {
     filteredData = tempArray
 
     return filteredData
+  }
+
+  public getAdminUser(user) {
+    this._auth.getInstitution().subscribe( res => {
+      if(res){
+        return this.adminUser = res.institution
+      }
+    })
+
+    return this.adminUser
   }
 
   public onChangeTable(config:any, page:any = this.page):any {
