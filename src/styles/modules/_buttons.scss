@@ -48,9 +48,9 @@ $iconBtnSize: $btnHeight;
  *  <button type="button" class="btn btn-danger">Danger</button>
  *  <button type="button" class="btn btn-link">Link</button>
  */
- .btn-primary, a.btn-primary {
-     background: $primaryBtnBg;
-     border-color: $primaryBtnBg;
+ .btn-primary, a.btn-primary, .btn-primary.disabled, .btn-primary:disabled {
+     background: $primaryBtnBg !important;
+     border-color: $primaryBtnBg !important;
 
      &:hover, &:focus, &:active {
         background: darken($primaryBtnBg, 10%);
