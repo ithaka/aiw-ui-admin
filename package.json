@@ -103,6 +103,7 @@
     "raven-js": "^3.19.1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "~5.0.2",
+    "upath": "^1.0.4",
     "zone.js": "0.8.14"
   },
   "devDependencies": {
