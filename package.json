@@ -177,7 +177,7 @@
     "url": "https://github.com/AngularClass/angular-starter/issues"
   },
   "engines": {
-    "node": ">= 8.10.0",
+    "node": ">=10.13.0",
     "npm": ">= 5"
   }
 }
