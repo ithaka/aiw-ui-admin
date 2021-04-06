@@ -17,6 +17,7 @@ xz -dc node-v10.13.0-linux-x64.tar.xz | tar xf - -C /usr/local/
 export PATH=/usr/local/node-v10.13.0-linux-x64/bin:$PATH
 
 # Get Yarn and use it for NPM dependencies
+npm install --save angular2-csv@0.2.5
 npm install --global yarn
 
 # Install global build packages
