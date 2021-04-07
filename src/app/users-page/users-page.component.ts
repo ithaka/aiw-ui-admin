@@ -4,7 +4,6 @@ import { NgTableComponent, NgTableFilteringDirective, NgTablePagingDirective, Ng
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Subscription } from 'rxjs/Subscription'
-// import { Angular2Csv } from 'angular2-csv/Angular2-csv'
 import { Angular2Csv } from 'angular2-csv/Angular2-csv'
 import * as moment from 'moment'
 
