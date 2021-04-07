@@ -22,6 +22,8 @@ npm install --global yarn
 # Install global build packages
 yarn global add webpack webpack-dev-server karma karma-cli protractor typescript rimraf phantomjs-prebuilt
 
+yarn add angular2-csv@0.2.5
+
 # Install dependencies
 yarn install
 
