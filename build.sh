@@ -20,7 +20,7 @@ export PATH=/usr/local/node-v10.13.0-linux-x64/bin:$PATH
 npm install --global yarn
 
 # Install global build packages
-yarn global add webpack webpack-dev-server karma karma-cli protractor typescript rimraf phantomjs-prebuilt angular2-csv@0.2.5
+yarn global add webpack webpack-dev-server karma karma-cli protractor typescript rimraf phantomjs-prebuilt
 
 # Install dependencies
 yarn install
