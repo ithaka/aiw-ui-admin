@@ -36,7 +36,7 @@
     },
     "LOCAL_SUPPORT": {
       "HDR": "Local support information",
-      "TXT": "Users with Admin rights",
+      "TXT": "Users with Admin rights:",
       "TXT2": "<span>Go to <a class=\"link\" tabindex=\"0\" href=\"/#/users\">User accounts</a> to assign Admin privileges to another user.</span>"
     }
   },
