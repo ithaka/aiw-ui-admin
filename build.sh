@@ -11,16 +11,18 @@ echo "Using package $PACKAGE_NAME and version ${VERSION}"
 cd $SRC_DIR
 
 # Grab a newer node.js
-wget https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x64.tar.xz
-xz -dc node-v8.10.0-linux-x64.tar.xz | tar xf - -C /usr/local/
+wget https://nodejs.org/dist/v10.13.0/node-v10.13.0-linux-x64.tar.xz
+xz -dc node-v10.13.0-linux-x64.tar.xz | tar xf - -C /usr/local/
 
-export PATH=/usr/local/node-v8.10.0-linux-x64/bin:$PATH
+export PATH=/usr/local/node-v10.13.0-linux-x64/bin:$PATH
 
 # Get Yarn and use it for NPM dependencies
 npm install --global yarn
 
 # Install global build packages
 yarn global add webpack webpack-dev-server karma karma-cli protractor typescript rimraf phantomjs-prebuilt
+
+yarn add angular2-csv@0.2.5
 
 # Install dependencies
 yarn install
