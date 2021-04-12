@@ -32,7 +32,7 @@ form#formPermissions(
           td {{ user.timeLastAccessed | date }}
         tr
           td Remote login access
-          td {{ user.daysAccessRemaining > 0 ? user.daysAccessRemaining : 0 }} of 120 days remaining
+          td {{ user.daysAccessRemaining > 0 ? user.daysAccessRemaining : 0 }} days remaining
     h6 Permissions
     fieldset([disabled]="user.archivedUser")
       ul.list-group.form-group.pb-3
