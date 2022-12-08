@@ -34,4 +34,4 @@ yarn run build:prod
 # rsync -a ${SRC_DIR}/dist/* ${BUILD_DIR}/
 
 # Package our built app
-tar -cvzf package.tgz ${SRC_DIR}/dist/
+tar -cvzf package.tgz ${SRC_DIR}/dist/test
