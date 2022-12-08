@@ -1,0 +1,204 @@
+default:
+  tags:
+    - ${ENVIRONMENT}-runner
+
+stages:
+  - test
+
+# stages:
+#   - test
+#   - build
+#   - deploy
+#   - post-deploy
+#   - verify
+#   - cleanup
+#   - trigger-downstream
+
+.artifacts:
+  rendered_templates: $CI_PROJECT_DIR/manifest-output
+
+# variables:
+#   APP_SERVICE_NAME: aiw-ui-admin-capstan
+#   EUREKA_SERVICE_NAME: $APP_SERVICE_NAME
+#   APP_DOCKERFILE: docker/Dockerfile
+#   APP_DOCKER_CONTEXT: .
+#   APP_IMAGE: $APP_SERVICE_NAME:$CI_COMMIT_SHA
+#   EXTRA_HELM_TEMPLATE_OPTIONS: ""
+#   UNDEPLOY_ENVIRONMENT: ""
+#   APP_TYPE: other
+#   TARGET_CLUSTER: $TARGET_CLUSTER
+#   ENVIRONMENT: $ENVIRONMENT
+#   PIPELINE: $PIPELINE
+#   APOLLO_STUDIO_KEY: $APOLLO_ACCESS_KEY
+#   GRAPH_PATH: /ccud-gql-service/graphql
+
+run-unit-tests:
+  stage: test
+  image: $DOCKER_VIRTUAL/jstor-frontend/node-aws-cli:5d22dda06824128e477d10f5e43c5c3d9994f91e
+  script:
+    - echo "Welcome to gitlab :wink:"
+
+# run-unit-tests:
+#   stage: test
+#   image: $DOCKER_VIRTUAL/jstor-frontend/node-aws-cli:5d22dda06824128e477d10f5e43c5c3d9994f91e
+#   script:
+#     - yarn install --immutable --immutable-cache
+#     - yarn test:ci
+
+# build-app-image:
+#   extends: .build-image
+#   stage: build
+#   variables:
+#     CONTEXT: $APP_DOCKER_CONTEXT
+#   before_script:
+#     - export DOCKERFILE=$APP_DOCKERFILE
+#     - export IMAGE_TAG=$DOCKER_VIRTUAL/$APP_IMAGE
+
+# promote-to-release-candidate:
+#   stage: build
+#   extends: .promote-image
+#   allow_failure: true
+#   variables:
+#     PROMOTE_TO: release-candidate
+#     DOCKER_REPOSITORY: $CI_PROJECT_PATH
+#     TAG: $CI_COMMIT_SHA
+#   needs:
+#     - build-app-image
+
+# promote-to-stable:
+#   stage: build
+#   extends: .promote-image
+#   rules:
+#     - if: $PIPELINE == "deploy-to-prod" || ($CI_PIPELINE_SOURCE == "parent_pipeline" && $CI_BUILD_REF_NAME == "main")
+#   allow_failure: true
+#   variables:
+#     PROMOTE_TO: stable
+#     DOCKER_REPOSITORY: $CI_PROJECT_PATH
+#     TAG: $CI_COMMIT_SHA
+#   needs:
+#     - promote-to-release-candidate
+
+# render-chart:
+#   stage: build
+#   extends: .render-charts
+#   before_script:
+#     - export APP_IMAGE=$DOCKER_VIRTUAL/$APP_IMAGE
+#     - export HELM_CHART_PATH=$HELM_CHART_PATH
+#   variables:
+#     MANIFEST_OUTPUT_DIRECTORY: !reference [.artifacts, rendered_templates]
+#     EXTRA_HELM_TEMPLATE_OPTIONS: --set internalPort=8080,healthcheckPath=/.well-known/apollo/server-health
+#   needs: []
+
+# commit-to-gitops:
+#   stage: deploy
+#   extends: .run-argo-deployer
+#   environment:
+#     name: $ENVIRONMENT
+#     url: https://$APP_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org
+#   variables:
+#     ACTION: deploy
+#     APP_NAME: $APP_SERVICE_NAME
+#     GROUP_NAME: $ITHAKA_OWNER
+#     INPUT_FILES_LOCATION: !reference [.artifacts, rendered_templates]
+
+# argocd-sync:
+#   stage: post-deploy
+#   extends: .argocd-sync
+#   variables:
+#     CI_PROJECT_NAME: $APP_SERVICE_NAME
+
+# wait-for-eureka:
+#   stage: post-deploy
+#   needs: ["argocd-sync"]
+#   extends: .check-healthy-deployment
+#   variables:
+#     ENABLE_DORA_METRICS: "true"
+#     TEAM_NAME: $ITHAKA_OWNER
+#     HEALTHCHECK_MAX_ITER: 60
+#     HEALTHCHECK_MAX_WAIT: 10
+
+# deploy grid:
+#   stage: verify
+#   extends: .deploy-selenium-grid
+#   variables:
+#     ENVIRONMENT: $ENVIRONMENT
+#     NODE_IMAGE: $DOCKER_VIRTUAL/selenium/node-chrome:4.1
+
+# integration-tests:
+#   stage: verify
+#   needs:
+#     - deploy grid
+#   extends: .integration-tests
+#   variables:
+#     APP_URL: $APP_SERVICE_NAME
+#     RAKE_TASK: "CCUD_Graphql:Service"
+#     TESTS_IMAGE: $DOCKER_VIRTUAL/jstor-fe/cucumber-eks:5287c415aac87f08c38e2a49198c198ef3450477
+#     TEST_ROOT_DIR: "integration"
+#     ENVIRONMENT: $ENVIRONMENT
+
+# full-graph-compatibility-check:
+#   stage: verify
+#   image: $DOCKER_VIRTUAL/node:16.15
+#   needs:
+#     - deploy grid
+#   before_script:
+#     - export APOLLO_KEY=$APOLLO_STUDIO_KEY
+#     - export APOLLO_ELV2_LICENSE=accept
+#   script:
+#     - npx -p @apollo/rover rover subgraph introspect https://$APP_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org$GRAPH_PATH > $APP_SERVICE_NAME.graphql
+#     - npx -p @apollo/rover rover subgraph check Frontend-GraphQl-Gateway@$ENVIRONMENT --schema "./$APP_SERVICE_NAME.graphql" --name $APP_SERVICE_NAME
+
+# cleanup:
+#   stage: cleanup
+#   extends: .cleanup-selenium-grid
+#   variables:
+#     ENVIRONMENT: $ENVIRONMENT
+#   rules:
+#     - when: always
+
+# apollo-studio-publish:
+#   stage: trigger-downstream
+#   image: $DOCKER_VIRTUAL/node:16
+#   before_script:
+#     - export APOLLO_KEY=$APOLLO_STUDIO_KEY
+#     - export APOLLO_ELV2_LICENSE=accept
+#   script:
+#     - npx -p @apollo/rover rover subgraph introspect https://$APP_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org$GRAPH_PATH > $APP_SERVICE_NAME.graphql
+#     - npx -p @apollo/rover rover subgraph publish Frontend-GraphQl-Gateway@$ENVIRONMENT --schema "./$APP_SERVICE_NAME.graphql" --name $APP_SERVICE_NAME --routing-url "https://$APP_SERVICE_NAME.apps.$ENVIRONMENT.cirrostratus.org$GRAPH_PATH"
+
+# deploy-graphql-gateway:
+#   stage: trigger-downstream
+#   needs:
+#     - apollo-studio-publish
+#   variables:
+#     ENVIRONMENT: $ENVIRONMENT
+#   trigger:
+#     project: capstan/platform-apps/loca/graphql-gateway
+#     branch: main
+
+
+# include:
+#   - project: capstan/pow/gitlab-templates
+#     file: /build-image/template.yml
+#     ref: build-image-v3
+#   - project: capstan/pow/gitlab-templates
+#     file: run-argo-deployer/template.yml
+#     ref: run-argo-deployer-v3
+#   - project: capstan/pow/gitlab-templates
+#     file: render-charts/template.yml
+#     ref: render-charts-v3
+#   - project: capstan/pow/gitlab-templates
+#     file: argocd-sync/template.yml
+#     ref: argocd-sync-v3
+#   - project: capstan/pow/gitlab-templates
+#     file: check-healthy-deployment/template.yml
+#     ref: check-healthy-deployment-v3
+#   - project: capstan/pow/gitlab-templates
+#     file: promote-image/template.yml
+#     ref: promote-image-v3
+#   - file: /deploy-selenium-grid/template.yml
+#     project: capstan/pow/gitlab-templates
+#     ref: deploy-selenium-grid-v3
+#   - file: /run-integration-tests/template.yml
+#     project: capstan/pow/gitlab-templates
+#     ref: run-integration-tests-v3
