@@ -28,10 +28,12 @@ yarn add angular2-csv@0.2.5
 yarn install
 
 # Build the project! (uses Webpack)
-yarn run build:prod
+yarn run build:test
 
 # Collect our built files
 # rsync -a ${SRC_DIR}/dist/* ${BUILD_DIR}/
 
 # Package our built app
-tar -cvzf package.tgz ${SRC_DIR}/dist/test
+#tar -cvzf package.tgz builds/capstan/platform-apps/alps/aiw-ui-admin/dist/test
+ls -la ${SRC_DIR}/dist/test
+echo "TEST build script complete"
