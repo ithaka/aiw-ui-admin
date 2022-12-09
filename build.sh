@@ -28,7 +28,7 @@ yarn add angular2-csv@0.2.5
 yarn install
 
 # Build the project! (uses Webpack)
-yarn run build:test
+yarn run build:prod
 
 # Collect our built files
 # rsync -a ${SRC_DIR}/dist/* ${BUILD_DIR}/
