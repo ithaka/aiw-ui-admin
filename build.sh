@@ -10,6 +10,8 @@ echo "Using package $PACKAGE_NAME and version ${VERSION}"
 
 cd $SRC_DIR
 
+mkdir -p ${SRC_DIR}/dist/test
+
 # Grab a newer node.js
 wget https://nodejs.org/dist/v14.21.1/node-v14.21.1-linux-x64.tar.xz
 xz -dc node-v14.21.1-linux-x64.tar.xz | tar xf - -C /usr/local/
@@ -35,5 +37,5 @@ yarn run build:prod
 
 # Package our built app
 #tar -cvzf package.tgz builds/capstan/platform-apps/alps/aiw-ui-admin/dist/test
-ls -la ${SRC_DIR}/dist/test
+ls -la ${SRC_DIR}/dist
 echo "TEST build script complete"
