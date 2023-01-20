@@ -1,55 +1,33 @@
+stages:
+    - run-pipeline
 
 variables:
-  APP_NAME: aiw-ui-admin-capstan
+  PIPELINE_ACTION:
+      value: ""
+      description: run-integration-tests
 
-stages:
-  - build
-  - deploy
- 
-default:
-  tags:
-    - test-runner
-
-include:
-  - project: capstan/pow/gitlab-templates
-    file: /static-app-deployer/template.yml
-    ref: static-app-deployer-v1
-  - file: /deploy-selenium-grid/template.yml
-    project: capstan/pow/gitlab-templates
-    ref: deploy-selenium-grid-v3
-  - file: /run-integration-tests/template.yml
-    project: capstan/pow/gitlab-templates
-    ref: run-integration-tests-v3
-  - project: capstan/pow/gitlab-templates
-    file: check-healthy-deployment/template.yml
-    ref: check-healthy-deployment-v3
-
-build-aiw-ui-app:
-  stage: build
-  extends: .build-static-app
-  image: $DOCKER_VIRTUAL/node:14.21.1
+deploy-aiw-ui-app-test:
+  stage: run-pipeline
+  rules:
+      - if: $CI_PIPELINE_SOURCE == "push"
+        when: manual
+      - if: $CI_PIPELINE_SOURCE == "web"
+        when: manual
   variables:
-    BUILD_SCRIPT_PATH: $CI_PROJECT_DIR/build.sh
-    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/${ENVIRONMENT}
+      ENVIRONMENT: test
+  trigger:
+      include: ./gitlab-ci/deploy.yml
+      strategy: depend
 
-deploy:
-  stage: deploy
-  extends: .deploy-static-app
+deploy-aiw-ui-app-prod:
+  stage: run-pipeline
+  rules:
+      - if: $CI_PIPELINE_SOURCE == "push"
+        when: manual
+      - if: $CI_PIPELINE_SOURCE == "web"
+        when: manual
   variables:
-    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/test
-    ENVIRONMENT: test
-  environment:
-    name: test
-    url: http://${APP_NAME}.apps.test.cirrostratus.org
-
-deploy:
-  stage: deploy
-  extends: .deploy-static-app
-  variables:
-    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/test
-    ENVIRONMENT: prod
-    tags:
-      - prod-runner
-  environment:
-    name: test
-    url: http://${APP_NAME}.apps.test.cirrostratus.org
+      ENVIRONMENT: prod
+  trigger:
+      include: ./gitlab-ci/deploy.yml
+      strategy: depend

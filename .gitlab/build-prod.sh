@@ -10,7 +10,7 @@ echo "Using package $PACKAGE_NAME and version ${VERSION}"
 
 cd $SRC_DIR
 
-mkdir -p ${SRC_DIR}/dist/test
+mkdir -p ${SRC_DIR}/dist/prod
 
 # Grab a newer node.js
 wget https://nodejs.org/dist/v14.21.1/node-v14.21.1-linux-x64.tar.xz
@@ -30,12 +30,6 @@ yarn add angular2-csv@0.2.5
 yarn install
 
 # Build the project! (uses Webpack)
-yarn run build:test
+yarn run build:prod
 
-# Collect our built files
-# rsync -a ${SRC_DIR}/dist/* ${BUILD_DIR}/
-
-# Package our built app
-#tar -cvzf package.tgz builds/capstan/platform-apps/alps/aiw-ui-admin/dist/test
-ls -la ${SRC_DIR}/dist
-echo "TEST build script complete"
+echo "prod build script complete"
