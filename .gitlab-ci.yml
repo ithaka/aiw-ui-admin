@@ -16,7 +16,7 @@ deploy-test:
   variables:
       ENVIRONMENT: test
   trigger:
-      include: ./gitlab/deploy.yml
+      include: gitlab/deploy.yml
       strategy: depend
 
 deploy-prod:
@@ -29,5 +29,5 @@ deploy-prod:
   variables:
       ENVIRONMENT: prod
   trigger:
-      include: ./gitlab/deploy.yml
+      include: gitlab/deploy.yml
       strategy: depend
