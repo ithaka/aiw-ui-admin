@@ -11,6 +11,8 @@
   * The settings that are common to test and dev
  */
  const commonConfig = require('./webpack.common.js');
+
+ const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
  
  /**
   * Webpack Plugins
@@ -51,7 +53,7 @@
       * See: http://webpack.github.io/docs/configuration.html#devtool
       * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
       */
-     devtool: 'source-map',
+     devtool: 'inline-source-map',
  
      /**
       * Options affecting the output of the compilation.
@@ -92,6 +94,22 @@
        chunkFilename: '[name].[chunkhash].chunk.js'
  
      },
+
+     resolve: {
+
+      /**
+       * An array of extensions that should be used to resolve modules.
+       *
+       * See: http://webpack.github.io/docs/configuration.html#resolve-extensions
+       */
+      extensions: ['.ts', '.js'],
+
+      /**
+       * Make sure root is src
+       */
+      modules: [helpers.root('src'), 'node_modules']
+
+    },
  
      module: {
  
@@ -162,13 +180,26 @@
        // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
        new DefinePlugin({
          'ENV': JSON.stringify(METADATA.ENV),
-         'HMR': METADATA.HMR,
+         'HMR': false,
          'process.env': {
-           'ENV': JSON.stringify(METADATA.ENV),
-           'NODE_ENV': JSON.stringify(METADATA.ENV),
-           'HMR': METADATA.HMR,
+           'ENV': JSON.stringify(ENV),
+           'NODE_ENV': JSON.stringify(ENV),
+           'HMR': false,
          }
        }),
+
+       new ContextReplacementPlugin(
+        /**
+         * The (\\|\/) piece accounts for path separators in *nix and Windows
+         */
+        /angular(\\|\/)core(\\|\/)@angular/,
+        helpers.root('src'), // location of your src
+        {
+          /**
+           * your Angular Async Route paths relative to this root directory
+           */
+        }
+      ),
  
        /**
         * Plugin: UglifyJsPlugin

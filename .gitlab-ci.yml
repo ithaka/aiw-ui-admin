@@ -42,21 +42,14 @@ deploy:
     name: test
     url: http://${APP_NAME}.apps.test.cirrostratus.org
 
-# deploy grid:
-#   stage: verify
-#   extends: .deploy-selenium-grid
-#   variables:
-#     ENVIRONMENT: $ENVIRONMENT
-
-# integration-tests:
-#   stage: verify
-#   needs:
-#     - deploy grid
-#   extends: .integration-tests
-#   variables:
-#     APP_URL: ccu-dashboard
-#     RAKE_TASK: "CCU_Dashboard_UI:Integration"
-#     TESTS_IMAGE: $DOCKER_VIRTUAL/jstor-fe/cucumber-eks:5287c415aac87f08c38e2a49198c198ef3450477
-#     TEST_ROOT_DIR: $CI_PROJECT_DIR/ccu-dashboard/regression_tests
-#     ENVIRONMENT: $ENVIRONMENT
-#     JUNIT_REPORT_FILENAME_PATTERN: $CI_PROJECT_DIR/ccu-dashboard/regression_tests/features_report/**/*.xml
+deploy:
+  stage: deploy
+  extends: .deploy-static-app
+  variables:
+    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/test
+    ENVIRONMENT: prod
+    tags:
+      - prod-runner
+  environment:
+    name: test
+    url: http://${APP_NAME}.apps.test.cirrostratus.org
