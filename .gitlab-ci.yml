@@ -6,7 +6,7 @@ variables:
       value: ""
       description: run-integration-tests
 
-deploy-aiw-ui-app-test:
+deploy-test:
   stage: run-pipeline
   rules:
       - if: $CI_PIPELINE_SOURCE == "push"
@@ -19,7 +19,7 @@ deploy-aiw-ui-app-test:
       include: ./gitlab-ci/deploy.yml
       strategy: depend
 
-deploy-aiw-ui-app-prod:
+deploy-prod:
   stage: run-pipeline
   rules:
       - if: $CI_PIPELINE_SOURCE == "push"
