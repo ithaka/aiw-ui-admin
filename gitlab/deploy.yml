@@ -29,7 +29,7 @@ build-aiw-ui-app:
   extends: .build-static-app
   image: $DOCKER_VIRTUAL/node:14.21.1
   variables:
-    BUILD_SCRIPT_PATH: $CI_PROJECT_DIR/build.sh
+    BUILD_SCRIPT_PATH: $CI_PROJECT_DIR/build-${ENVIRONMENT}.sh
     BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/${ENVIRONMENT}
 
 deploy:
@@ -37,7 +37,7 @@ deploy:
   extends: .deploy-static-app
   variables:
     BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/${ENVIRONMENT}
-    ENVIRONMENT: test
+    ENVIRONMENT: ${ENVIRONMENT}
   environment:
-    name: test
+    name: ${ENVIRONMENT}
     url: http://${APP_NAME}.apps.$ENVIRONMENT.cirrostratus.org
