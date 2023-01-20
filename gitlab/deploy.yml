@@ -1,0 +1,43 @@
+
+variables:
+  APP_NAME: aiw-ui-admin-capstan
+
+stages:
+  - build
+  - deploy
+ 
+default:
+  tags:
+    - ${ENVIRONMENT}-runner
+
+include:
+  - project: capstan/pow/gitlab-templates
+    file: /static-app-deployer/template.yml
+    ref: static-app-deployer-v1
+  - file: /deploy-selenium-grid/template.yml
+    project: capstan/pow/gitlab-templates
+    ref: deploy-selenium-grid-v3
+  - file: /run-integration-tests/template.yml
+    project: capstan/pow/gitlab-templates
+    ref: run-integration-tests-v3
+  - project: capstan/pow/gitlab-templates
+    file: check-healthy-deployment/template.yml
+    ref: check-healthy-deployment-v3
+
+build-aiw-ui-app:
+  stage: build
+  extends: .build-static-app
+  image: $DOCKER_VIRTUAL/node:14.21.1
+  variables:
+    BUILD_SCRIPT_PATH: $CI_PROJECT_DIR/build-${ENVIRONMENT}.sh
+    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/${ENVIRONMENT}
+
+deploy:
+  stage: deploy
+  extends: .deploy-static-app
+  variables:
+    BUILD_OUTPUT_PATH: $CI_PROJECT_DIR/dist/${ENVIRONMENT}
+    ENVIRONMENT: ${ENVIRONMENT}
+  environment:
+    name: ${ENVIRONMENT}
+    url: http://${APP_NAME}.apps.$ENVIRONMENT.cirrostratus.org
