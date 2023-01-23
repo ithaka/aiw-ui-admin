@@ -1,6 +1,6 @@
 
 variables:
-  APP_NAME: aiw-ui-admin-capstan
+  APP_NAME: ang-ui-admin
 
 stages:
   - build
