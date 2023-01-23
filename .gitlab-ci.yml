@@ -22,8 +22,7 @@ deploy-test:
 deploy-prod:
   stage: run-pipeline
   rules:
-      - if: $CI_PIPELINE_SOURCE == "push"
-        when: manual
+      - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       - if: $CI_PIPELINE_SOURCE == "web"
         when: manual
   variables:
