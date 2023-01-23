@@ -1,0 +1,32 @@
+stages:
+    - run-pipeline
+
+variables:
+  PIPELINE_ACTION:
+      value: ""
+      description: run-integration-tests
+
+deploy-test:
+  stage: run-pipeline
+  rules:
+      - if: $CI_PIPELINE_SOURCE == "push"
+        when: manual
+      - if: $CI_PIPELINE_SOURCE == "web"
+        when: manual
+  variables:
+      ENVIRONMENT: test
+  trigger:
+      include: gitlab/deploy.yml
+      strategy: depend
+
+deploy-prod:
+  stage: run-pipeline
+  rules:
+      - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - if: $CI_PIPELINE_SOURCE == "web"
+        when: manual
+  variables:
+      ENVIRONMENT: prod
+  trigger:
+      include: gitlab/deploy.yml
+      strategy: depend
