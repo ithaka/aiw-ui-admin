@@ -32,7 +32,7 @@
     },
     "PROMO": {
       "HDR": "Need materials to promote Artstor at your institution?",
-      "CONTENT": "<span>Go to </span><a href='http://support.artstor.org/?article=promoting-artstor-on-campus' target='_blank'>Promotional materials</a><span> for more information.</span>"
+      "CONTENT": "<span>Go to </span><a href='https://support.artstor.org/hc/en-us/articles/360021193094?article=promoting-artstor-on-campus' target='_blank'>Promotional materials</a><span> for more information.</span>"
     },
     "LOCAL_SUPPORT": {
       "HDR": "Local support information",
