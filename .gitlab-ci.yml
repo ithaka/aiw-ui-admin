@@ -4,11 +4,15 @@ stages:
 variables:
   PIPELINE_ACTION:
       value: ""
-      description: run-integration-tests
+      description: run-integration-tests, deploy
+  ENVIRONMENT:
+      value: "test"
+      description: test,prod
 
 deploy-test:
   stage: run-pipeline
   rules:
+      - if: $ENVIRONMENT == "test" && $PIPELINE_ACTION == "deploy"
       - if: $CI_PIPELINE_SOURCE == "push"
         when: manual
       - if: $CI_PIPELINE_SOURCE == "web"
@@ -22,6 +26,7 @@ deploy-test:
 deploy-prod:
   stage: run-pipeline
   rules:
+      - if: $ENVIRONMENT == "prod" && $PIPELINE_ACTION == "deploy"
       - if: $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       - if: $CI_PIPELINE_SOURCE == "web"
         when: manual
