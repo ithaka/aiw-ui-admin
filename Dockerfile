@@ -15,7 +15,7 @@
 #    Run image as virtual host (read more: https://github.com/jwilder/nginx-proxy):
 #    docker run -e VIRTUAL_HOST=angular-starter.your-domain.com --name angular-starter angular-starter &
 
-FROM nginx:1.13.0-alpine
+FROM docker-vitual.artifactory.acorn.cirrostratus.org/nginx:1.13.0-alpine
 
 # install console and node
 RUN apk add --no-cache bash=4.3.46-r5 &&\
